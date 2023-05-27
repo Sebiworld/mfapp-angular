@@ -1,0 +1,36 @@
+<app-section-spacer [position]="'top'"></app-section-spacer>
+<footer class="footer bg-tertiary" id="footer">
+  <app-logo></app-logo>
+
+  <p>{{ 'footer.description' | translate }}</p>
+  <ion-button target="_blank" href="https://www.musical-fabrik.de/#mitglied-werden">{{ 'footer.cta' | translate }}
+  </ion-button>
+
+  <div class="mobile-reach-out">
+    <strong>
+      {{ 'footer.external' | translate }}
+    </strong>
+
+    <div class="social-actions">
+      <ion-button fill="clear" class="icon-button" target="_blank" href="https://www.musical-fabrik.de">
+        <ion-icon name="globe"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="icon-button hover-facebook" target="_blank"
+        href="https://www.facebook.com/musicalfabrik">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="icon-button hover-instagram" target="_blank"
+        href="https://www.instagram.com/musicalfabrik/">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="icon-button hover-youtube" target="_blank"
+        href="https://www.youtube.com/channel/UCluu4BuDfn4dChkFBPpQt0g">
+        <ion-icon name="logo-youtube"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <hr class="ion-color ion-color-dark">
+  <p><span [innerHTML]="'footer.by' | translate"></span> <span class="copyright">{{ 'footer.copyright' | translate
+      }}</span></p>
+</footer>

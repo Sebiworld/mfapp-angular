@@ -1,0 +1,25 @@
+.background-beam {
+  background: linear-gradient(110deg, var(--secondary) 33%, rgba(0, 0, 0, 0) 33%),
+    linear-gradient(110deg, #C5E7D7 34%, var(--primary) 34%);
+  background-size: 800%;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+
+  animation: background-beam-animation 5s ease infinite;
+  -webkit-animation: background-beam-animation 15s ease infinite;
+  -moz-animation: background-beam-animation 5s ease infinite;
+}
+
+@-webkit-keyframes background-beam-animation {
+  0% {
+    background-position: 33% 50%
+  }
+
+  50% {
+    background-position: 29% 50%
+  }
+
+  100% {
+    background-position: 33% 50%
+  }
+}

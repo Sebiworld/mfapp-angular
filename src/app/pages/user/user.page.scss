@@ -1,0 +1,12 @@
+@import 'global-settings';
+
+.user-roles-list {
+  margin-left: 0;
+  margin-right: 0;
+
+  ion-list-header {
+    ion-label {
+      margin-top: 16px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="content-tabs" [ngClass]="'mode-' + data.tab_mode">
+  <ion-accordion-group class="accordion">
+    <ion-accordion *ngFor="let item of data.items; let index = index;" [value]="index">
+      <ion-item slot="header" color="dark" lines="none">
+        <ion-label [innerHTML]="item.title"></ion-label>
+      </ion-item>
+
+      <ion-list slot="content" lines="none">
+        <ion-item>
+          <div class="content-wrapper" [innerHTML]="item.text"></div>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <div class="sidebar">
+    <div *ngIf="data?.background_pattern" class="pattern-container" [ngClass]="data?.background_pattern"></div>
+    <ion-list lines="none">
+      <ion-item button detail *ngFor="let item of data.items; let index = index" (click)="activeIndex = index"
+        [class.active]="activeIndex === index">
+        <ion-label [innerHTML]="item.title"></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="tab-content-wrapper">
+    <div class="tab-content" *ngFor="let item of data.items; let index = index" [class.active]="activeIndex === index"
+      [innerHTML]="item.text"></div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content #scrollArea [scrollEvents]="true" [fullscreen]="true">
+  <div class="main-wrapper">
+    <div class="main-container">
+      <section class="hero">
+        <div class="aspect-ratio ar-16-9">
+          <div class="ar-content">
+            <img class="img-fluid" lazyImg [fallback]="'assets/img/medicus-ensemble.webp'">
+          </div>
+        </div>
+
+        <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+      </section>
+
+      <section class="section greeting">
+        <div class="section-header">
+          Hallo {{ nickname$ | async }}!
+        </div>
+
+        <app-countdown class="section-content" [date]="1727371800000">
+          <span slot="start">Zeit bis zur Premiere:</span>
+        </app-countdown>
+      </section>
+
+
+      <app-section-articles [articles]="articles$ | async"></app-section-articles>
+    </div>
+
+    <app-footer id="hello"></app-footer>
+  </div>
+
+</ion-content>

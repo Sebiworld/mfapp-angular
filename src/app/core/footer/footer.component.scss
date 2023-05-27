@@ -1,0 +1,113 @@
+@import 'global-settings';
+
+app-logo {
+  width: 200px;
+  max-width: 100%;
+  margin: 24px auto;
+}
+
+app-section-spacer {
+  --background-color: var(--tertiary);
+  margin-top: 48px;
+}
+
+.footer {
+  padding: 64px 32px 32px 32px;
+  text-align: center;
+
+  &>p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.greeting {
+  font-size: 7vw;
+  width: 6em;
+  font-weight: bold;
+  margin-bottom: 32px;
+}
+
+.mobile-reach-out {
+  position: relative;
+  display: block;
+  margin-top: 64px;
+
+  .social-actions {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    transition: all 0.4s ease-in;
+    margin-top: 8px;
+
+    ion-button {
+      z-index: 100;
+      margin: 0;
+
+      --background: rgba(var(--ion-color-light-rgb), var(--menu-opacity));
+      --color: var(--light-contrast);
+      --background-hover: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+      --background-hover-opacity: var(--menu-opacity-hover);
+      --background-focused: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+      --background-focused-opacity: var(--menu-opacity-hover);
+      --background-activated: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+      --background-activated-opacity: var(--menu-opacity-hover);
+
+      &.icon-button {
+        --padding-top: 4px;
+        --padding-bottom: 4px;
+        --padding-left: 4px;
+        --padding-right: 4px;
+        --padding-start: 0;
+        --padding-end: 0;
+        height: 40px;
+        width: 40px;
+      }
+    }
+  }
+}
+
+.reach-out-wrapper {
+  position: relative;
+  display: none;
+  justify-content: flex-end;
+  padding: 32px 64px 0 64px;
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+  }
+
+  &>svg {
+    position: relative;
+    display: block;
+    width: 80%;
+    max-width: 100%;
+
+    .arrow {
+      fill: var(--dark);
+      fill-opacity: 0.8;
+    }
+
+    .here {
+      display: block;
+      font-size: 8px;
+      font-weight: bold;
+      fill: var(--dark);
+    }
+  }
+}
+
+hr {
+  margin-top: 64px;
+  margin-left: 32px;
+  margin-right: 32px;
+  margin-bottom: 16px;
+}
+
+.copyright {
+  margin-top: 4px;
+  display: block;
+}

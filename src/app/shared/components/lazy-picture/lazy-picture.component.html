@@ -1,0 +1,6 @@
+<picture [class]="pictureClasses">
+  <source *ngFor="let source of sources$ | async" [media]="source.media || ''" [type]="source.type || ''"
+    [attr.data-srcset]="source.srcset">
+  <img *ngrxLet="img$ as img" [src]="img?.placeholderSrc || 'assets/img/mf-bg.jpg'" [attr.data-src]="img?.src"
+    [class]="img?.class || ''" [alt]="img?.alt || ''">
+</picture>

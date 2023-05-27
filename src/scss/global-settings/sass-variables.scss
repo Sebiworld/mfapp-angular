@@ -1,0 +1,128 @@
+// These Sass-variables can be used for calculations - will be set as CSS-variables
+$color-bright: #ffffff;
+$color-dark: #1e1e1e;
+
+// Base Colors:
+$success: #2dd36f;
+$warning: #ffc409;
+$danger: #eb445a;
+$primary: #fd8e01;
+$secondary: #151d25;
+$tertiary: #f1f1f5;
+$dark: #1e1e1e;
+$medium: #92949c; // Used as disabled-color
+$light: #f4f5f8;
+
+$theme-colors: (
+  success: $success,
+  warning: $warning,
+  danger: $danger,
+  primary: $primary,
+  secondary: $secondary,
+  tertiary: $tertiary,
+  dark: $dark,
+  medium: $medium,
+  light: $light,
+);
+
+// Color-Steps:
+$color-steps: (
+  step-50: #f5f5f5,
+  step-100: #ececec,
+  step-150: #e2e2e2,
+  step-200: #d8d8d8,
+  step-250: #cfcfcf,
+  step-300: #c5c5c5,
+  step-350: #bbbbbb,
+  step-400: #b2b2b2,
+  step-450: #a8a8a8,
+  step-500: #9f9f9f,
+  step-550: #959595,
+  step-600: #8b8b8b,
+  step-650: #828282,
+  step-700: #787878,
+  step-750: #6e6e6e,
+  step-800: #656565,
+  step-850: #5b5b5b,
+  step-900: #515151,
+  step-950: #484848,
+);
+
+$special-colors: (
+  twitter: #1da1f2,
+  facebook: #1877f2,
+  instagram: #e1306c,
+  whatsapp: #25d366,
+  youtube: #ff0000,
+  stackoverflow: #f48024,
+  github: #6e5494,
+  linkedin: #0077b5,
+  xing: #cfdc00,
+  musical-fabrik: #fd8e01,
+  discord: #5865F2
+);
+
+// Dark theme:
+// These Sass-variables can be used for calculations - will be set as CSS-variables
+$dark-color-bright: #d4d4d4;
+$dark-color-dark: #000000;
+
+// Base Colors:
+$dark-success: #036a2c;
+$dark-warning: #ffd534;
+$dark-danger: #ff4961;
+$dark-primary: #fd8e01;
+$dark-secondary: #f1f1f5;
+$dark-tertiary: #272521;
+$dark-dark: #f4f5f8;
+$dark-medium: #989aa2; // Used as disabled-color
+$dark-light: #081015;
+
+$dark-theme-colors: (
+  success: $dark-success,
+  warning: $dark-warning,
+  danger: $dark-danger,
+  primary: $dark-primary,
+  secondary: $dark-secondary,
+  tertiary: $dark-tertiary,
+  dark: $dark-dark,
+  medium: $dark-medium,
+  light: $dark-light,
+);
+
+// Color-Steps:
+$dark-color-steps: (
+  step-50: #c9c9c9,
+  step-100: #bfbfbf,
+  step-150: #b4b4b4,
+  step-200: #aaaaaa,
+  step-250: #9f9f9f,
+  step-300: #949494,
+  step-350: #8a8a8a,
+  step-400: #7f7f7f,
+  step-450: #757575,
+  step-500: #6a6a6a,
+  step-550: #5f5f5f,
+  step-600: #555555,
+  step-650: #4a4a4a,
+  step-700: #404040,
+  step-750: #353535,
+  step-800: #2a2a2a,
+  step-850: #202020,
+  step-900: #151515,
+  step-950: #0b0b0b,
+);
+
+// Breakpoints:
+$grid-breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 1024px,
+  lg: 1200px,
+  xl: 1440px,
+);
+
+$step-sm: 10px;
+$step-md: 20px;
+$step-lg: 40px;
+$step-xl: 80px;

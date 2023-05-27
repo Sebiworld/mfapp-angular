@@ -1,0 +1,31 @@
+<section class="articles section">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="headline">
+        {{ 'news.title' | translate }}
+        <hr>
+      </h2>
+      <div class="subtitle">
+        <a [routerLink]="['/news']">
+          {{ 'news.view-archive' | translate }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-wrapper">
+    <swiper-container *ngIf="articles" init="false" appSwiper [config]="swiperConfig" class="articles-slider">
+      <swiper-slide *ngFor="let item of articles; let index = index">
+        <app-page-card [data]="item"></app-page-card>
+      </swiper-slide>
+
+      <swiper-slide class="more-slide">
+        <ion-button [routerLink]="['/news']" color="primary">
+          Mehr...
+        </ion-button>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <app-loader [loading]="!articles"></app-loader>
+</section>

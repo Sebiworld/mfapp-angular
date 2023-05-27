@@ -1,0 +1,65 @@
+.pattern-container {
+  position: absolute;
+  display: block;
+  --offset-x: 32px;
+  --offset-y: 32px;
+
+  @each $color, $value in $theme-colors {
+    &.#{$color} {
+      color: var(--#{$color});
+    }
+  }
+
+  &.round {
+    border-radius: 50%;
+  }
+
+  &.offset-xs {
+    --offset-x: 8px;
+    --offset-y: 8px;
+  }
+  &.offset-sm {
+    --offset-x: 16px;
+    --offset-y: 16px;
+  }
+  &.offset-md {
+    --offset-x: 28px;
+    --offset-y: 28px;
+  }
+  &.offset-lg {
+    --offset-x: 48px;
+    --offset-y: 48px;
+  }
+  &.offset-xl {
+    --offset-x: 64px;
+    --offset-y: 64px;
+  }
+
+  &.top-left {
+    top: calc(-1 * var(--offset-y));
+    bottom: var(--offset-y);
+    left: calc(-1 * var(--offset-x));
+    right: var(--offset-x);
+  }
+
+  &.top-right {
+    top: calc(-1 * var(--offset-y));
+    bottom: var(--offset-y);
+    left: var(--offset-x);
+    right: calc(-1 * var(--offset-x));
+  }
+
+  &.bottom-left {
+    top: var(--offset-y);
+    bottom: calc(-1 * var(--offset-y));
+    left: calc(-1 * var(--offset-x));
+    right: var(--offset-x);
+  }
+
+  &.bottom-right {
+    top: var(--offset-y);
+    bottom: calc(-1 * var(--offset-y));
+    left: var(--offset-x);
+    right: calc(-1 * var(--offset-x));
+  }
+}

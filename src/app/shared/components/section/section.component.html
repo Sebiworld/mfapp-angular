@@ -1,0 +1,23 @@
+<section class="section" [ngClass]="['section-' + data.type]" [id]="data.section_name">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 *ngIf="data.title" class="headline">
+        <a *ngIf="data.section_name" class="index" [routerLink]="[]" [fragment]="data.section_name">
+          {{ index + 1 | pad }}.
+        </a>
+        <span *ngIf="!data.section_name" class="index">{{ index + 1 | pad }}.</span>
+        <span class="title" [innerHTML]="data.title"></span>
+        <hr>
+      </h2>
+
+      <div *ngIf="data.reference?.url && data.reference_label" class="subtitle">
+        <a [routerLink]="data.reference.url">
+          {{ data.reference_label }}
+        </a>
+      </div>
+    </div>
+
+    <app-content-blocks *ngIf="data.contents" [contents]="data.contents" [locale]="locale" [darkMode]="darkMode">
+    </app-content-blocks>
+  </div>
+</section>

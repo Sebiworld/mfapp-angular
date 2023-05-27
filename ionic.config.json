@@ -1,0 +1,13 @@
+{
+  "name": "mfapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "hooks": {
+    "serve:before": "./scripts/build-before.js",
+    "build:before": "./scripts/build-before.js",
+    "capacitor:build:before": "./scripts/build-before.js",
+    "capacitor:sync:before": "./scripts/build-before.js"
+  }
+}

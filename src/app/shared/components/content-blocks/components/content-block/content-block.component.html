@@ -1,0 +1,9 @@
+<div class="content-block" [ngClass]="['depth-' + depth, 'content-block-' + data.type]">
+  <ng-template appContentBlockHost></ng-template>
+
+  <div class="content-children" *ngIf="data.children && data.children.length >= 1">
+    <app-content-block class="child-block" *ngFor="let childData of data.children" [depth]="depth + 1" [data]="childData"
+      [locale]="locale" [darkMode]="darkMode" [contentComponents]="contentComponents"  [ngClass]="childData?.grid_classes">
+    </app-content-block>
+  </div>
+</div>

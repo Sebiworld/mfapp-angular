@@ -1,0 +1,55 @@
+<ion-list class="menu-top" *ngIf="isAuthenticated$ | async">
+  <ion-menu-toggle auto-hide="false">
+    <ion-item class="user-btn" routerDirection="root" [routerLink]="['/user']" lines="none" detail="false"
+      routerLinkActive="active">
+      <ion-icon slot="start" [ios]="'person-circle-outline'" [md]="'person-circle-sharp'"></ion-icon>
+      <ion-label>
+        Hallo 👋
+        <strong>{{ nickname$ | async }}</strong>
+      </ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>
+
+<ion-list class="menu-center">
+  <ion-menu-toggle auto-hide="false">
+    <ion-item routerDirection="root" [routerLink]="['/home']" lines="none" detail="false" routerLinkActive="active">
+      <ion-icon slot="start" [ios]="'home-outline'" [md]="'home-sharp'"></ion-icon>
+      <ion-label>Dashboard</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle auto-hide="false">
+    <ion-item routerDirection="root" [routerLink]="['/news']" lines="none" detail="false" routerLinkActive="active">
+      <ion-icon slot="start" [ios]="'newspaper-outline'" [md]="'newspaper-sharp'"></ion-icon>
+      <ion-label>Aktuelles</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle auto-hide="false" *ngIf="isAuthenticated$ | async">
+    <ion-item routerDirection="root" [routerLink]="['/calendar']" lines="none" detail="false" routerLinkActive="active">
+      <ion-icon slot="start" [ios]="'calendar-outline'" [md]="'calendar-sharp'"></ion-icon>
+      <ion-label>Kalender</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle auto-hide="false">
+    <ion-item routerDirection="root" [routerLink]="['/settings']" lines="none" detail="false" routerLinkActive="active">
+      <ion-icon slot="start" ios="cog-outline" md="cog-sharp"></ion-icon>
+      <ion-label>Einstellungen</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>
+
+<ion-list class="menu-bottom">
+  <hr>
+  <ion-menu-toggle auto-hide="false" *ngIf="isNotAuthenticated$ | async">
+    <ion-item lines="none" detail="false" button (click)="login()" color="primary">
+      <ion-icon slot="start" ios="log-in-outline" md="log-in-sharp"></ion-icon>
+      <ion-label>Login</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+  <ion-menu-toggle auto-hide="false" *ngIf="isAuthenticated$ | async">
+    <ion-item lines="none" detail="false" button (click)="logout()">
+      <ion-icon slot="start" ios="log-out-outline" md="log-out-sharp"></ion-icon>
+      <ion-label>Logout</ion-label>
+    </ion-item>
+  </ion-menu-toggle>
+</ion-list>

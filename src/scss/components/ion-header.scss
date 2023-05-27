@@ -1,0 +1,10 @@
+ion-header {
+  &.overlapping {
+    position: absolute;
+  }
+
+  .header-background {
+    -webkit-backdrop-filter: saturate(180%) blur(3px);
+    backdrop-filter: saturate(180%) blur(3px);
+  }
+}

@@ -1,0 +1,11 @@
+<div class="content-pages" [ngClass]="data?.classes">
+  <h3 *ngIf="data?.title && !data?.hide_title">{{ data.title }}</h3>
+  <div *ngIf="data?.background_pattern" class="pattern-container" [ngClass]="data?.background_pattern">
+  </div>
+  <div class="pages-wrapper">
+    <div class="item-wrapper" *ngFor="let item of data.items; let index = index">
+      <app-page-card [data]="item" [classes]="'color-on-hover'"
+        [horizontalLayout]="data?.classes?.includes('featured-items')" [index]="index"></app-page-card>
+    </div>
+  </div>
+</div>

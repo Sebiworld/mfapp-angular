@@ -1,0 +1,132 @@
+<div class="main-content">
+  <section class="hero" lazyBg [url]="'assets/img/medicus-ensemble.webp'">
+    <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+  </section>
+
+  <section class="contents ion-padding">
+    <form class="styled-form" [formGroup]="myForm" (ngSubmit)="onSubmit()" autocomplete="on"
+      [class.error]="!myForm.valid && myForm.touched">
+
+      <p>
+        <strong>Bist du bereits ein Mitglied der Musical-Fabrik?</strong><br>
+        Registriere dich hier, um Zugang zu internen Nachrichten und Probenplänen zu bekommen!
+      </p>
+
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input formControlName="email" type="email" (keyup.enter)="onSubmit()" autocomplete="email"
+            [readonly]="loading">
+          </ion-input>
+          <ion-note>
+            Deine Email-Adresse ist nur für dich sichtbar und wird für den Login benötigt.
+          </ion-note>
+          <ion-note class="error-note">
+            Die Email-Adresse darf nicht leer sein
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Passwort</ion-label>
+          <ion-input formControlName="password" type="password" [readonly]="loading" (keyup.enter)="onSubmit()"
+            autocomplete="password">
+          </ion-input>
+
+          <ng-container
+            *ngIf="myForm.controls['password'].invalid && (myForm.controls['password'].dirty || myForm.controls['password'].touched)">
+            <ion-note *ngIf="!myForm.controls['password'].hasError('required')" class="error-note">
+              Das Passwort muss aus mindestens 6 Zeichen bestehen und Zahlen und Buchstaben enthalten.
+            </ion-note>
+            <ion-note *ngIf="myForm.controls['password'].hasError('required')" class="error-note">
+              Das Passwort darf nicht leer sein
+            </ion-note>
+          </ng-container>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Passwort wiederholen</ion-label>
+          <ion-input formControlName="passwordRepeat" type="password" [readonly]="loading" (keyup.enter)="onSubmit()">
+          </ion-input>
+
+          <ng-container
+            *ngIf="myForm.controls['passwordRepeat'].invalid && (myForm.controls['passwordRepeat'].dirty || myForm.controls['passwordRepeat'].touched)">
+            <ion-note *ngIf="myForm.controls['passwordRepeat'].hasError('required')" class="error-note">
+              Das Passwort darf nicht leer sein
+            </ion-note>
+            <ion-note *ngIf="myForm.controls['passwordRepeat'].hasError('passwordsDoNotMatch')" class="error-note">
+              Die Passwörter sind verschieden
+            </ion-note>
+          </ng-container>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Vorname</ion-label>
+          <ion-input formControlName="firstname" type="text" [readonly]="loading" (keyup.enter)="onSubmit()"
+            autocomplete="firstname">
+          </ion-input>
+          <ion-note class="error-note">
+            Bitte gib einen Vornamen an!
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Nachname</ion-label>
+          <ion-input formControlName="lastname" type="text" [readonly]="loading" (keyup.enter)="onSubmit()"
+            autocomplete="lastname">
+          </ion-input>
+          <ion-note class="error-note">
+            Bitte gib einen Nachnamen an!
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Spitzname (optional)</ion-label>
+          <ion-input formControlName="nickname" type="text" [readonly]="loading" (keyup.enter)="onSubmit()"
+            autocomplete="nickname">
+          </ion-input>
+          <ion-note class="error-note">
+            Bitte gib einen Spitznamen an!
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Geburtstag</ion-label>
+          <ion-datetime formControlName="birthdate" [readonly]="loading" presentation="date" [preferWheel]="true"
+            firstDayOfWeek="1" [locale]="locale"></ion-datetime>
+          <ion-note class="error-note">
+            Bitte gib deinen Geburtstag an!
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Rollen</ion-label>
+          <p class="description">Bei welchen Projekten warst du schon dabei? Bitte schreib hier kurz, was du wo gemacht
+            hast, damit
+            wir deine Benutzerrollen zuordnen können!</p>
+          <ion-textarea formControlName="rolestext" [readonly]="loading">
+          </ion-textarea>
+        </ion-item>
+      </ion-list>
+
+      <ion-note class="general-error-note">
+        Die Daten sind noch nicht vollständig und können deshalb nicht abgeschickt werden. Bitte überprüfe deine
+        Eingaben!
+      </ion-note>
+
+      <ion-button type="submit" expand="block" class="ion-no-margin" color="primary" [disabled]="loading">
+        Registrieren <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      </ion-button>
+
+      <p>oder:</p>
+
+      <ion-button expand="block" class="ion-no-margin" color="primary" (click)="shouldNavigateToLogin()">
+        Zurück zum Login
+      </ion-button>
+
+      <ion-button *ngIf="isStartup" expand="block" class="ion-no-margin" color="dark" fill="clear"
+        (click)="shouldDismiss()">
+        Überspringen
+      </ion-button>
+    </form>
+  </section>
+</div>

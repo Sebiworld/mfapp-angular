@@ -1,0 +1,59 @@
+@import 'mixins/breakpoints';
+@import 'mixins/hide-input';
+@import 'mixins/word-wrap';
+@import 'mixins/color-mixins';
+
+@mixin vertical-align($position: relative, $top: 50%) {
+	position: $position;
+	top: $top;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+@mixin border-radius($leftTop: 0px, $rightTop: 0px, $rightBottom: 0px, $leftBottom: 0px) {
+	border-radius: $leftTop $rightTop $rightBottom $leftBottom;
+	-moz-border-radius: $leftTop $rightTop $rightBottom $leftBottom;
+	-webkit-border-radius: $leftTop $rightTop $rightBottom $leftBottom;
+}
+
+@mixin box-shadow($x: 0px, $y: 0px, $blur: 5px, $spread: 0px, $box-shadow-color: rgba($black,0.1)) {
+	-webkit-box-shadow: $x $y $blur $spread $box-shadow-color;
+	-moz-box-shadow: $x $y $blur $spread $box-shadow-color;
+	box-shadow: $x $y $blur $spread $box-shadow-color;
+}
+
+@mixin text-dot() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin multi-line-text-dot($height, $lines-to-show) {
+	display: block;
+	display: -webkit-box;
+	height: $height;
+	margin: 0 auto;
+	-webkit-line-clamp: $lines-to-show;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin mediaMaxWidth($breakpoint) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		@media (max-width: #{map-get($breakpoints, $breakpoint)}) {
+			@content;
+		}
+	}
+
+	@else {
+		@warn "The `#{$breakpoint}`. is undefinied";
+	}
+}
+
+@mixin mapKeyProperty($map, $key, $property) {
+	@if map-has-key($map, $key) {
+		#{$property}: #{map-get($map, $key)};
+	}
+}

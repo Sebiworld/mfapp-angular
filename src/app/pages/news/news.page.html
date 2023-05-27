@@ -1,0 +1,12 @@
+<ion-header>
+  <app-header [title]="'news.title' | translate" [backDefault]="'/'"></app-header>
+</ion-header>
+
+<ion-content>
+  <div class="pages-wrapper">
+    <div class="item-wrapper" *ngFor="let item of articles$ | async; let index = index">
+      <app-page-card [data]="item" [classes]="'color-on-hover'" [horizontalLayout]="'auto'" [index]="index">
+      </app-page-card>
+    </div>
+  </div>
+</ion-content>

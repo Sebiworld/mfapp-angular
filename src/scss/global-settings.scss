@@ -1,0 +1,6 @@
+$color-bright: #ffffff !default;
+$color-dark: #1e1e1e !default;
+
+@import "./global-settings/functions/colors.scss";
+@import "./global-settings/sass-variables.scss";
+@import "./global-settings/mixins";

@@ -1,0 +1,16 @@
+@use '@ngneat/hot-toast/src/styles/styles.scss';
+
+// @import "izmir";
+@import '~animate.css/animate.min.css';
+@import 'lightgallery';
+@import 'swiper/swiper';
+@import 'lazysizes';
+
+.c4-izmir {
+  --primary-color: var(--secondary);
+  --text-color: var(--secondary-contrast);
+  --secondary-color: var(--primary);
+  --transition-duration: 500ms;
+  --border-width: 4px;
+  --overlay-opacity: 0.5;
+}

@@ -1,0 +1,33 @@
+<ion-header>
+  <app-header [title]="" [backDefault]="'/'"></app-header>
+</ion-header>
+
+<ion-content #scrollArea scrollEvents="true" fullscreen="true">
+  <div class="main-wrapper">
+    <div class="main-container">
+      <article *ngIf="data$ | async as data">
+        <div class="article-header">
+          <h1>{{ data.title | stripHtml }}<small *ngIf="data.subtitle">{{ data.subtitle }}</small></h1>
+
+          <div class="intro" *ngIf="data.intro" [innerHTML]="data.intro"></div>
+
+        </div>
+
+        <div class="contents-wrapper">
+          <app-content-blocks *ngIf="data.contents" [contents]="data.contents" [locale]="currentLanguage$ | async">
+          </app-content-blocks>
+        </div>
+
+        <app-section *ngFor="let section of data.sections; trackBy:sectionById;" [data]="section"
+          [index]="section.title_index" [locale]="currentLanguage$ | async">
+        </app-section>
+      </article>
+
+      <app-not-found *ngIf="notFound$ | async"></app-not-found>
+    </div>
+
+    <app-footer id="hello"></app-footer>
+  </div>
+
+  <app-loader [loading$]="loading$"></app-loader>
+</ion-content>

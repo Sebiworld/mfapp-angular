@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="main-content">
+    <section class="hero" lazyBg [url]="'assets/img/medicus-ensemble.webp'">
+      <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+    </section>
+
+    <section class="contents ion-padding">
+      <p>
+        Aber zuerst...<br>
+        Wie heißt du eigentlich?
+      </p>
+
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" autocomplete="on"
+        [class.error]="!myForm.valid && myForm.touched">
+        <ion-list lines="none">
+          <ion-item class="bg-tertiary">
+            <ion-input formControlName="nickname" type="text" (keyup.enter)="onSubmit(myForm.value)"
+              autocomplete="nickname">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-button [disabled]="!myForm.valid" type="submit" expand="block" class="ion-no-margin" color="primary">
+          Bestätigen
+        </ion-button>
+      </form>
+    </section>
+  </div>
+</ion-content>

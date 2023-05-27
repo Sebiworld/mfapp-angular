@@ -1,0 +1,43 @@
+<div class="content-gallery">
+  <div class="content" [innerHTML]="data.text"></div>
+
+  <ng-container *ngIf="data?.images && data.images.length >= 1">
+    <div *ngIf="data?.gallery_type?.[0].id === 1" class="masonry gallery-items">
+      <button *ngFor="let image of data.images; let index = index; trackBy: trackImage" class="gallery-item"
+        [attr.aria-label]="'Open gallery on index ' + index"
+        [class.width-2x]="image.dimension_ratio && image.dimension_ratio >= 1"
+        [class.width-4x]="image.dimension_ratio && image.dimension_ratio >= 2" (click)="openGallery(index)">
+        <figure class="gallery-image">
+          <div *ngIf="data?.background_pattern" class="pattern-container" [ngClass]="data?.background_pattern"></div>
+          <app-lazy-picture [apiImage]="image"
+            [media]="{'max-width: 500px': {'width': 500}, 'max-width: 795px': {'width': 795}, 'min-width: 796px': {'width': 1000}}">
+          </app-lazy-picture>
+          <figcaption *ngIf="image.caption" [innerHTML]="image.caption">
+          </figcaption>
+        </figure>
+      </button>
+    </div>
+
+    <swiper-container *ngIf="data?.gallery_type?.[0].id === 2" [config]="swiperConfig" class="slider gallery-items"
+      #swiper>
+      <swiper-slide *ngFor="let image of data.images;let index = index; trackBy: trackImage">
+        <button class="gallery-item" [attr.aria-label]="'Open gallery on index ' + index"
+          [class.width-2x]="image.dimension_ratio && image.dimension_ratio >= 1"
+          [class.width-4x]="image.dimension_ratio && image.dimension_ratio >= 2" (click)="openGallery(index)">
+          <figure class="gallery-image">
+            <div *ngIf="data?.background_pattern" class="pattern-container" [ngClass]="data?.background_pattern"></div>
+            <app-lazy-picture [apiImage]="image"
+              [media]="{'max-width: 500px': {'width': 500}, 'max-width: 795px': {'width': 795}, 'min-width: 796px': {'width': 1000}}">
+            </app-lazy-picture>
+            <figcaption *ngIf="image.caption" [innerHTML]="image.caption">
+            </figcaption>
+          </figure>
+        </button>
+      </swiper-slide>
+    </swiper-container>
+  </ng-container>
+
+  <lightgallery #lightgalleryContainer [settings]="lightGallerySettings" [onInit]="onLightGalleryInit"
+    [onAfterSlide]="onLightGalleryAfterSlide">
+  </lightgallery>
+</div>

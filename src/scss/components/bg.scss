@@ -1,0 +1,41 @@
+.bg {
+  --background: var(--ion-color-base);
+  --background-rgb: var(--ion-color-base-rgb);
+  --color: var(--ion-color-contrast);
+  --color-rgb: var(--ion-color-contrast-rgb);
+
+  background-color: var(--background);
+  color: var(--color);
+  transition: background-color 0.2s ease;
+  border-color: var(--border-color);
+
+  &.disabled,
+  &.item-disabled.item-disabled {
+    --color: var(--status-disabled-color);
+    --ion-color-contrast: var(--status-disabled-color) !important;
+    color: var(--status-disabled-color)
+  }
+
+  &.darker {
+    --background: var(--ion-color-shade);
+  }
+
+  &.lighter {
+    --background: var(--ion-color-tint);
+  }
+
+  &.bg-clear {
+    background-color: transparent !important;
+    color: var(--background) !important;
+    border-color: transparent !important;
+  }
+
+  &.hoverable.hoverable {
+
+    &:hover,
+    &:focus {
+      --background: var(--hover-color);
+      --color: var(--ion-color-contrast);
+    }
+  }
+}

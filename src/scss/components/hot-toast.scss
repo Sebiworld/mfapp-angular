@@ -1,0 +1,32 @@
+hot-toast {
+  .hot-toast-icon {
+    align-self: center !important;
+    padding-top: 0 !important;
+  }
+
+  .hot-toast-close-btn {
+    margin-top: 0 !important;
+  }
+
+  .hot-toast-bar-base {
+    font-size: var(--font-size-mini);
+
+    &.toast-error {
+      border: 1px solid var(--danger);
+      color: var(--danger-contrast);
+      background: var(--danger);
+    }
+
+    &.toast-warning {
+      border: 1px solid var(--warning);
+      color: var(--warning-contrast);
+      background: var(--warning);
+    }
+
+    &.toast-success {
+      border: 1px solid var(--success);
+      color: var(--success-contrast);
+      background: var(--success);
+    }
+  }
+}

@@ -1,0 +1,90 @@
+@import 'global-settings';
+
+.block-title {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.content-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+
+  &.depth-0 {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 36px;
+    padding-right: 36px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media-breakpoint-up(sm) {
+      width: 800px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 1000px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 1200px;
+    }
+
+    &.content-block-gallery {
+      width: 100%;
+    }
+  }
+}
+
+.content-block>* {
+  position: relative;
+  display: block;
+}
+
+.content-block>.content-children {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 100%);
+  column-gap: 24px;
+  row-gap: 24px;
+
+  @include media-breakpoint-up(sm) {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  &>.child-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+
+    &.double-width {
+      grid-column: span 2;
+    }
+
+    &.justify-center {
+      justify-content: center;
+    }
+
+    &.justify-start {
+      justify-content: flex-start;
+    }
+
+    &.justify-end {
+      justify-content: flex-end;
+    }
+
+    &.justify-stretch {
+      justify-content: stretch;
+    }
+
+    @each $name,
+    $value in $grid-breakpoints {
+      &.max-#{$name} {
+        width: $value;
+        max-width: 100%;
+      }
+    }
+  }
+}

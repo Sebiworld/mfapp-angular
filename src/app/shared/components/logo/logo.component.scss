@@ -1,0 +1,21 @@
+@import 'global-settings';
+
+:host {
+  --logo-start-color: #fd8e00;
+  --logo-end-color: #58585a;
+
+  position: relative;
+  display: block;
+}
+
+:host-context(.theme-dark) {
+  --logo-end-color: var(--dark);
+}
+
+.logo-start {
+  fill: var(--logo-start-color);
+}
+
+.logo-end {
+  fill: var(--logo-end-color);
+}

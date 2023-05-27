@@ -1,0 +1,39 @@
+@import 'global-settings';
+
+.content-text {
+  position: relative;
+  display: block;
+  padding: 0;
+
+  .content {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+
+  &.depth-0 {
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media-breakpoint-up(sm) {
+      width: 800px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 1000px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 1200px;
+    }
+
+    .content {
+      position: relative;
+      display: block;
+      width: auto;
+    }
+  }
+}

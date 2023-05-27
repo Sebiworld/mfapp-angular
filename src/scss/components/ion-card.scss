@@ -1,0 +1,223 @@
+ion-card {
+  --background: var(--card-bg);
+  --color: var(--card-bg-contrast);
+  box-shadow: var(--shadow-elevation-medium);
+  transition: all 0.2s;
+
+  ion-card-title,
+  ion-card-subtitle,
+  ion-card-header,
+  ion-card-content,
+  ion-card-footer {
+    // --color: var(--card-bg-contrast);
+    text-align: left;
+  }
+
+  ion-card-title {
+    font-family: var(--ion-headline-font-family);
+  }
+
+  ion-card-header {
+    &>*:first-child {
+      margin-top: 0;
+    }
+
+    &>*:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ion-card-content {
+    font-size: var(--font-size-small);
+  }
+
+  &>.card-img-top {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--image-bg);
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+
+    figure,
+    img {
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    app-lazy-picture {
+      width: 100%;
+    }
+  }
+
+  &.ion-activatable {
+    // transition: all 0.4s ease;
+
+    ion-card-title,
+    ion-card-header,
+    ion-card-content,
+    ion-card-footer {
+      // transition: all 0.4s ease;
+    }
+
+    &:hover,
+    &:focus {
+      // --background: var(--card-bg-hover);
+      // --color: var(--card-bg-hover-contrast);
+      box-shadow: var(--shadow-elevation-low);
+      // top: 2px;
+      // left: 2px;
+
+      ion-card-title,
+      ion-card-header,
+      ion-card-content,
+      ion-card-footer {
+        // --color: var(--card-bg-hover-contrast);
+      }
+    }
+  }
+
+  &.color-on-hover {
+
+    .card-img-top {
+      background-color: rgba(var(--color-dark-rgb), 0.8);
+    }
+
+    figure {
+      // filter: grayscale(100%) contrast(1) brightness(90%) opacity(.6);
+      filter: grayscale(20%) contrast(1) brightness(100%) opacity(.8);
+      transition: all 0.2s cubic-bezier(0.64, 0.042, 0.42, 1) 0s;
+      // mix-blend-mode: screen;
+    }
+
+    &:hover,
+    &:focus {
+      --background: var(--card-bg-hover);
+      --color: var(--card-bg-hover-contrast);
+
+      figure {
+        filter: none;
+        mix-blend-mode: normal;
+      }
+    }
+  }
+
+  ion-button {
+    &.button-full {
+      margin: 0;
+    }
+  }
+
+  &.horizontal-layout-auto {
+    @include media-breakpoint-only(xs) {
+      position: relative;
+
+      &.ion-activatable {
+        &::part(native) {
+          position: relative;
+          display: grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: auto 1fr auto;
+          align-content: space-between;
+          grid-template-areas:
+            "image header"
+            "image main"
+            "image footer";
+          justify-items: stretch;
+        }
+      }
+
+      &:not(.ion-activatable) {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto 1fr auto;
+        align-content: space-between;
+        grid-template-areas:
+          "image header"
+          "image main"
+          "image footer";
+        justify-items: stretch;
+      }
+
+      ion-card-header {
+        grid-area: header;
+
+        ion-card-title:first-child {
+          margin-top: 0;
+        }
+      }
+
+      ion-card-content {
+        grid-area: main;
+
+        p:first-child {
+          margin-top: 0;
+        }
+      }
+
+      ion-card-footer {
+        grid-area: footer;
+      }
+
+      ion-card-header,
+      ion-card-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &>*:first-child {
+          margin-top: 16px;
+        }
+
+        ion-card-subtitle {
+          flex: 1 1 auto;
+        }
+      }
+
+      .card-img-top {
+        height: 100%;
+        min-height: 100px;
+        grid-area: image;
+
+        &::before {
+          display: none;
+        }
+
+        &>.ar-content {
+          position: relative;
+          margin: 0;
+          object-fit: cover;
+          font-family: 'object-fit: cover';
+        }
+      }
+
+      &.img-right {
+        &.ion-activatable {
+          &::part(native) {
+            grid-template-areas:
+              "header image"
+              "main image"
+              "footer image";
+
+          }
+        }
+
+        &:not(.ion-activatable) {
+          grid-template-areas:
+            "header image"
+            "main image"
+            "footer image";
+        }
+      }
+    }
+
+    @media (max-width: 440px) {
+      ion-card-content {
+        display: none;
+      }
+    }
+  }
+}

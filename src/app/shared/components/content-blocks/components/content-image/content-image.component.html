@@ -1,0 +1,9 @@
+<div class="content-image">
+  <figure class="gallery-image">
+    <div *ngIf="data?.background_pattern" class="pattern-container" [ngClass]="data?.background_pattern"></div>
+    <app-lazy-picture [apiImage]="data.image"
+      [media]="{'max-width: 500px': {'width': 500}, 'max-width: 795px': {'width': 795}, 'min-width: 796px': {'width': 1000}}"></app-lazy-picture>
+    <figcaption *ngIf="data.image.caption" [innerHTML]="data.image.caption">
+    </figcaption>
+  </figure>
+</div>

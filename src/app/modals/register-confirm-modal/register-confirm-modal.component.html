@@ -1,0 +1,20 @@
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button aria-label="Schließen" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div class="main-content">
+    <section class="hero" lazyBg [url]="'assets/img/medicus-ensemble.webp'">
+      <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+    </section>
+
+    <section class="contents ion-padding">
+      <p>
+        Deine Registrierung wird geprüft...
+      </p>
+      <ion-spinner name="circular"></ion-spinner>
+    </section>
+  </div>
+</ion-content>

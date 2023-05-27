@@ -1,0 +1,12 @@
+<ion-app [class.menu-open]="isMenuOpen$ | async">
+  <ion-split-pane contentId="main-content" disabled>
+    <ion-menu contentId="main-content" id="main-menu" type="push" side="start" (ionWillClose)="menuClosed()"
+      (ionWillOpen)="menuOpened()">
+      <ion-content>
+        <app-sidemenu></app-sidemenu>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

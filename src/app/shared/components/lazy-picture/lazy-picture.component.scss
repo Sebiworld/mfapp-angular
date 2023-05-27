@@ -1,0 +1,13 @@
+@import 'global-settings';
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+picture {
+  position: relative;
+  display: block;
+}

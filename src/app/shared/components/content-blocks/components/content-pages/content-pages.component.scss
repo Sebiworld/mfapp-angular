@@ -1,0 +1,47 @@
+@import 'global-settings';
+
+.content-pages {
+  position: relative;
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  @include media-breakpoint-up(sm) {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .pages-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-rows: masonry;
+    column-gap: 24px;
+    row-gap: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    .item-wrapper {
+      position: relative;
+      display: flex;
+      max-width: 100%;
+
+      &>app-page-card {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+
+  &.featured-items {
+    .pages-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

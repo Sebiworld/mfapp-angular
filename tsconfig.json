@@ -1,0 +1,61 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@modals/*": [
+        "src/app/modals/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@routing/*": [
+        "src/app/routing/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@store/*": [
+        "src/app/store/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ]
+    },
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

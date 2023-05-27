@@ -1,0 +1,5 @@
+<div class="content-blocks">
+    <app-content-block *ngFor="let data of contents" [data]="data" [locale]="locale" [darkMode]="darkMode"
+        [contentComponents]="contentComponents$ | async" [ngClass]="data?.grid_classes">
+    </app-content-block>
+</div>

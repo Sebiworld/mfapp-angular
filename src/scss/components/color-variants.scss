@@ -1,0 +1,27 @@
+  @each $color,
+  $value in $theme-colors {
+
+    .#{$color},
+    .bg-#{$color},
+    .bg.#{$color},
+    .bg.ion-color-#{$color},
+    .button.ion-color-#{$color} {
+      --ion-color-base: var(--#{$color}, var(--ion-color-#{$color}));
+      --ion-color-base-rgb: var(--#{$color}-rgb, var(--ion-color-#{$color}-rgb));
+      --ion-color-contrast: var(--#{$color}-contrast, var(--ion-color-#{$color}-contrast));
+      --ion-color-contrast-rgb: var(--#{$color}-contrast-rgb, var(--ion-color-#{$color}-contrat-rgb));
+      --ion-color-shade: var(--#{$color}-shade, var(--ion-color-#{$color}-shade, #4854e0));
+      --ion-color-tint: var(--#{$color}-tint, var(--ion-color-#{$color}-tint, #6370ff));
+    }
+
+    .bg-#{$color} {
+      @extend .bg;
+    }
+
+    .button.ion-color-#{$color} {
+      --background-hover: var(--hover-color);
+      --background-focused: var(--hover-color);
+      --color-hover: var(--ion-color-contrast);
+      --color-focused: var(--ion-color-contrast);
+    }
+  }

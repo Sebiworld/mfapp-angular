@@ -1,0 +1,86 @@
+@import 'global-settings';
+
+.main-container{
+  min-height: 80vh;
+}
+
+.article-header {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  padding-top: 40px;
+  width: 100%;
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 100px;
+    width: 800px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-top: 140px;
+    width: 1000px;
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 1200px;
+  }
+}
+
+h1 {
+  padding: 0 22px;
+  margin-top: 0;
+  margin-bottom: 28px;
+  line-height: 1.0;
+}
+
+.intro {
+  padding: 0 22px;
+}
+
+.summary {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 0 22px;
+  margin-top: 64px;
+  margin-bottom: 62px;
+  max-width: 100%;
+  width: 700px;
+
+  @include media-breakpoint-up(md) {
+    gap: 32px;
+    padding: 0 22px;
+  }
+
+  .infos,
+  .stack,
+  .links {
+    position: relative;
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 150px;
+
+    .title {
+      position: relative;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+  .stack {
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+  }
+
+  .infos{
+    gap: 24px;
+  }
+}

@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button *ngIf="!isStartup" aria-label="Schließen" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <app-login-form *ngIf="activeView === 'login'" [isStartup]="isStartup" [loading]="loading$ | async"
+    (dismiss)="dismiss()" (navigateToRegister)="navigateToRegister()">
+  </app-login-form>
+  <app-register-form *ngIf="activeView === 'register'" [isStartup]="isStartup" (dismiss)="dismiss()"
+    (navigateToLogin)="navigateToLogin()">
+  </app-register-form>
+
+  <app-loader [loading$]="loading$"></app-loader>
+</ion-content>

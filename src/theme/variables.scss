@@ -1,0 +1,249 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+@import 'global-settings';
+
+/** Ionic CSS Variables **/
+:root {
+  --color-bright: #{$color-bright};
+  --color-bright-rgb: #{hexToRGB($color-bright)};
+  --color-dark: #{$color-dark};
+  --color-dark-rgb: #{hexToRGB($color-dark)};
+
+  @each $color,
+  $value in $theme-colors {
+    --#{$color}: #{$value};
+
+    @if (is-dark($value)=='1') {
+      --#{$color}-contrast: var(--color-bright);
+      --#{$color}-contrast-rgb: var(--color-bright-rgb);
+    }
+
+    @else {
+      --#{$color}-contrast: var(--color-dark);
+      --#{$color}-contrast-rgb: var(--color-dark-rgb);
+    }
+
+    --ion-color-#{$color}: var(--#{$color});
+    --ion-color-#{$color}-rgb: #{hexToRGB($value)};
+    --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
+    --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
+    --ion-color-#{$color}-shade: #{get-color-shade($value)};
+    --ion-color-#{$color}-tint: #{get-color-tint($value)};
+    --#{$color}-hover: var(--ion-color-#{$color}-shade);
+    --#{$color}-success: var(--#{$color}-contrast);
+    --#{$color}-warning: var(--#{$color}-contrast);
+    --#{$color}-danger: var(--#{$color}-contrast);
+  }
+
+  @each $name,
+  $color in $color-steps {
+    --color-#{$name}: #{$color};
+    --color-#{$name}-contrast: #{text-color-over($color)};
+    --color-#{$name}-rgb: #{hexToRGB($color)};
+    --ion-color-#{$name}: var(--color-#{$name});
+  }
+
+  @each $name,
+  $color in $special-colors {
+    --color-#{$name}: #{$color};
+    --color-#{$name}-contrast: #{text-color-over($color)};
+    --color-#{$name}-rgb: #{hexToRGB($color)};
+  }
+}
+
+body,
+.md body,
+.ios body {
+  &.theme-dark {
+    --color-bright: #{$dark-color-bright};
+    --color-bright-rgb: #{hexToRGB($dark-color-bright)};
+    --color-dark: #{$dark-color-dark};
+    --color-dark-rgb: #{hexToRGB($dark-color-dark)};
+
+    @each $color,
+    $value in $dark-theme-colors {
+      --#{$color}: #{$value};
+
+      @if (is-dark($value)=='1') {
+        --#{$color}-contrast: var(--color-bright);
+        --#{$color}-contrast-rgb: var(--color-bright-rgb);
+      }
+
+      @else {
+        --#{$color}-contrast: var(--color-dark);
+        --#{$color}-contrast-rgb: var(--color-dark-rgb);
+      }
+
+      --ion-color-#{$color}: var(--#{$color});
+      --ion-color-#{$color}-rgb: #{hexToRGB($value)};
+      --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
+      --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
+      --ion-color-#{$color}-shade: #{get-color-shade($value)};
+      --ion-color-#{$color}-tint: #{get-color-tint($value)};
+      --#{$color}-hover: var(--ion-color-#{$color}-shade);
+      --#{$color}-success: var(--#{$color}-contrast);
+      --#{$color}-warning: var(--#{$color}-contrast);
+      --#{$color}-danger: var(--#{$color}-contrast);
+
+      @if($color=='tertiary') {
+        --ion-color-#{$color}-tint: #{get-color-tint($value, 8%)};
+      }
+    }
+
+    @each $name,
+    $color in $dark-color-steps {
+      --color-#{$name}: #{$color};
+      --color-#{$name}-contrast: #{text-color-over($color)};
+      --color-#{$name}-rgb: #{hexToRGB($color)};
+      --ion-color-#{$name}: var(--color-#{$name});
+    }
+
+    @each $name,
+    $color in $special-colors {
+      --color-#{$name}: #{$color};
+      --color-#{$name}-contrast: #{text-color-over($color)};
+      --color-#{$name}-rgb: #{hexToRGB($color)};
+    }
+  }
+}
+
+.ios {
+
+  body.theme-dark {
+    --ion-background-color: #000000;
+    --ion-background-color-rgb: 0, 0, 0;
+
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+
+    --ion-color-step-50: #0d0d0d;
+    --ion-color-step-100: #1a1a1a;
+    --ion-color-step-150: #262626;
+    --ion-color-step-200: #333333;
+    --ion-color-step-250: #404040;
+    --ion-color-step-300: #4d4d4d;
+    --ion-color-step-350: #595959;
+    --ion-color-step-400: #666666;
+    --ion-color-step-450: #737373;
+    --ion-color-step-500: #808080;
+    --ion-color-step-550: #8c8c8c;
+    --ion-color-step-600: #999999;
+    --ion-color-step-650: #a6a6a6;
+    --ion-color-step-700: #b3b3b3;
+    --ion-color-step-750: #bfbfbf;
+    --ion-color-step-800: #cccccc;
+    --ion-color-step-850: #d9d9d9;
+    --ion-color-step-900: #e6e6e6;
+    --ion-color-step-950: #f2f2f2;
+
+    --ion-item-background: #000000;
+
+    --ion-card-background: #1c1c1d;
+
+    ion-modal {
+      --ion-background-color: var(--ion-color-step-100);
+      --ion-toolbar-background: var(--ion-color-step-150);
+      --ion-toolbar-border-color: var(--ion-color-step-250);
+    }
+  }
+}
+
+.md {
+
+  body.theme-dark {
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18, 18, 18;
+
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+
+    --ion-border-color: #222222;
+
+    --ion-color-step-50: #1e1e1e;
+    --ion-color-step-100: #2a2a2a;
+    --ion-color-step-150: #363636;
+    --ion-color-step-200: #414141;
+    --ion-color-step-250: #4d4d4d;
+    --ion-color-step-300: #595959;
+    --ion-color-step-350: #656565;
+    --ion-color-step-400: #717171;
+    --ion-color-step-450: #7d7d7d;
+    --ion-color-step-500: #898989;
+    --ion-color-step-550: #949494;
+    --ion-color-step-600: #a0a0a0;
+    --ion-color-step-650: #acacac;
+    --ion-color-step-700: #b8b8b8;
+    --ion-color-step-750: #c4c4c4;
+    --ion-color-step-800: #d0d0d0;
+    --ion-color-step-850: #dbdbdb;
+    --ion-color-step-900: #e7e7e7;
+    --ion-color-step-950: #f3f3f3;
+
+    --ion-item-background: #1e1e1e;
+
+    --ion-toolbar-background: #1f1f1f;
+
+    --ion-tab-bar-background: #1f1f1f;
+
+    --ion-card-background: #1e1e1e;
+  }
+}
+
+body {
+  --font-size-mini: 13px;
+  --font-size-small: 14px;
+  --font-size: 16px;
+  --font-size-big: 18px;
+
+  --font-size-h1: calc(var(--font-size) * 2);
+  --font-size-h2: calc(var(--font-size) * 1.5);
+  --font-size-h3: var(--font-size);
+  --font-size-h4: var(--font-size);
+
+  --btn-icon-size: 16px;
+  --btn-icon-size-md: 14px;
+
+  // Grid Variables
+  // -----------
+  --ion-grid-columns: 12;
+  --ion-grid-width-xs: 100%;
+  --ion-grid-width-sm: map.get($grid-breakpoints, 'sm');
+  --ion-grid-width-md: map.get($grid-breakpoints, 'md');
+  --ion-grid-width-lg: map.get($grid-breakpoints, 'lg');
+  --ion-grid-width-xl: map.get($grid-breakpoints, 'xl');
+
+  --step-sm: #{$step-sm};
+  --step-md: #{$step-md};
+  --step-lg: #{$step-lg};
+  --step-xl: #{$step-xl};
+
+  // Cards
+  // ---------
+  --card-font-size: var(--font-size);
+  --card-border-radius: var(--border-radius);
+
+  --card-bg: var(--tertiary);
+  --card-bg-rgb: var(--ion-color-tertiary-rgb);
+  --card-bg-contrast: var(--tertiary-contrast);
+  --card-bg-contrast-rgb: var(--ion-color-tertiary-contrast-rgb);
+  --card-bg-shade: var(--ion-color-tertiary-shade);
+  --card-bg-tint: var(--ion-color-tertiary-tint);
+  --card-bg-hover: var(--ion-color-tertiary-tint);
+  --card-bg-hover-contrast: var(--tertiary-contrast);
+  --card-bg-success: var(--tertiary-success);
+  --card-bg-warning: var(--tertiary-warning);
+  --card-bg-danger: var(--tertiary-danger);
+
+  --card-bg-active: var(--element-bg-active);
+  --card-bg-active-rgb: var(--element-bg-active-rgb);
+  --card-bg-active-contrast: var(--element-bg-active-contrast);
+  --card-bg-active-contrast-rgb: var(--element-bg-active-contrast-rgb);
+  --card-bg-active-shade: var(--element-bg-active-shade);
+  --card-bg-active-tint: var(--element-bg-active-tint);
+  --card-bg-active-hover: var(--card-bg-active-shade);
+  --card-bg-active-hover-contrast: var(--card-bg-active-contrast);
+  --card-bg-active-success: var(--element-bg-active-success);
+  --card-bg-active-warning: var(--element-bg-active-warning);
+  --card-bg-active-danger: var(--element-bg-active-danger);
+}

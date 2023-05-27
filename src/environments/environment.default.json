@@ -1,0 +1,8 @@
+{
+  "production": false,
+  "apiUrl": "",
+  "pageEndpoint": "page/",
+  "fileEndpoint": "file/",
+  "apiKey": "",
+  "lgLic": ""
+}

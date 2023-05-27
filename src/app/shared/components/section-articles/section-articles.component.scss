@@ -1,0 +1,34 @@
+@import 'global-settings';
+
+section {
+  position: relative;
+}
+
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+  justify-content: center;
+  min-height: 300px;
+  margin-top: 24px;
+
+  swiper-container {
+    padding: 8px 42px;
+  }
+
+  swiper-slide {
+    width: 240px;
+
+    &.more-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+app-loader {
+  --position: absolute;
+}

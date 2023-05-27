@@ -1,0 +1,9 @@
+$lg-theme-highlight: $secondary;
+$lg-border-radius-base: 0;
+
+@import 'lightgallery/scss/lightgallery-bundle';
+// @import '~lightgallery/scss/lightgallery';
+
+.lg-thumb-item.lg-thumb-item{
+  border-radius: 0;
+}

@@ -1,0 +1,43 @@
+<ion-card *ngIf="data?.id" class="page-item" [ngClass]="classes" [class.horizontal-layout]="horizontalLayout === true"
+  [class.horizontal-layout-auto]="horizontalLayout === 'auto'">
+
+  <div class="card-img-top aspect-ratio ar-16-9">
+    <figure class="ar-content" *ngIf="horizontalLayout && data?.main_image">
+      <app-lazy-picture [apiImage]="data.main_image" [default]="{width: 500}">
+      </app-lazy-picture>
+      <figcaption *ngIf="data.main_image?.caption" [innerHTML]="data.main_image?.caption">
+      </figcaption>
+    </figure>
+
+    <figure class="ar-content" *ngIf="!(horizontalLayout && data?.main_image)">
+      <app-lazy-picture [apiImage]="data.main_image" [default]="{height: 220}">
+      </app-lazy-picture>
+      <figcaption *ngIf="data.main_image?.caption" [innerHTML]="data.main_image?.caption">
+      </figcaption>
+    </figure>
+  </div>
+
+  <ion-card-header>
+    <ion-card-title [innerHTML]="data.title"></ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p *ngIf="data.intro" class="intro" [innerHTML]="data.intro"></p>
+  </ion-card-content>
+
+  <ion-card-footer>
+    <ng-container *ngIf="data?.external_type === 'Facebook'">
+      <ion-button *ngIf="data?.external_link" class="block-button link-item hover-facebook" color="secondary"
+        expand="full" [href]="data?.external_link" target="_blank">
+        <ion-icon slot="start" name="logo-facebook" class="button-icon"></ion-icon> Mehr dazu auf Facebook...
+      </ion-button>
+    </ng-container>
+
+    <ng-container *ngIf="data?.external_type !== 'Facebook'">
+      <ion-button *ngIf="data?.url" class="block-button link-item" color="secondary" expand="full"
+        [routerLink]="data?.url" [routerDirection]="'forward'">
+        {{ 'page-card.btn-more' | translate }}
+      </ion-button>
+    </ng-container>
+  </ion-card-footer>
+</ion-card>

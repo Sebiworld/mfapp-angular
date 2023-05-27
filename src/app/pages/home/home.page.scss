@@ -1,0 +1,22 @@
+@import 'global-settings';
+
+app-header {
+  height: 0px;
+}
+
+section.hero {
+  position: relative;
+
+  app-section-spacer {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+
+    --background-color: var(--ion-background-color);
+  }
+}
+
+section.greeting {
+  font-weight: bold;
+}

@@ -1,0 +1,48 @@
+{
+  "languages": {
+    "label": "Sprachen"
+  },
+  "not-found": {
+    "title": "404 Seite nicht gefunden",
+    "description": "Diese Seite konnte leider nicht gefunden werden.",
+    "back-to-home": "Zurück zur Startseite"
+  },
+  "footer": {
+    "cta": "Werden Sie Mitglied!",
+    "description": "Jetzt Vereinsmitglied werden, die Ziele unterstützen und das nächste Musical-Projekt fördern.",
+    "external": "Besuchen Sie uns auch hier:",
+    "by": "Entwickelt mit ❤ von <a href='https://www.sebi.dev' target='_blank'>Sebastian Schendel</a>.",
+    "copyright": "© 2023"
+  },
+  "home": {
+    "title": "Home",
+    "menu": "Home"
+  },
+  "user": {
+    "title": "Deine Benutzereinstellungen"
+  },
+  "calendar": {
+    "title": "Kalender",
+    "menu": "Kalender"
+  },
+  "news": {
+    "title": "Neuigkeiten",
+    "menu": "Neuigkeiten",
+    "view-archive": "Archiv ansehen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "menu": "Einstellungen",
+    "darkMode": "Dunkler Modus",
+    "on": "an",
+    "off": "aus",
+    "auto": "automatisch",
+    "save": "speichern"
+  },
+  "page-card": {
+    "btn-more": "Mehr dazu..."
+  },
+  "startup": {
+    "go": "Los geht's!"
+  }
+}

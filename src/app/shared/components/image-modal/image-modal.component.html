@@ -1,0 +1,27 @@
+<ion-content fullscreen>
+    <ion-item class="close-fake" lines="none" text-center>
+        <button ion-button (click)="close()" fill="clear" color="light">
+            <ion-icon name="close" slot="start"></ion-icon>
+            Back
+        </button>
+        <button ion-button (click)="zoom(true)" fill="clear" color="light">
+            <ion-icon name="add" slot="start"></ion-icon>
+            in
+        </button>
+        <button ion-button (click)="zoom(false)" fill="clear" color="light">
+            <ion-icon name="remove" slot="start"></ion-icon>
+            out
+        </button>
+    </ion-item>
+
+    <ion-slides [options]="sliderOpts">
+        <ion-slide>
+            <!-- <figure class="gallery-image">
+                <img [lazyLoad]="image.basename + '?page=' + image.page_id + '&width=1000 1x, ' + image.basename + '?page=' + image.page_id + '&width=2000 2x'"
+                    [useSrcset]="true" />
+                <figcaption *ngIf="image.caption" [innerHTML]="image.caption">
+                </figcaption>
+            </figure> -->
+        </ion-slide>
+    </ion-slides>
+</ion-content>

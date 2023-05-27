@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="main-content">
+    <section class="hero" lazyBg [url]="'assets/img/medicus-ensemble.webp'">
+      <!-- <img class="img-fluid" lazyImg [fallback]="'assets/img/medicus-ensemble.webp'"> -->
+      <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+    </section>
+
+    <section class="contents ion-padding">
+      <p>
+        <strong style="font-size: 48px;">Hallo!</strong><br>
+        Wir sind die <strong><span class="text-primary">Musical</span>-Fabrik</strong>!<br>
+        Herzlich Willkommen in unserer App -<br>
+        <strong style="font-size: 24px">Schön, dass du hier bist!</strong>
+      </p>
+    </section>
+
+    <ion-button [expand]="'block'" (click)="dismiss()">{{ 'startup.go' | translate }}</ion-button>
+  </div>
+</ion-content>

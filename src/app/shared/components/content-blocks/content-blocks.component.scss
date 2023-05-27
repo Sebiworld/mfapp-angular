@@ -1,0 +1,59 @@
+@import 'global-settings';
+
+.row {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+app-content-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  margin-bottom: 24px;
+  max-width: 100%;
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: 48px;
+  }
+  // @include media-breakpoint-up(xl) {
+  //   margin-bottom: 64px;
+  // }
+
+  &:first-child,
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child,
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @each $name, $value in $grid-breakpoints {
+    &.max-#{$name} {
+      width: $value;
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+.content-sub-block {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+p {
+  width: 38em;
+  max-width: 100%;
+}
+
+.center,
+.center > p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}

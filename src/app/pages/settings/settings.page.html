@@ -1,0 +1,31 @@
+<ion-header>
+  <app-header [title]="'settings.title' | translate" [backDefault]="'/'"></app-header>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-radio-group formControlName="darkMode">
+        <ion-list-header>
+          <ion-label>{{ 'settings.darkMode' | translate }}</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>{{ 'settings.auto' | translate }}</ion-label>
+          <ion-radio slot="start" value="auto"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ 'settings.off' | translate }}</ion-label>
+          <ion-radio slot="start" value="off"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ 'settings.on' | translate }}</ion-label>
+          <ion-radio slot="start" value="on"></ion-radio>
+        </ion-item>
+
+      </ion-radio-group>
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,0 +1,155 @@
+ion-button,
+.btn {
+  --border-radius: var(--border-radius);
+  text-transform: none;
+  --box-shadow: 0;
+  --padding-top: 0.85em;
+  --padding-bottom: 0.85em;
+  --padding-left: 1em;
+  --padding-right: 1em;
+  letter-spacing: normal;
+
+  &.btn {
+    background: transparent;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    outline: 0 none;
+
+    &:focus {
+      outline: 0 none;
+    }
+  }
+
+  .align-left {
+    position: relative;
+    display: block;
+    text-align: left;
+    justify-content: flex-start;
+    margin-right: auto;
+  }
+
+  .align-right {
+    position: relative;
+    display: block;
+    text-align: right;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  .button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--btn-icon-size);
+    flex: 0 0 auto;
+    width: 1.5em;
+    height: 1.5em;
+
+    @include media-breakpoint-down(md) {
+      font-size: var(--btn-icon-size-md);
+    }
+  }
+
+  .btn-content-text {
+    padding: 4px;
+  }
+
+  &.icon-btn {
+    position: relative;
+    width: var(--btn-size);
+    height: var(--btn-size);
+
+    &::part(native) {
+      padding: 4px;
+    }
+
+    @include media-breakpoint-down(md) {
+      width: var(--btn-size-md);
+      height: var(--btn-size-md);
+    }
+
+    &.btn-small {
+      width: var(--btn-small-size);
+      height: var(--btn-small-size);
+
+      @include media-breakpoint-down(md) {
+        width: var(--btn-small-size-md);
+        height: var(--btn-small-size-md);
+      }
+
+      .button-icon {
+        font-size: var(--btn-small-icon-size);
+
+        @include media-breakpoint-down(md) {
+          font-size: var(--btn-small-icon-size-md);
+        }
+      }
+    }
+  }
+
+  @each $name,
+  $value in $theme-colors {
+    &.bg-#{$name} {
+      background-color: var(--#{$name});
+      color: var(--#{$name}-contrast);
+
+      &:hover,
+      &:focus {
+        background-color: var(--ion-color-#{$name}-shade);
+      }
+    }
+
+    &.hover-#{$name} {
+      &.button-clear {
+        --color-hover: var(--#{$name});
+        --color-activated: var(--#{$name});
+        --color-focused: var(--#{$name});
+
+        &:hover,
+        &:focus {
+          &::part(native) {
+            color: var(--#{$name});
+          }
+        }
+      }
+    }
+  }
+
+  @each $name,
+  $color in $special-colors {
+    &.hover-#{$name} {
+      &.button-clear {
+        --color-hover: #{$color};
+        --color-activated: #{$color};
+        --color-focused: #{$color};
+
+        &:hover,
+        &:focus {
+          &::part(native) {
+            color: #{$color};
+          }
+        }
+      }
+    }
+  }
+
+  @each $name,
+  $color in $special-colors {
+    &.hover-#{$name} {
+      &.button-clear {
+        --color-hover: #{$color};
+        --color-activated: #{$color};
+        --color-focused: #{$color};
+
+        &:hover,
+        &:focus {
+          &::part(native) {
+            color: #{$color};
+          }
+        }
+      }
+    }
+  }
+}

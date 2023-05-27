@@ -1,0 +1,67 @@
+<div class="countdown-container">
+  <div class="text-container">
+    <ng-content select="[slot='start']"></ng-content>
+  </div>
+
+  <div class="countdown" *ngIf="timeLeftChars$ | async as timeLeftChars" #countdownElement>
+    <div class="block" *ngIf="timeLeftChars.years">
+      <div class="label">Jahre</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.years; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" *ngIf="timeLeftChars.months || timeLeftChars.years">
+      <div class="label">Monate</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.months; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" *ngIf="timeLeftChars.days || timeLeftChars.months || timeLeftChars.years">
+      <div class="label">Tage</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.days; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" *ngIf="timeLeftChars.hours || timeLeftChars.days || timeLeftChars.months || timeLeftChars.years">
+      <div class="label">Stunden</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.hours; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block"
+      *ngIf="timeLeftChars.minutes || timeLeftChars.hours || timeLeftChars.days || timeLeftChars.months || timeLeftChars.years">
+      <div class="label">Minuten</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.minutes; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block"
+      *ngIf="timeLeftChars.seconds || timeLeftChars.minutes || timeLeftChars.hours || timeLeftChars.days || timeLeftChars.months || timeLeftChars.years">
+      <div class="label">Sekunden</div>
+      <div class="value">
+        <div class="figure" *ngFor="let current of timeLeftChars.seconds; let index = index; trackBy: trackFigure">
+          <div class="current">{{current}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-container">
+    <ng-content select="[slot='end']"></ng-content>
+  </div>
+</div>

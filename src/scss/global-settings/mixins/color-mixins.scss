@@ -1,0 +1,17 @@
+@mixin set-color-vars($prefix) {
+  --background: var(--#{$prefix}, var(--ion-color-#{$prefix}, var(--ion-color-primary, #5260ff)));
+  --background-rgb: var(--#{$prefix}-rgb, var(--ion-color-#{$prefix}-rgb, var(--ion-color-primary-rgb, 82, 96, 255)));
+  --color: var(--#{$prefix}-contrast, var(--ion-color-#{$prefix}-contrast, var(--ion-color-primary-contrast, #ffffff)));
+  --color-rgb: var(--#{$prefix}-contrast-rgb, var(--ion-color-#{$prefix}-contrast-rgb, var(--ion-color-primary-contrast-rgb, 255, 255, 255)));
+
+  --ion-color-base: var(--background);
+  --ion-color-base-rgb: var(--background-rgb);
+  --ion-color-contrast: var(--color);
+  --ion-color-contrast-rgb: var(--color-rgb);
+  --ion-color-shade: var(--#{$prefix}-shade, var(--ion-color-#{$prefix}-shade, #4854e0));
+  --ion-color-tint: var(--#{$prefix}-tint, var(--ion-color-#{$prefix}-tint, #6370ff));
+
+  --status-success-color: var(--#{$prefix}-success, var(--success, #68a154));
+  --status-warning-color: var(--#{$prefix}-warning, var(--warning, #ffae00));
+  --status-danger-color: var(--#{$prefix}-danger, var(--danger, #cc4b37));
+}

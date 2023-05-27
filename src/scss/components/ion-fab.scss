@@ -1,0 +1,56 @@
+ion-fab {
+  ion-fab-button {
+    --background: rgba(var(--ion-color-light-rgb), 1);
+    --color: var(--light-contrast);
+    --background-hover: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+    --background-hover-opacity: var(--menu-opacity-hover);
+    --background-focused: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+    --background-focused-opacity: var(--menu-opacity-hover);
+    --background-activated: rgba(var(--ion-color-light-rgb), var(--menu-opacity-hover));
+    --background-activated-opacity: var(--menu-opacity-hover);
+    --border-radius: 0;
+    --box-shadow: 0;
+    margin: 0;
+
+    @include media-breakpoint-up(sm) {
+      --background: rgba(var(--ion-color-light-rgb), var(--menu-opacity));
+    }
+
+    &.fab-button-in-list {
+      margin: 0;
+    }
+
+    @each $name, $value in $theme-colors {
+      &.hover-#{$name} {
+        --color-hover: var(--#{$name});
+        --color-activated: var(--#{$name});
+        --color-focused: var(--#{$name});
+      }
+    }
+
+    @each $name, $color in $special-colors {
+      &.hover-#{$name} {
+        --color-hover: #{$color};
+        --color-activated: #{$color};
+        --color-focused: #{$color};
+      }
+    }
+  }
+
+  ion-fab-list {
+    min-width: 40px;
+    margin: 46px 0;
+  }
+
+  &.fab-vertical-top {
+    top: 8px;
+  }
+
+  &.fab-horizontal-start {
+    left: calc(8px + var(--ion-safe-area-left, 0px));
+  }
+
+  & > ion-fab-button {
+    --background: rgba(var(--ion-color-light-rgb), var(--menu-opacity));
+  }
+}

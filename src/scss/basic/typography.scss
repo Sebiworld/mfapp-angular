@@ -1,0 +1,108 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+ion-title {
+  font-family: var(--ion-headline-font-family);
+
+  &>small {
+    display: block;
+    font-weight: lighter;
+    font-size: var(--font-size);
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--primary);
+
+    &:hover,
+    &:focus {
+      color: var(--primary-hover);
+    }
+  }
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+p,
+.intro {
+  max-width: 100%;
+  width: 32em;
+  font-size: var(--font-size);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fontweight-light {
+  font-weight: 200;
+}
+
+a {
+  position: relative;
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-decoration-thickness: 0.13em;
+  text-underline-offset: 0.08em;
+  color: inherit;
+  transition: all 0.1s ease-out;
+
+  &:hover,
+  &:focus {
+    color: var(--primary);
+    text-decoration-thickness: 0.22em;
+    text-underline-offset: 0.08em;
+  }
+
+  &.external {
+    &::before {
+      content: '⧉ ';
+    }
+  }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right,
+      rgba(var(--ion-color-base-rgb), 0),
+      rgba(var(--ion-color-base-rgb), 0.75),
+      rgba(var(--ion-color-base-rgb), 0));
+}
+
+*::selection {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.content {
+  &>*:first-child {
+    margin-top: 0;
+  }
+
+  &>*:last-child {
+    margin-bottom: 0;
+  }
+}

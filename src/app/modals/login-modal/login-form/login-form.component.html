@@ -1,0 +1,51 @@
+<div class="main-content">
+  <section class="hero" lazyBg [url]="'assets/img/medicus-ensemble.webp'">
+    <app-section-spacer position="bottom" logo="auto"></app-section-spacer>
+  </section>
+
+  <section class="contents ion-padding">
+    <form class="styled-form" [formGroup]="myForm" (ngSubmit)="onSubmit()" autocomplete="on"
+      [class.error]="!loading && !myForm.valid && myForm.touched">
+
+      <p>
+        <strong>Bist du bereits ein Mitglied der Musical-Fabrik?</strong><br>
+        Melde dich an, um Zugang zu internen Nachrichten und Probenplänen zu bekommen!
+      </p>
+
+      <ion-button expand="block" class="ion-no-margin" color="primary" (click)="shouldNavigateToRegister()">
+        Mitgliedszugang anfragen
+      </ion-button>
+
+      <p>oder einloggen:</p>
+
+      <ion-list lines="none">
+        <ion-item class="bg-tertiary">
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input formControlName="email" type="text" (keyup.enter)="onSubmit()" autocomplete="email"
+            [readonly]="loading">
+          </ion-input>
+        </ion-item>
+
+        <ion-item class="bg-tertiary">
+          <ion-label position="stacked">Passwort</ion-label>
+          <ion-input formControlName="password" type="password" (keyup.enter)="onSubmit()" autocomplete="password"
+            [readonly]="loading">
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-note class="general-error-note">
+        Bitte gib deine Email-Adresse und dein Passwort ein!
+      </ion-note>
+
+      <ion-button type="submit" expand="block" class="ion-no-margin" color="primary" [disabled]="loading">
+        Anmelden <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+      </ion-button>
+
+      <ion-button *ngIf="isStartup" expand="block" class="ion-no-margin" color="dark" fill="clear"
+        (click)="shouldDismiss()">
+        Überspringen
+      </ion-button>
+    </form>
+  </section>
+</div>

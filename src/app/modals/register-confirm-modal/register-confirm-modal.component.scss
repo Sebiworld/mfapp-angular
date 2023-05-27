@@ -1,0 +1,57 @@
+@import 'global-settings';
+
+.main-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+section.hero {
+  position: relative;
+  display: block;
+  background: black;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-height: 500px;
+  flex: 1 1 70%;
+
+  @include media-breakpoint-up(sm) {
+    max-height: 600px;
+  }
+
+  app-section-spacer {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+
+    --background-color: var(--ion-background-color);
+  }
+}
+
+section.contents {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 16px;
+
+  &>p {
+    margin: 0;
+  }
+
+  ion-spinner {
+    position: relative;
+    width: 48px;
+    height: 48px;
+  }
+
+  ion-button {
+    margin-top: 8px;
+  }
+}

@@ -1,0 +1,123 @@
+@import 'global-settings';
+
+.content-tabs {
+  &.mode-tabs {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    & > .accordion {
+      display: block;
+      width: 100%;
+    }
+
+    & > .sidebar {
+      display: none;
+      padding: 16px 16px 16px 0;
+      width: 30%;
+    }
+
+    & > .tab-content-wrapper {
+      display: none;
+      flex: 1 1 200px;
+      width: 70%;
+      padding: 16px 0 16px 16px;
+    }
+
+    @include media-breakpoint-up(sm) {
+      display: flex;
+
+      & > .accordion {
+        display: none;
+      }
+
+      & > .sidebar {
+        display: block;
+      }
+
+      & > .tab-content-wrapper {
+        display: block;
+      }
+    }
+  }
+
+  &.mode-accordion {
+    & > ion-accordion-group {
+      max-width: 800px;
+    }
+
+    & > .sidebar {
+      display: none;
+    }
+
+    & > .tab-content-wrapper {
+      display: none;
+    }
+  }
+}
+
+.accordion {
+  ion-accordion {
+    margin-bottom: 4px;
+
+    ion-item[slot='header'] {
+      --background: var(--dark);
+      --color: var(--dark-contrast);
+
+      .ion-accordion-toggle-icon {
+        color: var(--dark-contrast);
+      }
+    }
+
+    &.accordion-expanded {
+      ion-item[slot='header'] {
+        --background: rgba(var(--ion-color-dark-rgb), 1);
+        --color: var(--dark-contrast);
+      }
+    }
+  }
+
+  .content-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+
+.sidebar {
+  position: relative;
+
+  ion-item {
+    --background: rgba(var(--ion-color-dark-rgb), 0.7);
+    --color: var(--dark-contrast);
+    --min-height: auto;
+    --ripple-color: var(--dark);
+    margin-bottom: 4px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    ion-label {
+      white-space: normal;
+    }
+
+    &::part(detail-icon) {
+      --detail-icon-color: var(--dark-contrast);
+      --detail-icon-opacity: 1;
+      margin-left: 12px;
+    }
+
+    &.active {
+      --background: rgba(var(--ion-color-dark-rgb), 1);
+    }
+  }
+}
+
+.tab-content {
+  position: relative;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
