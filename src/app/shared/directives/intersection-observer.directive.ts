@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { debounceTime, filter } from 'rxjs/operators';
   selector: '[appIntersectionObserver]'
 })
 export class IntersectionObserverDirective implements OnInit {
+
+  private destroyRef = inject(DestroyRef);
 
   @Input() intersectionDebounce = 0;
   @Input() intersectionRootMargin = '0px';
@@ -29,7 +31,7 @@ export class IntersectionObserverDirective implements OnInit {
       config,
       this.intersectionDebounce
     ).pipe(
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe((status) => {
       this.visibilityChange.emit(status);
     });

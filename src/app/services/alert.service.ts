@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
 import { delay, take, map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,6 +11,8 @@ import { TranslationService } from '@services/translation.service';
   providedIn: 'root',
 })
 export class AlertService {
+
+  private destroyRef = inject(DestroyRef);
 
   private defaultConfig: HotToastOptions<DefaultDataType> = {
     // dismissible: true,
@@ -133,7 +135,7 @@ export class AlertService {
         take(1),
         map((translations: string[]) => translations.join('<br>')),
         delay(waitFor),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.destroyRef)
       ).subscribe((messageString: string) => {
         let ref;
         if (type === 'error') {

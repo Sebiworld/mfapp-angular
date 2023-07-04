@@ -2,7 +2,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError, take, map } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
-import { Injectable } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { environment } from '@env/environment';
@@ -12,6 +12,8 @@ import { TranslationService } from '@services/translation.service';
   providedIn: 'root',
 })
 export class HttpErrorInterceptor implements HttpInterceptor {
+
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private translationService: TranslationService,
@@ -54,7 +56,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 });
                 toast.present();
               }),
-              takeUntilDestroyed()
+              takeUntilDestroyed(this.destroyRef)
             );
           }
 

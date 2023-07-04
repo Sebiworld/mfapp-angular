@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, tap } from 'rxjs';
@@ -13,6 +13,8 @@ import { AuthStoreFacade } from '@services/auth/+store/auth-store.facade';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
+
+  private destroyRef = inject(DestroyRef);
 
   @Input() isStartup: boolean = false;
   @Input() loading: boolean = false;
@@ -40,7 +42,7 @@ export class LoginFormComponent implements OnInit {
     this.loginResponse$.pipe(
       filter(data => data?.type === 'error' && data.timestamp === this.lastAttempt),
       tap(() => this.myForm.patchValue({ password: '' })),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

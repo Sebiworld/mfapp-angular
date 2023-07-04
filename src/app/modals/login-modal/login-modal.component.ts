@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, Input, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, filter, tap } from 'rxjs';
 import { ModalController } from '@ionic/angular';
@@ -12,6 +12,8 @@ import { AuthStoreFacade } from '@services/auth/+store/auth-store.facade';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginModalComponent {
+
+  private destroyRef = inject(DestroyRef);
 
   public static readonly MODAL_ID = 'login-modal';
 
@@ -30,7 +32,7 @@ export class LoginModalComponent {
       filter(val => !!val),
       debounceTime(100),
       tap(() => this.modalController.dismiss(undefined, undefined, LoginModalComponent.MODAL_ID)),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

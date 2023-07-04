@@ -38,6 +38,7 @@ import { NicknameModalModule } from '@modals/nickname-modal/nickname-modal.modul
 import { LoginModalModule } from '@modals/login-modal/login-modal.module';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { RegisterConfirmModalModule } from '@modals/register-confirm-modal/register-confirm-modal.module';
+import { CalendarModule } from '@services/calendar/calendar.module';
 
 export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 
@@ -100,6 +101,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(h
     PagesModule,
     ArchiveModule,
     AuthModule,
+    CalendarModule,
 
     // ServiceWorkerModule.register('ngsw-worker.js', {
     //   enabled: environment.production,

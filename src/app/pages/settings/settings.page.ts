@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { firstValueFrom, Subject, takeUntil, tap } from 'rxjs';
+import { firstValueFrom, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { UtilService } from '@services/util.service';
@@ -12,6 +12,8 @@ import { AppStateFacade } from '@store/app-state.facade';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit, AfterViewInit {
+
+  private destroyRef = inject(DestroyRef);
 
   public readonly initialized$ = this.appStateFacade.initialized$;
   public readonly darkMode$ = this.appStateFacade.darkMode$;
@@ -38,7 +40,7 @@ export class SettingsPage implements OnInit, AfterViewInit {
           this.utilService.setDarkMode(changes.darkMode);
         }
       }),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

@@ -1,5 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
-import { SwiperOptions } from "swiper";
+import { SwiperOptions } from 'swiper/types';
 
 @Directive({
   selector: '[appSwiper]',

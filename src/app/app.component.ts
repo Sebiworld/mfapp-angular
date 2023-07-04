@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, inject, InjectionToken, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, Inject, inject, InjectionToken, OnDestroy, OnInit } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { delay, distinctUntilChanged, filter, map, mergeMap, switchMap, take, takeUntil, tap } from 'rxjs/operators';
@@ -30,6 +30,7 @@ import { LoginModalComponent } from '@modals/login-modal/login-modal.component';
 import { StartupModalComponent } from '@modals/startup-modal/startup-modal.component';
 import { SplashModalComponent } from '@modals/splash-modal/splash-modal.component';
 import { RegisterConfirmModalComponent } from '@modals/register-confirm-modal/register-confirm-modal.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export const WINDOW = new InjectionToken<Window>(
   'An abstraction over global window object',
@@ -43,9 +44,9 @@ export const WINDOW = new InjectionToken<Window>(
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit {
 
-  private unsubscribe$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
 
   public readonly darkModeActivated$ = this.appStateFacade.darkModeActivated$;
 
@@ -87,7 +88,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       });
       this.darkModeActivated$.pipe(
         switchMap(darkModeActivated => StatusBar.setStyle({ style: darkModeActivated ? Style.Dark : Style.Light })),
-        takeUntil(this.unsubscribe$)
+        takeUntilDestroyed(this.destroyRef)
       ).subscribe();
 
       this._hasSystemStatusBar$.next(true);
@@ -108,7 +109,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
             this.modalController.dismiss(undefined, undefined, 'splash-modal');
             this.afterInitialization();
           }),
-          takeUntil(this.unsubscribe$)
+          takeUntilDestroyed(this.destroyRef)
         ).subscribe();
       });
     } catch (err) {
@@ -171,13 +172,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           ]);
         }
       }),
-      takeUntil(this.unsubscribe$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next(null);
-    this.unsubscribe$.complete();
   }
 
   private async showSplashModal() {
@@ -214,7 +210,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           await this.showLoginModal();
         }
       }),
-      takeUntil(this.unsubscribe$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 
@@ -286,6 +282,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   menuOpened() {
     this._isMenuOpen$.next(true);
   }
+
   menuClosed() {
     this._isMenuOpen$.next(false);
   }

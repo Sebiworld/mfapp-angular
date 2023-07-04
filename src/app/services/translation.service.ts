@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { DestroyRef, Inject, Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, distinctUntilChanged, filter, debounceTime, switchMap } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,8 @@ export const supportedLanguages = ['default', 'de'];
   providedIn: 'root',
 })
 export class TranslationService {
+
+  private destroyRef = inject(DestroyRef);
 
   public readonly languageLabels: { key: string; value: string }[] = [
     { key: 'de', value: 'Deutsch' }
@@ -53,7 +55,7 @@ export class TranslationService {
         this.ngxTranslateService.use(language);
         this.document.documentElement.lang = language;
       }),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

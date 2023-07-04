@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { SwiperOptions } from 'swiper';
-import EffectCarousel from '@shared/misc/effect-carousel.esm.js';
 
+import EffectCarousel from '@shared/misc/effect-carousel.esm.js';
 import { ApiDefaultPage } from '@services/pages/+store/api-default-page.model';
+import { SwiperOptions } from 'swiper/types';
 
 @Component({
   selector: 'app-section-articles',

@@ -1,17 +1,17 @@
 $themeColor: $primary;
 
 @import "swiper/swiper.scss";
-@import "swiper/modules/a11y/a11y.scss";
-@import "swiper/modules/controller/controller.scss";
-// @import "swiper/modules/effect-coverflow/effect-coverflow.scss";
-// @import "swiper/modules/effect-cube/effect-cube.scss";
-// @import "swiper/modules/effect-fade/effect-fade.scss";
-// @import "swiper/modules/effect-flip/effect-flip.scss";
-@import "swiper/modules/navigation/navigation.scss";
-@import "swiper/modules/pagination/pagination.scss";
-@import "swiper/modules/scrollbar/scrollbar.scss";
-// @import "swiper/modules/thumbs/thumbs.scss";
-// @import "swiper/modules/zoom/zoom.scss";
+@import "swiper/modules/a11y.scss";
+@import "swiper/modules/controller.scss";
+// @import "swiper/modules/effect-coverflow.scss";
+// @import "swiper/modules/effect-cube.scss";
+// @import "swiper/modules/effect-fade.scss";
+// @import "swiper/modules/effect-flip.scss";
+@import "swiper/modules/navigation.scss";
+@import "swiper/modules/pagination.scss";
+@import "swiper/modules/scrollbar.scss";
+// @import "swiper/modules/thumbs.scss";
+// @import "swiper/modules/zoom.scss";
 
 @import "effect-carousel";
 

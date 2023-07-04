@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, take, tap } from 'rxjs';
@@ -13,6 +13,8 @@ import { AuthService } from '@services/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterConfirmModalComponent implements OnInit {
+
+  private destroyRef = inject(DestroyRef);
 
   public static readonly MODAL_ID = 'register-confirm-modal';
 
@@ -32,7 +34,7 @@ export class RegisterConfirmModalComponent implements OnInit {
       filter(loading => !loading),
       take(1),
       tap(() => this.dismiss()),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

@@ -1,6 +1,6 @@
 import {
   Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, ChangeDetectionStrategy, AfterViewChecked,
-  OnChanges, SimpleChanges
+  OnChanges, SimpleChanges, inject, DestroyRef
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import lgZoom from 'lightgallery/plugins/zoom';
@@ -11,10 +11,11 @@ import { LightGallerySettings } from 'lightgallery/lg-settings';
 import { GalleryItem } from 'lightgallery/lg-utils';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
-import SwiperCore, { Pagination, SwiperOptions, Navigation, Mousewheel, Keyboard } from 'swiper';
+import SwiperCore from 'swiper';
+import { Pagination, Navigation, Mousewheel, Keyboard } from 'swiper/modules';
 SwiperCore.use([Pagination, Navigation, Mousewheel, Keyboard]);
 import { register } from 'swiper/element/bundle';
-import { Swiper } from 'swiper/types';
+import { Swiper, SwiperOptions } from 'swiper/types';
 
 import { environment } from '@env/environment';
 import { ApiService } from '@services/api/api.service';
@@ -31,6 +32,8 @@ import { ContentComponent } from '../content-block/content-component.interface';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentGalleryComponent implements OnInit, AfterViewInit, AfterViewChecked, OnChanges, ContentComponent {
+
+  private destroyRef = inject(DestroyRef);
 
   @ViewChild('lightgalleryContainer', { static: false }) lightgalleryContainer: ElementRef;
   @ViewChild('inlineGalleryWrapper', { static: true }) inlineGalleryWrapper: ElementRef;
@@ -91,7 +94,7 @@ export class ContentGalleryComponent implements OnInit, AfterViewInit, AfterView
           alt: image.description
         }));
       }),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

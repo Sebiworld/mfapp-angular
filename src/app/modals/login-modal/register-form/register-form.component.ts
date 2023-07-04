@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthStoreFacade } from '@services/auth/+store/auth-store.facade';
@@ -15,6 +15,8 @@ import { filter, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterFormComponent implements OnInit {
+
+  private destroyRef = inject(DestroyRef);
 
   @Input() isStartup: boolean = false;
   @Input() loading: boolean = false;
@@ -77,7 +79,7 @@ export class RegisterFormComponent implements OnInit {
     this.authStoreFacade.registrationResponse$.pipe(
       filter(data => data?.type === 'success'),
       tap(() => this.shouldDismiss()),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

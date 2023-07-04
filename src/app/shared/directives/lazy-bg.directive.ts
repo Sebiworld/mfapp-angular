@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, Renderer2, OnChanges, SimpleChanges, HostListener, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, Renderer2, OnChanges, SimpleChanges, HostListener, OnInit, OnDestroy, inject, DestroyRef } from '@angular/core';
 import 'lazysizes/plugins/unveilhooks/ls.unveilhooks';
 import { BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
@@ -13,6 +13,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   selector: '[lazyBg]'
 })
 export class LazyBgDirective implements OnInit, OnChanges {
+
+  private destroyRef = inject(DestroyRef);
 
   @Input() apiImage?: ApiImage;
   @Input() url?: string;
@@ -52,7 +54,7 @@ export class LazyBgDirective implements OnInit, OnChanges {
           this.el.nativeElement.style.backgroundImage = 'url(' + url + ')';
         }
       }),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 

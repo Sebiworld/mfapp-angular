@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { debounceTime, filter, map, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ import { Section } from '@models/section.model';
   styleUrls: ['./default.page.scss'],
 })
 export class DefaultPage implements OnInit, AfterViewInit {
+
+  private destroyRef = inject(DestroyRef);
 
   @ViewChild(IonContent, { static: false }) ionContent: IonContent;
 
@@ -54,7 +56,7 @@ export class DefaultPage implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.data$.pipe(
       tap(data => this.seoService.setSeo(data?.seo ?? {}, data?.urls)),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 
@@ -83,7 +85,7 @@ export class DefaultPage implements OnInit, AfterViewInit {
 
         this.ionContent.scrollByPoint(0, anchor.offsetTop, 0);
       }),
-      takeUntilDestroyed()
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 
