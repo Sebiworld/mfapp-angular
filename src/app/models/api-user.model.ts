@@ -15,6 +15,6 @@ export interface ApiUser {
   id: string;
   name: string;
   email: string;
-  roles: ApiRole[];
-  permissions: ApiPermission[];
+  roles?: ApiRole[];
+  permissions?: ApiPermission[];
 };

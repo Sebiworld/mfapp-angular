@@ -8,4 +8,8 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <app-calendar-list-event *ngFor="let event of events$ | async; trackBy: trackCalendarEvent" [event]="event">
+
+  </app-calendar-list-event>
 </ion-content>

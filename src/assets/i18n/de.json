@@ -23,7 +23,14 @@
   },
   "calendar": {
     "title": "Kalender",
-    "menu": "Kalender"
+    "menu": "Kalender",
+    "event": {
+      "title": "Titel",
+      "description": "Beschreibung",
+      "timespans": "Zeit",
+      "timeFrom": "Von",
+      "timeUntil": "Bis"
+    }
   },
   "news": {
     "title": "Neuigkeiten",
@@ -44,5 +51,11 @@
   },
   "startup": {
     "go": "Los geht's!"
+  },
+  "general": {
+    "required": "Pflichtfeld",
+    "done": "Ok",
+    "cancel": "Abbrechen",
+    "clear": "Zurücksetzen"
   }
 }

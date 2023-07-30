@@ -8,6 +8,7 @@ import * as CalendarSelectors from './calendar.selectors';
 export class CalendarStoreFacade {
 
   public readonly loading$ = this.store.select(CalendarSelectors.selectLoading);
+  public readonly events$ = this.store.select(CalendarSelectors.selectAllEvents);
 
   constructor(
     private store: Store

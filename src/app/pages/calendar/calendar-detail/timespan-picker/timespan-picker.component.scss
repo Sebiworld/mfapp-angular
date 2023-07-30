@@ -1,0 +1,9 @@
+@import 'global-settings';
+
+.contents-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}

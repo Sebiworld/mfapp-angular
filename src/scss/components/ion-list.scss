@@ -1,0 +1,17 @@
+ion-list {
+  &.form-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: transparent;
+
+    &>ion-item {
+      width: 100%;
+
+      &.w-50 {
+        width: 49%;
+      }
+    }
+  }
+}

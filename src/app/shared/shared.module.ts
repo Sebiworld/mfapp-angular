@@ -37,6 +37,8 @@ import { SafeSrcPipe } from './pipes/safe-src.pipe';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { StripSpacesPipe } from './pipes/strip-spaces.pipe';
 import { SwiperDirective } from './directives/swiper.directive';
+import { DateWithFallbackPipe } from './pipes/date-with-fallback.pipe';
+import { AreDatesEqualPipe } from './pipes/are-dates-equal.pipe';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { SwiperDirective } from './directives/swiper.directive';
     StripNewLinePipe,
     StripSpacesPipe,
     UnescapeHtmlPipe,
+    DateWithFallbackPipe,
+    AreDatesEqualPipe,
     LazyImgDirective,
     LazyBgDirective,
     LazySourceDirective,
@@ -106,6 +110,8 @@ import { SwiperDirective } from './directives/swiper.directive';
     StripNewLinePipe,
     StripSpacesPipe,
     UnescapeHtmlPipe,
+    DateWithFallbackPipe,
+    AreDatesEqualPipe,
     LazyImgDirective,
     LazyBgDirective,
     LazySourceDirective,

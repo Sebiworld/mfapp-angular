@@ -54,7 +54,6 @@ module.exports = function (ctx) {
   });
 };
 
-
 var getDotenvValues = function (environment) {
   var output = {};
   try {
