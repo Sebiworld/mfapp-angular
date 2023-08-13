@@ -24,12 +24,15 @@
   "calendar": {
     "title": "Kalender",
     "menu": "Kalender",
+    "loading": "Kalender wird geladen",
     "event": {
       "title": "Titel",
       "description": "Beschreibung",
-      "timespans": "Zeit",
+      "timespans": "Zeitblock",
       "timeFrom": "Von",
-      "timeUntil": "Bis"
+      "timeUntil": "Bis",
+      "add": "Zeitblock hinzufügen",
+      "loading": "Termin wird geladen"
     }
   },
   "news": {
@@ -56,6 +59,12 @@
     "required": "Pflichtfeld",
     "done": "Ok",
     "cancel": "Abbrechen",
-    "clear": "Zurücksetzen"
+    "clear": "Zurücksetzen",
+    "loading": "Daten werden geladen"
+  },
+  "errors": {
+    "title": "Fehler:",
+    "not_found": "Daten nicht gefunden.",
+    "event_not_found": "Der Kalender-Eintrag wurde nicht gefunden."
   }
 }

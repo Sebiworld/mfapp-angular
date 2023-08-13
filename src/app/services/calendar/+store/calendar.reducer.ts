@@ -6,12 +6,12 @@ import { CalendarEventState, CalendarEventEntity } from './calendar-event.entity
 const featureKey = 'calendar';
 
 export interface CalendarState {
-  loading: boolean;
+  loading: string[];
   events: CalendarEventState;
 }
 
 const initialState: CalendarState = {
-  loading: false,
+  loading: [],
   events: CalendarEventEntity.initialState
 };
 
@@ -19,17 +19,63 @@ const reducer = createReducer(
   initialState,
 
   on(CalendarActions.loadCalendar,
-    state => ({ ...state, loading: true })
+    state => ({
+      ...state,
+      loading: [...state.loading, 'load-calendar']
+    })
   ),
   on(CalendarActions.loadCalendarSuccess,
     (state, action) => ({
       ...state,
-      loading: false,
+      loading: state.loading.filter(v => v !== 'load-calendar'),
       events: CalendarEventEntity.adapter.upsertMany(action.events, state.events)
     })
   ),
   on(CalendarActions.loadCalendarFailure, CalendarActions.loadCalendarNotModified,
-    state => ({ ...state, loading: false })
+    state => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'load-calendar')
+    })
+  ),
+
+  on(CalendarActions.loadEvent,
+    state => ({
+      ...state,
+      loading: [...state.loading, 'load-event']
+    })
+  ),
+  on(CalendarActions.loadEventSuccess,
+    (state, action) => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'load-event'),
+      events: CalendarEventEntity.adapter.upsertOne(action.event, state.events)
+    })
+  ),
+  on(CalendarActions.loadEventFailure, CalendarActions.loadEventNotModified,
+    state => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'load-event')
+    })
+  ),
+
+  on(CalendarActions.saveEvent,
+    state => ({
+      ...state,
+      loading: [...state.loading, 'save-event']
+    })
+  ),
+  on(CalendarActions.saveEventSuccess,
+    (state, action) => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'save-event'),
+      events: CalendarEventEntity.adapter.upsertOne(action.event, state.events)
+    })
+  ),
+  on(CalendarActions.saveEventFailure,
+    state => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'save-event')
+    })
   ),
 
 );

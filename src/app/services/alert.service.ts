@@ -1,11 +1,12 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { combineLatest, Observable } from 'rxjs';
-import { delay, take, map } from 'rxjs/operators';
+import { delay, take, map, tap } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CreateHotToastRef, DefaultDataType, HotToastService, ToastOptions as HotToastOptions } from '@ngneat/hot-toast';
 import { isElement as _isElement, uniq as _uniq } from 'lodash-es';
 
 import { TranslationService } from '@services/translation.service';
+import { isValidArray } from '@shared/helpers/general.helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -47,8 +48,11 @@ export class AlertService {
   public error(
     message: any,
     payload: HotToastOptions<DefaultDataType> = {},
-    translationParams?: { [key: string]: string },
-    waitFor: number = 0
+    translationParams?: { [key: string]: string } | { [key: string]: string }[],
+    options?: {
+      waitFor?: number,
+      spacer: ' '
+    }
   ): Promise<CreateHotToastRef<DefaultDataType>> {
     const toastConfig = {
       iconTheme: {
@@ -59,14 +63,17 @@ export class AlertService {
       autoClose: false,
       ...payload
     };
-    return this.show(message, toastConfig, translationParams, 'error', waitFor);
+    return this.show(message, toastConfig, translationParams, 'error', options);
   }
 
   public warning(
     message: any,
     payload: HotToastOptions<DefaultDataType> = {},
-    translationParams?: { [key: string]: string },
-    waitFor: number = 0
+    translationParams?: { [key: string]: string } | { [key: string]: string }[],
+    options?: {
+      waitFor?: number,
+      spacer: ' '
+    }
   ): Promise<CreateHotToastRef<DefaultDataType>> {
     const toastConfig = {
       iconTheme: {
@@ -75,14 +82,17 @@ export class AlertService {
       },
       ...payload
     };
-    return this.show(message, toastConfig, translationParams, 'warning', waitFor);
+    return this.show(message, toastConfig, translationParams, 'warning', options);
   }
 
   public success(
     message: any,
     payload: HotToastOptions<DefaultDataType> = {},
-    translationParams?: { [key: string]: string },
-    waitFor: number = 0
+    translationParams?: { [key: string]: string } | { [key: string]: string }[],
+    options?: {
+      waitFor?: number,
+      spacer: ' '
+    }
   ): Promise<CreateHotToastRef<DefaultDataType>> {
     const toastConfig = {
       iconTheme: {
@@ -91,15 +101,18 @@ export class AlertService {
       },
       ...payload
     };
-    return this.show(message, toastConfig, translationParams, 'success', waitFor);
+    return this.show(message, toastConfig, translationParams, 'success', options);
   }
 
   public show(
     message: any,
     payload: HotToastOptions<DefaultDataType> = {},
-    translationParams?: { [key: string]: string },
+    translationParams?: { [key: string]: string } | { [key: string]: string }[],
     type?: string,
-    waitFor: number = 0
+    options?: {
+      waitFor?: number,
+      spacer: ' '
+    }
   ): Promise<CreateHotToastRef<DefaultDataType>> {
     return new Promise(async resolve => {
       if (!message || message.length <= 0) {
@@ -108,15 +121,19 @@ export class AlertService {
       }
 
       const translationObservables: Observable<string>[] = [];
-      if (typeof message === 'object' && Array.isArray(message)) {
-        for (const messagePart of message) {
+      if (isValidArray(message)) {
+        for (const index in message) {
+          const messagePart = message[index];
           if (typeof messagePart !== 'string') { continue; }
-          translationObservables.push(this.translationService.getTranslation$(messagePart, translationParams));
+          const params = isValidArray(translationParams) ? translationParams?.[index] : translationParams;
+          translationObservables.push(this.translationService.getTranslation$(messagePart, params));
         }
       } else if (typeof message === 'object' && typeof message.error === 'string') {
-        translationObservables.push(this.translationService.getTranslation$(message.error, translationParams));
+        const params = isValidArray(translationParams) ? translationParams?.[0] : translationParams;
+        translationObservables.push(this.translationService.getTranslation$(message.error, params));
       } else if (typeof message === 'string') {
-        translationObservables.push(this.translationService.getTranslation$(message, translationParams));
+        const params = isValidArray(translationParams) ? translationParams?.[0] : translationParams;
+        translationObservables.push(this.translationService.getTranslation$(message, params));
       }
 
       let classes = ['toast-box', 'toast-' + (type || 'default'), 'dci-toast'];
@@ -133,8 +150,8 @@ export class AlertService {
 
       combineLatest(translationObservables).pipe(
         take(1),
-        map((translations: string[]) => translations.join('<br>')),
-        delay(waitFor),
+        map((translations: string[]) => translations.join(options?.spacer || ' ')),
+        delay(options?.waitFor || 0),
         takeUntilDestroyed(this.destroyRef)
       ).subscribe((messageString: string) => {
         let ref;

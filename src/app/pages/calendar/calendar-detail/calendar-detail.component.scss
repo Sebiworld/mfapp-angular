@@ -4,3 +4,32 @@
   margin-left: 8px;
   margin-right: 8px;
 }
+
+.timespans-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+  margin: 24px 0;
+
+  ion-card {
+    margin: 0;
+
+    .delete-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      height: auto;
+
+      &.button-disabled {
+        display: none;
+      }
+    }
+  }
+}

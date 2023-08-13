@@ -5,6 +5,8 @@
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-backdrop-opacity: 0.6;
+
   --color-bright: #{$color-bright};
   --color-bright-rgb: #{hexToRGB($color-bright)};
   --color-dark: #{$color-dark};

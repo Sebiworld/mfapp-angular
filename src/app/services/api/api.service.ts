@@ -1,33 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Observable, timer, throwError, of } from 'rxjs';
 import { catchError, mergeMap, retryWhen } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { UtilService } from '@services/util.service';
-import { ApiHttpParams } from './api-http-params.model';
 
-export interface ApiErrorResponse {
-  error: {
-    errorcode: string;
-    error: string;
-    status: number;
-    devmessage?: {
-      class: string;
-      code: number;
-      message: string;
-      location: string;
-      line: number;
-    };
-  };
-  headers: any;
-  message: string;
-  ok: boolean;
-  status: number;
-  statusText: string;
-  url: string;
-};
+import { ApiHttpParams } from './api-http-params.model';
+import { ApiErrorResponse } from './api-error.model';
 
 export const genericRetryStrategy = ({
   maxRetryAttempts = 1,
@@ -157,7 +138,6 @@ export class ApiService {
     if (!environment.production) { console.error('API Error: ', error); }
 
     throw error.error;
-    return error.error;
   }
 
   protected sendForm(path: string, method: string, target: string, params: { [key: string]: any }): void {

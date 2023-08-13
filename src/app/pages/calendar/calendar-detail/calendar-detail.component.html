@@ -29,36 +29,80 @@
       </ion-card-content>
     </ion-card>
 
-    <div class="timespan-wrapper" formArrayName="timespans"
-      *ngFor="let timespan of timespans.controls; let index = index">
-      <ion-card [formGroupName]="index">
-        <ion-card-header>
-          <ion-card-subtitle>{{ 'calendar.event.timespans' | translate }}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-list class="form-list" lines="none">
-            <ion-item button (click)="openTimespanPicker($event, index, timespan.value.timeFrom, timespan.value.timeUntil)">
-              <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day'">
-                {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
-                <span class="date-spacer">-</span>
-                {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'mediumTime' : locale }}
-              </div>
+    <div class="timespans-wrapper">
+      <div class="timespan-wrapper" formArrayName="timespans"
+        *ngFor="let timespan of timespans.controls; let index = index">
+        <ion-card [formGroupName]="index">
+          <ion-card-header>
+            <ion-card-subtitle>{{ 'calendar.event.timespans' | translate }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list class="form-list" lines="none">
+              <ion-item button
+                (click)="openTimespanPicker($event, index, timespan.value.timeFrom, timespan.value.timeUntil)">
+                <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day'">
+                  {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
+                  <span class="date-spacer">-</span>
+                  {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'mediumTime' : locale }}
+                </div>
 
-              <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day': true">
-                {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
-                <span class="date-spacer">-</span>
-                {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'medium' : locale }}
-              </div>
-            </ion-item>
+                <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day': true">
+                  {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
+                  <span class="date-spacer">-</span>
+                  {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'medium' : locale }}
+                </div>
+              </ion-item>
 
-            <ion-item>
-              <ion-input formControlName="title" label-placement="floating" fill="solid"
-                [label]="'calendar.event.title' | translate">
-              </ion-input>
-            </ion-item>
-          </ion-list>
-        </ion-card-content>
-      </ion-card>
+              <ion-item *ngIf="timespan.get('title')">
+                <ion-input formControlName="title" label-placement="floating" fill="solid">
+                  <div slot="label">
+                    {{ 'calendar.event.title' | translate }} <ion-text *ngIf="timespan.get('title').validator"
+                      color="danger" [title]="'general.required' | translate">&ast;</ion-text>
+                  </div>
+                </ion-input>
+              </ion-item>
+
+              <ion-item *ngIf="timespan.get('description')">
+                <ion-textarea formControlName="description" label-placement="floating" fill="solid" [autoGrow]="true">
+                  <div slot="label">
+                    {{ 'calendar.event.description' | translate }} <ion-text
+                      *ngIf="timespan.get('description')?.validator" color="danger"
+                      [title]="'general.required' | translate">&ast;</ion-text>
+                  </div>
+                </ion-textarea>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+          <ion-button class="delete-btn" color="secondary" fill="clear" shape="round" size="small"
+            [disabled]="timespans.controls.length <= 1" (click)="deleteTimespan(index)">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+        </ion-card>
+      </div>
+
+      <ion-button color="tertiary" (click)="addTimespan()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        {{ 'calendar.event.add' | translate }}
+      </ion-button>
     </div>
   </form>
+
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ng-container *ngrxLet="saveEventLoading$ as saveEventLoading">
+      <ion-fab-button color="success" (click)="save()" [disabled]="!eventForm.valid || saveEventLoading">
+        <ion-icon *ngIf="!saveEventLoading" name="save"></ion-icon>
+        <ion-spinner *ngIf="saveEventLoading" name="circular"></ion-spinner>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+
+  <div class="loading-overlay" *ngIf="loadEventLoading$ | async">
+    <ion-card>
+      <ion-card-content>
+        <ion-spinner name="circular"></ion-spinner>
+        <span>{{ 'calendar.event.loading' | translate }}</span>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
