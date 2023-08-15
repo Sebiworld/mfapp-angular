@@ -12,8 +12,10 @@ import { CalendarService } from '@services/calendar/calendar.service';
 import { ApiCalendarTimespan } from '@services/calendar/+store/api-calendar-event.model';
 import { CalendarStoreFacade } from '@services/calendar/+store/calendar-store.facade';
 import { AlertService } from '@services/alert.service';
+import { NavigationService } from '@services/navigation.service';
 
 import { TimespanPickerComponent } from './timespan-picker/timespan-picker.component';
+
 
 @Component({
   selector: 'app-calendar-detail',
@@ -41,14 +43,14 @@ export class CalendarDetailComponent {
   public readonly saveEventLoading$ = this.calendarStoreFacade.saveEventLoading$;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private translationService: TranslationService,
-    private popoverController: PopoverController,
-    private changeDetectorRef: ChangeDetectorRef,
-    private calendarService: CalendarService,
-    private calendarStoreFacade: CalendarStoreFacade,
-    private alertService: AlertService,
-    private router: Router
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly translationService: TranslationService,
+    private readonly popoverController: PopoverController,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly calendarService: CalendarService,
+    private readonly calendarStoreFacade: CalendarStoreFacade,
+    private readonly alertService: AlertService,
+    private readonly navigationService: NavigationService
   ) {
     this.eventForm = new FormGroup({
       id: new FormControl(''),
@@ -76,9 +78,8 @@ export class CalendarDetailComponent {
             undefined,
             [{ fallback: 'Fehler:' }, { fallback: 'Der Kalender-Termin konnte nicht geladen werden.' }]
           );
-          this.router.navigate(['calendar', 'new'], {
-            replaceUrl: true
-          });
+
+          this.navigationService.back('/calendar');
           return of();
         })
       )),
