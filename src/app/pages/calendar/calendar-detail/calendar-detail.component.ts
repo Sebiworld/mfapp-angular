@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
 import { PopoverController } from '@ionic/angular';
 import { addHours, fromUnixTime, isEqual } from 'date-fns';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { TranslationService } from '@services/translation.service';
 import { isValidArray } from '@shared/helpers/general.helpers';
@@ -15,7 +16,6 @@ import { AlertService } from '@services/alert.service';
 import { NavigationService } from '@services/navigation.service';
 
 import { TimespanPickerComponent } from './timespan-picker/timespan-picker.component';
-
 
 @Component({
   selector: 'app-calendar-detail',
@@ -37,10 +37,12 @@ export class CalendarDetailComponent {
   );
   public readonly currentDate = new Date();
 
-  private readonly _loadEventLoading$ = new BehaviorSubject<boolean>(false);
-  public readonly loadEventLoading$ = this._loadEventLoading$.asObservable().pipe(distinctUntilChanged());
+  private readonly _loading$ = new BehaviorSubject<boolean>(false);
+  public readonly loading$ = this._loading$.asObservable().pipe(distinctUntilChanged());
 
   public readonly saveEventLoading$ = this.calendarStoreFacade.saveEventLoading$;
+
+  public Editor = ClassicEditor;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -68,7 +70,7 @@ export class CalendarDetailComponent {
     // Load current event:
     this.id$.pipe(
       filter(id => !!id && id !== 'new'),
-      tap(() => this._loadEventLoading$.next(true)),
+      tap(() => this._loading$.next(true)),
       debounceTime(100),
       distinctUntilChanged(),
       switchMap(id => this.calendarService.loadEvent$(id).pipe(
@@ -83,7 +85,7 @@ export class CalendarDetailComponent {
           return of();
         })
       )),
-      tap(() => this._loadEventLoading$.next(false)),
+      tap(() => this._loading$.next(false)),
       takeUntilDestroyed(this.destroyRef)
     ).subscribe();
 

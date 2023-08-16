@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { SharedModule } from '@shared/shared.module';
 import { HeaderModule } from '@core/header/header.module';
@@ -21,7 +22,8 @@ import { TimespanPickerComponent } from './calendar-detail/timespan-picker/times
     LoaderModule,
     ContentBlocksModule,
     SectionModule,
-    CalendarPageRoutingModule
+    CalendarPageRoutingModule,
+    CKEditorModule
   ],
   declarations: [CalendarPage, CalendarDetailComponent, CalendarListEventComponent, TimespanPickerComponent]
 })

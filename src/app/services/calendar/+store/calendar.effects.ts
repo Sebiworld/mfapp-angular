@@ -16,7 +16,7 @@ export class CalendarEffects {
     switchMap((action) =>
       this.calendarApiService.loadCalendar().pipe(
         map((response) => {
-          return CalendarActions.loadCalendarSuccess({ response, events: response?.events || [] });
+          return CalendarActions.loadCalendarSuccess({ events: response?.events || [] });
         }),
         catchError(error => of(CalendarActions.loadCalendarFailure({ error })))
       )
@@ -47,7 +47,6 @@ export class CalendarEffects {
             throw new Error('Event could not be saved');
           }
           return CalendarActions.saveEventSuccess({
-            response,
             event: response?.event,
             shouldNavigate: response?.event?.id && action?.event?.id !== response.event.id
           });
@@ -59,13 +58,20 @@ export class CalendarEffects {
 
   saveEventSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(CalendarActions.saveEventSuccess),
-    filter(action => !!action.shouldNavigate && !!action.event?.id),
     switchMap(async (action) => {
-      await this.router.navigate(['calendar', action.event.id], {
-        replaceUrl: true
-      });
+      await this.router.navigate(['/calendar']);
     })
   ), { dispatch: false });
+
+  // saveEventSuccess$ = createEffect(() => this.actions$.pipe(
+  //   ofType(CalendarActions.saveEventSuccess),
+  //   filter(action => !!action.shouldNavigate && !!action.event?.id),
+  //   switchMap(async (action) => {
+  //     await this.router.navigate(['calendar', action.event.id], {
+  //       replaceUrl: true
+  //     });
+  //   })
+  // ), { dispatch: false });
 
   constructor(
     private actions$: Actions,

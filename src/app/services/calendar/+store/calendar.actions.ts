@@ -6,7 +6,7 @@ export const CalendarActions = createActionGroup({
   source: 'CALENDAR',
   events: {
     'Load Calendar': props<{ offset?: number; limit?: number }>(),
-    'Load Calendar Success': props<{ response: any; events: ApiCalendarEvent[] }>(),
+    'Load Calendar Success': props<{ events: ApiCalendarEvent[] }>(),
     'Load Calendar Not Modified': emptyProps(),
     'Load Calendar Failure': props<{ error: any }>(),
 
@@ -16,7 +16,7 @@ export const CalendarActions = createActionGroup({
     'Load Event Failure': props<{ error: any }>(),
 
     'Save Event': props<{ event: ApiCalendarEvent }>(),
-    'Save Event Success': props<{ response: any; event: ApiCalendarEvent; shouldNavigate: boolean; }>(),
+    'Save Event Success': props<{ event: ApiCalendarEvent; shouldNavigate: boolean; }>(),
     'Save Event Failure': props<{ error: any }>(),
   }
 });

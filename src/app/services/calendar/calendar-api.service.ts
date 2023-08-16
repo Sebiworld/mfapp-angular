@@ -11,8 +11,8 @@ import { CalendarConverters } from "./+store/calendar.converters";
 })
 export class CalendarApiService extends ApiService {
 
-  loadCalendar(): Observable<{ events: ApiCalendarEvent[] }> {
-    return this.get(this.baseUrl + 'calendar').pipe(
+  loadCalendar(params: { offset?: number, limit?: number } = {}): Observable<{ events: ApiCalendarEvent[] }> {
+    return this.get(this.baseUrl + 'calendar', typeof params === 'object' ? params : {}).pipe(
       map(response => ({
         ...response,
         events: CalendarConverters.convertEvents(response.events)

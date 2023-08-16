@@ -39,6 +39,7 @@ import { StripSpacesPipe } from './pipes/strip-spaces.pipe';
 import { SwiperDirective } from './directives/swiper.directive';
 import { DateWithFallbackPipe } from './pipes/date-with-fallback.pipe';
 import { AreDatesEqualPipe } from './pipes/are-dates-equal.pipe';
+import { GroupTimespansPipe } from './pipes/group-timespans.pipe';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { AreDatesEqualPipe } from './pipes/are-dates-equal.pipe';
     UnescapeHtmlPipe,
     DateWithFallbackPipe,
     AreDatesEqualPipe,
+    GroupTimespansPipe,
     LazyImgDirective,
     LazyBgDirective,
     LazySourceDirective,
@@ -112,6 +114,7 @@ import { AreDatesEqualPipe } from './pipes/are-dates-equal.pipe';
     UnescapeHtmlPipe,
     DateWithFallbackPipe,
     AreDatesEqualPipe,
+    GroupTimespansPipe,
     LazyImgDirective,
     LazyBgDirective,
     LazySourceDirective,

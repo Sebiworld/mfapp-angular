@@ -19,6 +19,22 @@ export class CalendarService {
     return this.calendarStoreFacade.loadCalendar(offset, limit);
   }
 
+  loadCalendar$(params: { offset?: number, limit?: number } = {}): Observable<boolean> {
+    return this.calendarApiService.loadCalendar(params).pipe(
+      map(response => {
+        const events = response?.events;
+        if (!events) {
+          throw {
+            error: 'No valid events found.',
+            errorcode: 'no-events'
+          };
+        }
+        this.calendarStoreFacade.loadCalendarSuccess(events);
+        return true;
+      })
+    );
+  }
+
   loadEvent(id: number) {
     return this.calendarStoreFacade.loadEvent(id);
   }

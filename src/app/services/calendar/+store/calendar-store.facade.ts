@@ -20,11 +20,13 @@ export class CalendarStoreFacade {
   loadCalendar(offset?: number, limit?: number) {
     this.store.dispatch(CalendarActions.loadCalendar({ offset, limit }));
   }
+  loadCalendarSuccess(events: ApiCalendarEvent[]) {
+    this.store.dispatch(CalendarActions.loadCalendarSuccess({ events }));
+  }
 
   loadEvent(id: number) {
     this.store.dispatch(CalendarActions.loadEvent({ id }));
   }
-
   loadEventSuccess(event: ApiCalendarEvent) {
     this.store.dispatch(CalendarActions.loadEventSuccess({ event }));
   }
