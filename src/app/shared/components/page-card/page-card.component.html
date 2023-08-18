@@ -27,14 +27,14 @@
 
   <ion-card-footer>
     <ng-container *ngIf="data?.external_type === 'Facebook'">
-      <ion-button *ngIf="data?.external_link" class="block-button link-item hover-facebook" color="secondary"
+      <ion-button *ngIf="data?.external_link" class="block-button link-item hover-facebook" color="tertiary"
         expand="full" [href]="data?.external_link" target="_blank">
         <ion-icon slot="start" name="logo-facebook" class="button-icon"></ion-icon> Mehr dazu auf Facebook...
       </ion-button>
     </ng-container>
 
     <ng-container *ngIf="data?.external_type !== 'Facebook'">
-      <ion-button *ngIf="data?.url" class="block-button link-item" color="secondary" expand="full"
+      <ion-button *ngIf="data?.url" class="block-button link-item" color="tertiary" expand="full"
         [routerLink]="data?.url" [routerDirection]="'forward'">
         {{ 'page-card.btn-more' | translate }}
       </ion-button>

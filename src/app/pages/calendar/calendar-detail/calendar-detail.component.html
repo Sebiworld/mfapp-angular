@@ -16,15 +16,13 @@
             </ion-input>
           </ion-item>
 
-          <ion-item *ngIf="eventForm.controls.description">
-            <ion-textarea formControlName="description" label-placement="floating" fill="solid" [autoGrow]="true">
-              <div slot="label">
-                {{ 'calendar.event.description' | translate }} <ion-text
-                  *ngIf="eventForm.controls.description.validator" color="danger"
-                  [title]="'general.required' | translate">&ast;</ion-text>
-              </div>
-            </ion-textarea>
-          </ion-item>
+          <div *ngIf="eventForm.controls.description" class="form-item rich-input">
+            <ion-label>
+              {{ 'calendar.event.description' | translate }} <ion-text *ngIf="eventForm.controls.description.validator"
+                color="danger" [title]="'general.required' | translate">&ast;</ion-text>
+            </ion-label>
+            <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"></ckeditor>
+          </div>
         </ion-list>
       </ion-card-content>
     </ion-card>
@@ -62,15 +60,14 @@
                 </ion-input>
               </ion-item>
 
-              <ion-item *ngIf="timespan.get('description')">
-                <ion-textarea formControlName="description" label-placement="floating" fill="solid" [autoGrow]="true">
-                  <div slot="label">
-                    {{ 'calendar.event.description' | translate }} <ion-text
-                      *ngIf="timespan.get('description')?.validator" color="danger"
-                      [title]="'general.required' | translate">&ast;</ion-text>
-                  </div>
-                </ion-textarea>
-              </ion-item>
+              <div *ngIf="timespan.get('description')" class="form-item rich-input">
+                <ion-label>
+                  {{ 'calendar.event.description' | translate }} <ion-text
+                    *ngIf="timespan.get('description')?.validator" color="danger"
+                    [title]="'general.required' | translate">&ast;</ion-text>
+                </ion-label>
+                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"></ckeditor>
+              </div>
             </ion-list>
           </ion-card-content>
 
@@ -81,7 +78,7 @@
         </ion-card>
       </div>
 
-      <ion-button color="tertiary" (click)="addTimespan()">
+      <ion-button color="secondary" (click)="addTimespan()">
         <ion-icon name="add" slot="start"></ion-icon>
         {{ 'calendar.event.add' | translate }}
       </ion-button>
@@ -91,7 +88,7 @@
   <ion-fab slot="fixed" horizontal="end" vertical="bottom">
     <ng-container *ngrxLet="saveEventLoading$ as saveEventLoading">
       <ion-fab-button color="success" (click)="save()" [disabled]="!eventForm.valid || saveEventLoading">
-        <ion-icon *ngIf="!saveEventLoading" name="save"></ion-icon>
+        <ion-icon *ngIf="!saveEventLoading" name="save-outline"></ion-icon>
         <ion-spinner *ngIf="saveEventLoading" name="circular"></ion-spinner>
       </ion-fab-button>
     </ng-container>

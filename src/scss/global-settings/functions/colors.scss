@@ -41,7 +41,7 @@
   }
 }
 
-@function is-dark($bgcolor) {
+@function is-dark($bgcolor, $log: 0) {
   $lightContrast: contrast-value($bgcolor, $color-bright);
   $darkContrast: contrast-value($bgcolor, $color-dark);
   $differenceValue: $lightContrast - $darkContrast;

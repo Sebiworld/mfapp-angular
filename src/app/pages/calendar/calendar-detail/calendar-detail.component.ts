@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
 import { PopoverController } from '@ionic/angular';
 import { addHours, fromUnixTime, isEqual } from 'date-fns';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { TranslationService } from '@services/translation.service';
 import { isValidArray } from '@shared/helpers/general.helpers';
@@ -16,6 +15,9 @@ import { AlertService } from '@services/alert.service';
 import { NavigationService } from '@services/navigation.service';
 
 import { TimespanPickerComponent } from './timespan-picker/timespan-picker.component';
+import Editor from '@shared/misc/ckeditor/ckeditor';
+import { EditorConfig } from '@ckeditor/ckeditor5-core';
+import { descriptionEditorConfig } from '@shared/misc/description-editor-config';
 
 @Component({
   selector: 'app-calendar-detail',
@@ -42,7 +44,8 @@ export class CalendarDetailComponent {
 
   public readonly saveEventLoading$ = this.calendarStoreFacade.saveEventLoading$;
 
-  public Editor = ClassicEditor;
+  public readonly Editor = Editor;
+  public readonly editorConfig: EditorConfig = descriptionEditorConfig;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -56,7 +59,7 @@ export class CalendarDetailComponent {
   ) {
     this.eventForm = new FormGroup({
       id: new FormControl(''),
-      title: new FormControl('', Validators.required),
+      title: new FormControl(''),
       description: new FormControl(''),
       timespans: new FormArray([this.createTimespan()], Validators.required)
     });

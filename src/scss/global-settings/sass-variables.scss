@@ -11,7 +11,8 @@ $secondary: #151d25;
 $tertiary: #f1f1f5;
 $dark: #1e1e1e;
 $medium: #92949c; // Used as disabled-color
-$light: #f4f5f8;
+$light: #ccd2e2;
+$lighter: #f4f5f8;
 
 $theme-colors: (
   success: $success,
@@ -23,6 +24,7 @@ $theme-colors: (
   dark: $dark,
   medium: $medium,
   light: $light,
+  lighter: $lighter,
 );
 
 // Color-Steps:
@@ -64,19 +66,29 @@ $special-colors: (
 
 // Dark theme:
 // These Sass-variables can be used for calculations - will be set as CSS-variables
-$dark-color-bright: #d4d4d4;
+$dark-color-bright: #fefefa;
 $dark-color-dark: #000000;
 
 // Base Colors:
+// $dark-success: #036a2c;
+// $dark-warning: #ffd534;
+// $dark-danger: #ff4961;
+// $dark-primary: #fd8e01;
+// $dark-secondary: #f1f1f5;
+// $dark-tertiary: #272521;
+// $dark-dark: #f4f5f8;
+// $dark-medium: #989aa2; // Used as disabled-color
+// $dark-light: #081015;
 $dark-success: #036a2c;
 $dark-warning: #ffd534;
 $dark-danger: #ff4961;
 $dark-primary: #fd8e01;
-$dark-secondary: #f1f1f5;
-$dark-tertiary: #272521;
-$dark-dark: #f4f5f8;
-$dark-medium: #989aa2; // Used as disabled-color
-$dark-light: #081015;
+$dark-secondary: #FD5F5B;
+$dark-tertiary: #2F4858;
+$dark-dark: #d9e8f1;
+$dark-medium: #223039; // Used as disabled-color
+$dark-light: #141e25;
+$dark-lighter: #543e3e;
 
 $dark-theme-colors: (
   success: $dark-success,
@@ -88,29 +100,30 @@ $dark-theme-colors: (
   dark: $dark-dark,
   medium: $dark-medium,
   light: $dark-light,
+  lighter: $dark-lighter,
 );
 
 // Color-Steps:
 $dark-color-steps: (
-  step-50: #c9c9c9,
-  step-100: #bfbfbf,
-  step-150: #b4b4b4,
-  step-200: #aaaaaa,
-  step-250: #9f9f9f,
-  step-300: #949494,
-  step-350: #8a8a8a,
-  step-400: #7f7f7f,
-  step-450: #757575,
-  step-500: #6a6a6a,
-  step-550: #5f5f5f,
-  step-600: #555555,
-  step-650: #4a4a4a,
-  step-700: #404040,
-  step-750: #353535,
-  step-800: #2a2a2a,
-  step-850: #202020,
-  step-900: #151515,
-  step-950: #0b0b0b,
+  step-50: #1e282f,
+  step-100: #283239,
+  step-150: #323c44,
+  step-200: #3b464e,
+  step-250: #455158,
+  step-300: #4f5b62,
+  step-350: #59656c,
+  step-400: #636f77,
+  step-450: #6d7981,
+  step-500: #77838b,
+  step-550: #808d95,
+  step-600: #8a979f,
+  step-650: #94a1aa,
+  step-700: #9eabb4,
+  step-750: #a8b6be,
+  step-800: #b2c0c8,
+  step-850: #bbcad2,
+  step-900: #c5d4dd,
+  step-950: #cfdee7,
 );
 
 // Breakpoints:

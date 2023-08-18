@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Signal, computed, signal } from '@angular/core';
+
+import { TranslationService } from '@services/translation.service';
 
 import { ApiCalendarEvent, ApiCalendarTimespan } from '@services/calendar/+store/api-calendar-event.model';
-import { TranslationService } from '@services/translation.service';
-import { CalendarTimespanGroup } from '@shared/pipes/group-timespans.pipe';
+import { CalendarTimespanGroup, groupTimespans } from '@services/calendar/calendar.helpers';
 
 @Component({
   selector: 'app-calendar-list-event',
@@ -12,7 +13,14 @@ import { CalendarTimespanGroup } from '@shared/pipes/group-timespans.pipe';
 })
 export class CalendarListEventComponent {
 
-  @Input() event: ApiCalendarEvent;
+  public readonly _event = signal<ApiCalendarEvent | undefined>(undefined)
+  @Input() set event(value: ApiCalendarEvent | undefined) {
+    this._event.set(value);
+  }
+
+  public readonly timespans: Signal<ApiCalendarTimespan[]> = computed(() => this._event()?.timespans || []);
+  public readonly timespanGroups: Signal<CalendarTimespanGroup[]> = computed(() => groupTimespans(this.timespans()) || []);
+  public readonly eventDates: Signal<number[]> = computed(() => this.timespanGroups().map(group => group.date));
 
   public readonly currentDate = new Date();
   public readonly locale = this.translationService.locale;

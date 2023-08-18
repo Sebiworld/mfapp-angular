@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, var(--ion-backdrop-opacity));
+  z-index: 100;
 
   ion-card-content {
     display: flex;

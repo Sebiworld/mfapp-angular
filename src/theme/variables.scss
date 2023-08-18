@@ -15,6 +15,7 @@
   @each $color,
   $value in $theme-colors {
     --#{$color}: #{$value};
+    --#{$color}-rgb: #{hexToRGB($value)};
 
     @if (is-dark($value)=='1') {
       --#{$color}-contrast: var(--color-bright);
@@ -26,16 +27,20 @@
       --#{$color}-contrast-rgb: var(--color-dark-rgb);
     }
 
-    --ion-color-#{$color}: var(--#{$color});
-    --ion-color-#{$color}-rgb: #{hexToRGB($value)};
-    --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
-    --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
-    --ion-color-#{$color}-shade: #{get-color-shade($value)};
-    --ion-color-#{$color}-tint: #{get-color-tint($value)};
+    --#{$color}-shade: #{get-color-shade($value)};
+    --#{$color}-tint: #{get-color-tint($value)};
     --#{$color}-hover: var(--ion-color-#{$color}-shade);
     --#{$color}-success: var(--#{$color}-contrast);
     --#{$color}-warning: var(--#{$color}-contrast);
     --#{$color}-danger: var(--#{$color}-contrast);
+    --#{$color}-border: var(--#{$color}-shade);
+
+    --ion-color-#{$color}: var(--#{$color});
+    --ion-color-#{$color}-rgb: var(--#{$color}-rgb);
+    --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
+    --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
+    --ion-color-#{$color}-shade: var(--#{$color}-shade);
+    --ion-color-#{$color}-tint: var(--#{$color}-tint);
   }
 
   @each $name,
@@ -66,8 +71,9 @@ body,
     @each $color,
     $value in $dark-theme-colors {
       --#{$color}: #{$value};
+      --#{$color}-rgb: #{hexToRGB($value)};
 
-      @if (is-dark($value)=='1') {
+      @if (is-dark($value)=='1' or $color =='primary') {
         --#{$color}-contrast: var(--color-bright);
         --#{$color}-contrast-rgb: var(--color-bright-rgb);
       }
@@ -77,20 +83,28 @@ body,
         --#{$color}-contrast-rgb: var(--color-dark-rgb);
       }
 
-      --ion-color-#{$color}: var(--#{$color});
-      --ion-color-#{$color}-rgb: #{hexToRGB($value)};
-      --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
-      --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
-      --ion-color-#{$color}-shade: #{get-color-shade($value)};
-      --ion-color-#{$color}-tint: #{get-color-tint($value)};
+      --#{$color}-shade: #{get-color-shade($value)};
+      --#{$color}-tint: #{get-color-tint($value)};
       --#{$color}-hover: var(--ion-color-#{$color}-shade);
       --#{$color}-success: var(--#{$color}-contrast);
       --#{$color}-warning: var(--#{$color}-contrast);
       --#{$color}-danger: var(--#{$color}-contrast);
+      --#{$color}-border: var(--#{$color}-tint);
 
       @if($color=='tertiary') {
-        --ion-color-#{$color}-tint: #{get-color-tint($value, 8%)};
+        --#{$color}-tint: #{get-color-tint($value, 8%)};
       }
+
+      @if($color=='light') {
+        --#{$color}-border: var(--#{$color}-shade);
+      }
+
+      --ion-color-#{$color}: var(--#{$color});
+      --ion-color-#{$color}-rgb: var(--#{$color}-rgb);
+      --ion-color-#{$color}-contrast: var(--#{$color}-contrast);
+      --ion-color-#{$color}-contrast-rgb: var(--#{$color}-contrast-rgb);
+      --ion-color-#{$color}-shade: var(--#{$color}-shade);
+      --ion-color-#{$color}-tint: var(--#{$color}-tint);
     }
 
     @each $name,
@@ -139,9 +153,8 @@ body,
     --ion-color-step-900: #e6e6e6;
     --ion-color-step-950: #f2f2f2;
 
-    --ion-item-background: #000000;
-
-    --ion-card-background: #1c1c1d;
+    --ion-item-background: var(--lighter);
+    --ion-item-color: var(--lighter-contrast);
 
     ion-modal {
       --ion-background-color: var(--ion-color-step-100);
@@ -182,12 +195,9 @@ body,
     --ion-color-step-900: #e7e7e7;
     --ion-color-step-950: #f3f3f3;
 
-    --ion-item-background: #1e1e1e;
-
+    --ion-item-background: var(--item-bg);
     --ion-toolbar-background: #1f1f1f;
-
     --ion-tab-bar-background: #1f1f1f;
-
     --ion-card-background: #1e1e1e;
   }
 }
@@ -225,27 +235,33 @@ body {
   --card-font-size: var(--font-size);
   --card-border-radius: var(--border-radius);
 
-  --card-bg: var(--tertiary);
-  --card-bg-rgb: var(--ion-color-tertiary-rgb);
-  --card-bg-contrast: var(--tertiary-contrast);
-  --card-bg-contrast-rgb: var(--ion-color-tertiary-contrast-rgb);
-  --card-bg-shade: var(--ion-color-tertiary-shade);
-  --card-bg-tint: var(--ion-color-tertiary-tint);
-  --card-bg-hover: var(--ion-color-tertiary-tint);
-  --card-bg-hover-contrast: var(--tertiary-contrast);
-  --card-bg-success: var(--tertiary-success);
-  --card-bg-warning: var(--tertiary-warning);
-  --card-bg-danger: var(--tertiary-danger);
+  --card-bg: var(--light);
+  --card-bg-rgb: var(--light-rgb);
+  --card-bg-contrast: var(--light-contrast);
+  --card-bg-contrast-rgb: var(--light-contrast-rgb);
+  --card-bg-shade: var(--light-shade);
+  --card-bg-tint: var(--light-tint);
+  --card-bg-border: var(--light-border);
+  --card-bg-hover: var(--light-tint);
+  --card-bg-hover-contrast: var(--light-contrast);
+  --card-bg-success: var(--light-success);
+  --card-bg-warning: var(--light-warning);
+  --card-bg-danger: var(--light-danger);
 
-  --card-bg-active: var(--element-bg-active);
-  --card-bg-active-rgb: var(--element-bg-active-rgb);
-  --card-bg-active-contrast: var(--element-bg-active-contrast);
-  --card-bg-active-contrast-rgb: var(--element-bg-active-contrast-rgb);
-  --card-bg-active-shade: var(--element-bg-active-shade);
-  --card-bg-active-tint: var(--element-bg-active-tint);
-  --card-bg-active-hover: var(--card-bg-active-shade);
-  --card-bg-active-hover-contrast: var(--card-bg-active-contrast);
-  --card-bg-active-success: var(--element-bg-active-success);
-  --card-bg-active-warning: var(--element-bg-active-warning);
-  --card-bg-active-danger: var(--element-bg-active-danger);
+  --item-bg: var(--medium);
+  --item-bg-rgb: var(--medium-rgb);
+  --item-bg-contrast: var(--medium-contrast);
+  --item-bg-contrast-rgb: var(--medium-contrast-rgb);
+  --item-bg-shade: var(--medium-shade);
+  --item-bg-tint: var(--medium-tint);
+  --item-bg-border: var(--medium-border);
+  --item-bg-hover: var(--medium-tint);
+  --item-bg-hover-contrast: var(--medium-contrast);
+  --item-bg-success: var(--medium-success);
+  --item-bg-warning: var(--medium-warning);
+  --item-bg-danger: var(--medium-danger);
+
+  --ion-item-background: var(--item-bg);
+  --ion-item-color: var(--item-bg-contrast);
+  --ion-item-border-color: var(--item-bg-border);
 }

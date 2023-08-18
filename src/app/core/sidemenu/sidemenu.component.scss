@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--tertiary);
-  background-image: linear-gradient(to right, var(--tertiary), var(--ion-color-tertiary-shade));
-  color: var(--tertiary-contrast);
+  background: var(--light);
+  background-image: linear-gradient(to right, var(--light), var(--ion-color-light-shade));
+  color: var(--light-contrast);
   padding-bottom: var(--ion-safe-area-bottom);
 }
 
@@ -20,7 +20,7 @@ ion-item {
   --padding-end: 8px;
   border-radius: 4px;
   margin-bottom: 4px;
-  --background: rgba(var(--ion-color-tertiary-rgb), 0.14);
+  --background: rgba(var(--ion-color-light-rgb), 0.14);
 
   ion-icon {
     color: rgba(var(--ion-color-contrast-rgb), 0.8);

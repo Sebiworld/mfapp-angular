@@ -5,6 +5,16 @@
   margin-right: 8px;
 }
 
+ion-card {
+  contain: none;
+  overflow: visible;
+
+  ion-list {
+    contain: none;
+    overflow: visible;
+  }
+}
+
 .timespans-wrapper {
   position: relative;
   display: flex;

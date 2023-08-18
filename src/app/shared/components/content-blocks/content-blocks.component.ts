@@ -13,6 +13,8 @@ export interface ComponentLoader { [key: string]: () => Promise<any> };
 })
 export class ContentBlocksComponent implements OnInit, OnChanges {
 
+  // TODO Look at NgComponentOutlet 16.2 improvements
+
   @Input() darkMode = false;
   @Input() locale: string;
 

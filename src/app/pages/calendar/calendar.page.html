@@ -4,13 +4,15 @@
 
 <ion-content>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="primary" [routerLink]="['new']">
+    <ion-fab-button color="success" [routerLink]="['new']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <app-calendar-list-event *ngFor="let event of events$ | async; trackBy: trackCalendarEvent" [event]="event">
-  </app-calendar-list-event>
+  <div class="events-container">
+    <app-calendar-list-event *ngFor="let event of events$ | async; trackBy: trackCalendarEvent" [event]="event">
+    </app-calendar-list-event>
+  </div>
 
   <div class="loading-overlay" *ngIf="loading$ | async">
     <ion-card>

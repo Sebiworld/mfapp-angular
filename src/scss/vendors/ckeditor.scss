@@ -1,0 +1,234 @@
+ckeditor {
+  --ck-font-size-base: var(--font-size);
+  --ck-focus-ring: 1px solid var(--primary);
+  --ck-border-radius: 0;
+  // --ck-z-default: 100;
+
+  /* Helper variables to avoid duplication in the colors. */
+  --ck-custom-background: var(--medium);
+  --ck-custom-foreground: var(--light);
+  --ck-custom-border: hsl(300, 1%, 22%);
+  --ck-custom-white: var(--light);
+  --ck-color-base-active: var(--primary);
+
+  /* -- Overrides generic colors. ------------------------------------------------------------- */
+
+  --ck-color-base-foreground: var(--ck-custom-background);
+  --ck-color-focus-border: var(--primary);
+  --ck-color-text: hsl(0, 0%, 98%);
+  --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.2);
+  --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+
+  /* -- Overrides the default .ck-button class colors. ---------------------------------------- */
+
+  --ck-color-button-default-background: var(--medium);
+  --ck-color-button-default-color: var(--medium-contrast);
+  --ck-color-button-default-hover-background: var(--medium-hover);
+  --ck-color-button-default-active-background: hsl(270, 2%, 20%);
+  --ck-color-button-default-active-shadow: hsl(270, 2%, 23%);
+  --ck-color-button-default-disabled-background: var(--medium);
+
+  --ck-color-button-on-background: var(--light);
+  --ck-color-button-on-color: var(--light-contrast);
+  --ck-color-button-on-hover-background: var(--light-hover);
+  --ck-color-button-on-active-background: hsl(255, 4%, 14%);
+  --ck-color-button-on-active-shadow: hsl(240, 3%, 19%);
+  --ck-color-button-on-disabled-background: var(--light);
+
+  --ck-color-button-action-background: hsl(168, 76%, 42%);
+  --ck-color-button-action-hover-background: hsl(168, 76%, 38%);
+  --ck-color-button-action-active-background: hsl(168, 76%, 36%);
+  --ck-color-button-action-active-shadow: hsl(168, 75%, 34%);
+  --ck-color-button-action-disabled-background: hsl(168, 76%, 42%);
+  --ck-color-button-action-text: var(--ck-custom-white);
+
+  --ck-color-button-save: hsl(120, 100%, 46%);
+  --ck-color-button-cancel: hsl(15, 100%, 56%);
+
+  /* -- Overrides the default .ck-dropdown class colors. -------------------------------------- */
+
+  --ck-color-dropdown-panel-background: var(--ck-custom-background);
+  --ck-color-dropdown-panel-border: var(--ck-custom-foreground);
+
+  /* -- Overrides the default .ck-splitbutton class colors. ----------------------------------- */
+
+  --ck-color-split-button-hover-background: var(--ck-color-button-default-hover-background);
+  --ck-color-split-button-hover-border: var(--ck-custom-foreground);
+
+  /* -- Overrides the default .ck-input class colors. ----------------------------------------- */
+
+  --ck-color-input-background: var(--ck-custom-background);
+  --ck-color-input-border: hsl(257, 3%, 43%);
+  --ck-color-input-text: hsl(0, 0%, 98%);
+  --ck-color-input-disabled-background: hsl(255, 4%, 21%);
+  --ck-color-input-disabled-border: hsl(250, 3%, 38%);
+  --ck-color-input-disabled-text: hsl(0, 0%, 78%);
+
+  /* -- Overrides the default .ck-labeled-field-view class colors. ---------------------------- */
+
+  --ck-color-labeled-field-label-background: var(--ck-custom-background);
+
+  /* -- Overrides the default .ck-list class colors. ------------------------------------------ */
+
+  --ck-color-list-background: var(--medium);
+  --ck-color-list-text: var(--medium-contrast);
+  --ck-color-list-button-hover-background: var(--medium-hover);
+  --ck-color-list-button-on-background: var(--light);
+  --ck-color-list-button-on-background-focus: var(--light);
+  --ck-color-list-button-on-text: var(--light-contrast);
+
+  /* -- Overrides the default .ck-balloon-panel class colors. --------------------------------- */
+
+  --ck-color-panel-background: var(--ck-custom-background);
+  --ck-color-panel-border: var(--ck-custom-border);
+
+  /* -- Overrides the default .ck-toolbar class colors. --------------------------------------- */
+
+  --ck-color-toolbar-background: var(--ck-custom-background);
+  --ck-color-toolbar-border: var(--ck-custom-border);
+
+  /* -- Overrides the default .ck-tooltip class colors. --------------------------------------- */
+
+  --ck-color-tooltip-background: hsl(252, 7%, 14%);
+  --ck-color-tooltip-text: hsl(0, 0%, 93%);
+
+  /* -- Overrides the default colors used by the ckeditor5-image package. --------------------- */
+
+  --ck-color-image-caption-background: hsl(0, 0%, 97%);
+  --ck-color-image-caption-text: hsl(0, 0%, 20%);
+
+  /* -- Overrides the default colors used by the ckeditor5-widget package. -------------------- */
+
+  --ck-color-widget-blurred-border: hsl(0, 0%, 87%);
+  --ck-color-widget-hover-border: hsl(43, 100%, 68%);
+  --ck-color-widget-editable-focus-background: var(--ck-custom-white);
+
+  /* -- Overrides the default colors used by the ckeditor5-link package. ---------------------- */
+
+  --ck-color-link-default: hsl(190, 100%, 75%);
+
+  .ck.ck-editor__main {
+    --ck-color-text: var(--medium-contrast);
+    --ck-color-base-background: var(--medium);
+    --ck-color-base-border: var(--medium-border);
+  }
+
+  .ck-dropdown {
+    .ck-button.ck-button.ck-button {
+      border: 0 none;
+      box-shadow: none;
+
+      .ck-button__label {
+        line-height: 1.2;
+      }
+    }
+  }
+
+  // --ck-color-base-foreground: var(--primary);
+  // --ck-color-base-background: var(--light);
+  // --ck-color-base-border: var(--light-border);
+  // --ck-color-base-action: hsl(104, 50.2%, 42.5%);
+  // --ck-color-base-focus: var(--primary);
+  // --ck-color-base-text: var(--light-contrast);
+  // --ck-color-base-active: var(--primary);
+  // --ck-color-base-active-focus: var(--primary);
+  // --ck-color-base-error: var(--danger);
+
+  // /* -- Generic colors ------------------------------------------------------------------------ */
+
+  // --ck-color-focus-border-coordinates: 218, 81.8%, 56.9%;
+  // --ck-color-focus-border: hsl(var(--ck-color-focus-border-coordinates));
+  // --ck-color-focus-outer-shadow: rgba(var(--primary-rgb), 0.5);
+  // --ck-color-focus-disabled-shadow: hsla(209, 90%, 72%, .3);
+  // --ck-color-focus-error-shadow: hsla(9, 100%, 56%, .3);
+  // --ck-color-text: var(--ck-color-base-text);
+  // --ck-color-shadow-drop: hsla(0, 0%, 0%, 0.15);
+  // --ck-color-shadow-drop-active: hsla(0, 0%, 0%, 0.2);
+  // --ck-color-shadow-inner: hsla(0, 0%, 0%, 0.1);
+
+  // /* -- Buttons ------------------------------------------------------------------------------- */
+
+  // --ck-color-button-default-background: var(--light);
+  // --ck-color-button-default-hover-background: var(--light-shade);
+  // --ck-color-button-default-active-background: var(--primary);
+  // --ck-color-button-default-disabled-background: transparent;
+
+  // --ck-color-button-on-background: hsl(212, 100%, 97.1%);
+  // --ck-color-button-on-hover-background: hsl(211.7, 100%, 92.9%);
+  // --ck-color-button-on-active-background: hsl(211.7, 100%, 92.9%);
+  // --ck-color-button-on-disabled-background: hsl(211, 15%, 95%);
+  // --ck-color-button-on-color: var(--primary-contrast);
+
+
+  // --ck-color-button-action-background: var(--ck-color-base-action);
+  // --ck-color-button-action-hover-background: hsl(104, 53.2%, 40.2%);
+  // --ck-color-button-action-active-background: hsl(104, 53.2%, 40.2%);
+  // --ck-color-button-action-disabled-background: hsl(104, 44%, 58%);
+  // --ck-color-button-action-text: var(--ck-color-base-background);
+
+  // --ck-color-button-save: var(--success);
+  // --ck-color-button-cancel: var(--danger);
+
+  // --ck-color-switch-button-off-background: hsl(0, 0%, 57.6%);
+  // --ck-color-switch-button-off-hover-background: hsl(0, 0%, 49%);
+  // --ck-color-switch-button-on-background: var(--ck-color-button-action-background);
+  // --ck-color-switch-button-on-hover-background: hsl(104, 53.2%, 40.2%);
+  // --ck-color-switch-button-inner-background: var(--ck-color-base-background);
+  // --ck-color-switch-button-inner-shadow: hsla(0, 0%, 0%, 0.1);
+
+  // /* -- Dropdown ------------------------------------------------------------------------------ */
+
+  // --ck-color-dropdown-panel-background: var(--dark);
+  // --ck-color-dropdown-panel-border: var(--dark-border);
+
+  // /* -- Input --------------------------------------------------------------------------------- */
+
+  // --ck-color-input-background: var(--ck-color-base-background);
+  // --ck-color-input-border: var(--ck-color-base-border);
+  // --ck-color-input-error-border: var(--ck-color-base-error);
+  // --ck-color-input-text: var(--ck-color-base-text);
+  // --ck-color-input-disabled-background: hsl(0, 0%, 95%);
+  // --ck-color-input-disabled-border: var(--ck-color-base-border);
+  // --ck-color-input-disabled-text: hsl(0, 0%, 46%);
+
+  // /* -- List ---------------------------------------------------------------------------------- */
+
+  // --ck-color-list-background: var(--ck-color-base-background);
+  // --ck-color-list-button-hover-background: var(--ck-color-button-default-hover-background);
+  // --ck-color-list-button-on-background: var(--ck-color-button-on-color);
+  // --ck-color-list-button-on-background-focus: var(--ck-color-button-on-color);
+  // --ck-color-list-button-on-text: var(--ck-color-base-background);
+
+  // /* -- Panel --------------------------------------------------------------------------------- */
+
+  // --ck-color-panel-background: var(--ck-color-base-background);
+  // --ck-color-panel-border: var(--ck-color-base-border);
+
+  // /* -- Toolbar ------------------------------------------------------------------------------- */
+
+  // --ck-color-toolbar-background: var(--light);
+  // --ck-color-toolbar-border: var(--light-border);
+
+  // /* -- Tooltip ------------------------------------------------------------------------------- */
+
+  // --ck-color-tooltip-background: var(--ck-color-base-text);
+  // --ck-color-tooltip-text: var(--ck-color-base-background);
+
+  // /* -- Engine -------------------------------------------------------------------------------- */
+
+  // --ck-color-engine-placeholder-text: hsl(0, 0%, 44%);
+
+  // /* -- Upload -------------------------------------------------------------------------------- */
+
+  // --ck-color-upload-bar-background: hsl(209, 92%, 70%);
+
+  // /* -- Link -------------------------------------------------------------------------------- */
+
+  // --ck-color-link-default: hsl(240, 100%, 47%);
+  // --ck-color-link-selected-background: hsla(201, 100%, 56%, 0.1);
+  // --ck-color-link-fake-selection: hsla(201, 100%, 56%, 0.3);
+
+  // /* -- Search result highlight ---------------------------------------------------------------- */
+
+  // --ck-color-highlight-background: hsl(60, 100%, 50%)
+}

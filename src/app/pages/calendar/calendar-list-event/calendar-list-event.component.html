@@ -1,25 +1,34 @@
 <ion-card>
   <ion-card-header>
-    <ion-card-title>{{ event.title }}</ion-card-title>
+    <div class="title-wrapper">
+      <ion-card-subtitle *ngIf="eventDates()?.length >= 1">
+        {{ eventDates()[0] | date: 'longDate' : undefined : locale }}
+        <ng-container *ngIf="eventDates()?.length >= 2">
+          - {{ eventDates()[eventDates()?.length - 1] | date: 'longDate' : undefined : locale }}
+        </ng-container>
+      </ion-card-subtitle>
+      <ion-card-title>{{ _event().title }}</ion-card-title>
+    </div>
 
     <div class="actions">
-      <ion-button size="small" color="tertiary" [routerLink]="['/calendar', event.id]">
+      <ion-button size="small" color="light" [routerLink]="['/calendar', _event().id]">
         <ion-icon slot="icon-only" name="create"></ion-icon>
       </ion-button>
     </div>
   </ion-card-header>
 
   <ion-card-content>
-    <div class="description" [innerHTML]="event.description">
+    <div class="description rich-content" *ngIf="_event().description" [innerHTML]="_event().description">
     </div>
 
     <div class="timespans-wrapper">
-      <div *ngFor="let group of event.timespans | groupTimespans; trackBy: trackTimespanGroup;" class="group-container">
-        <div class="group-header bg-dark">
+      <div *ngFor="let group of timespanGroups(); trackBy: trackTimespanGroup;" class="group-container">
+        <div class="group-header" *ngIf="timespanGroups()?.length >= 2">
           {{ group.date | date: 'longDate' : undefined : locale }}
         </div>
         <div class="timespans-wrapper">
-          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;" class="timespan bg-light">
+          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;"
+            class="timespan bg-medium">
             <div class="time">
               {{ timespan.timeFrom | date: 'shortTime' : undefined : locale }}&shy; - {{ timespan.timeUntil | date:
               'shortTime' : undefined : locale
@@ -27,7 +36,7 @@
             </div>
             <div class="info">
               <h3 *ngIf="timespan.title" class="title">{{ timespan.title }}</h3>
-              <div class="description" [innerHTML]="timespan.description"></div>
+              <div class="description rich-content" [innerHTML]="timespan.description"></div>
             </div>
           </div>
         </div>
