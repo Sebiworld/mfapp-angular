@@ -10,6 +10,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { HotToastModule } from '@ngneat/hot-toast';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker';
 import { NgxMatomoRouterModule } from '@ngx-matomo/router';
@@ -26,19 +27,20 @@ import { FooterModule } from '@core/footer/footer.module';
 import { LoaderModule } from '@core/loader/loader.module';
 import { AppRoutingModule } from '@routing/app-routing.module';
 import { AuthModule } from '@services/auth/auth.module';
-
-import { AppComponent } from './app.component';
+import { CalendarModule } from '@services/calendar/calendar.module';
 import { PagesModule } from '@services/pages/pages.module';
-import { StartupModalModule } from '@modals/startup-modal/startup-modal.module';
-import { SplashModalModule } from '@modals/splash-modal/splash-modal.module';
 import { ArchiveModule } from '@services/archive/archive.module';
 import { AuthInterceptor } from '@services/api/auth-interceptor';
 import { ApikeyInterceptor } from '@services/api/apikey-interceptor';
+import { MissingTranslationFallbackHandler } from '@shared/misc/missing-translation-fallback.handler';
+
+import { StartupModalModule } from '@modals/startup-modal/startup-modal.module';
+import { SplashModalModule } from '@modals/splash-modal/splash-modal.module';
 import { NicknameModalModule } from '@modals/nickname-modal/nickname-modal.module';
 import { LoginModalModule } from '@modals/login-modal/login-modal.module';
-import { HotToastModule } from '@ngneat/hot-toast';
 import { RegisterConfirmModalModule } from '@modals/register-confirm-modal/register-confirm-modal.module';
-import { CalendarModule } from '@services/calendar/calendar.module';
+
+import { AppComponent } from './app.component';
 
 export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 
@@ -53,6 +55,10 @@ export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(h
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationFallbackHandler,
+        useClass: MissingTranslationFallbackHandler
       }
     }),
     IonicModule.forRoot({
