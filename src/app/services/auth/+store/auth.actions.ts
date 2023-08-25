@@ -1,5 +1,8 @@
-import { ApiPermission, ApiRole } from '@models/api-user.model';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+
+import { ApiProject } from '@models/api-project.model';
+import { ApiPermission, ApiRole } from '@models/api-user.model';
+
 import { AuthState } from './auth.reducer';
 
 export const AuthActions = createActionGroup({
@@ -15,6 +18,7 @@ export const AuthActions = createActionGroup({
       name: string;
       roles?: ApiRole[];
       permissions?: ApiPermission[];
+      projects?: ApiProject[];
       loggedIn: boolean;
     }>(),
     'Load User Failure': props<{ error: any }>(),
@@ -28,6 +32,7 @@ export const AuthActions = createActionGroup({
       name: string;
       roles?: ApiRole[];
       permissions?: ApiPermission[];
+      projects?: ApiProject[];
       loggedIn: boolean;
     }>(),
 

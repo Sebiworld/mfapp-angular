@@ -24,7 +24,7 @@
       <ion-label>Aktuelles</ion-label>
     </ion-item>
   </ion-menu-toggle>
-  <ion-menu-toggle auto-hide="false" *ngIf="isAuthenticated$ | async">
+  <ion-menu-toggle auto-hide="false">
     <ion-item routerDirection="root" [routerLink]="['/calendar']" lines="none" detail="false" routerLinkActive="active">
       <ion-icon slot="start" [ios]="'calendar-outline'" [md]="'calendar-sharp'"></ion-icon>
       <ion-label>Kalender</ion-label>

@@ -1,11 +1,11 @@
 <div class="contents-wrapper">
   <ion-datetime #timeFrom [firstDayOfWeek]="1" (ionChange)="changeTimeFrom($event)">
-    <span slot="time-label">{{ 'calendar.event.timespans' | translate }}</span>
+    <span slot="time-label">{{ 'calendar.event.timespan.time-from' | translate }}</span>
   </ion-datetime>
 
   <span class="date-spacer">-</span>
 
   <ion-datetime #timeUntil [firstDayOfWeek]="1" (ionChange)="changeTimeUntil($event)">
-    <span slot="time-label">{{ 'calendar.event.timespans' | translate }}</span>
+    <span slot="time-label">{{ 'calendar.event.timespan.time-until' | translate }}</span>
   </ion-datetime>
 </div>

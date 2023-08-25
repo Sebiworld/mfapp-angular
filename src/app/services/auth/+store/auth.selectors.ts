@@ -78,9 +78,28 @@ export const selectUserRoles = createSelector(
     });
   }
 );
-
 export const selectUserRolesCount = createSelector(
   selectUserRoles, roles => roles?.length || 0
+);
+
+export const selectUserPermissions = createSelector(
+  selectCurrentSession, (session) => {
+    if (!session?.permissions || !isValidArray(session.permissions)) { return []; }
+    return session.permissions;
+  }
+);
+export const selectUserPermissionsCount = createSelector(
+  selectUserPermissions, permissions => permissions?.length || 0
+);
+
+export const selectProjects = createSelector(
+  selectCurrentSession, (session) => {
+    if (!session?.projects || !isValidArray(session.projects)) { return []; }
+    return session.projects;
+  }
+);
+export const selectProjectsCount = createSelector(
+  selectProjects, projects => projects?.length || 0
 );
 
 export const selectIsAuthenticated = createSelector(

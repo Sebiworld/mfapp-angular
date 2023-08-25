@@ -14,4 +14,5 @@
   --status-success-color: var(--#{$prefix}-success, var(--success, #68a154));
   --status-warning-color: var(--#{$prefix}-warning, var(--warning, #ffae00));
   --status-danger-color: var(--#{$prefix}-danger, var(--danger, #cc4b37));
+  --status-disabled-color: var(--#{$prefix}-disabled, var(--disabled, #cc4b37));
 }

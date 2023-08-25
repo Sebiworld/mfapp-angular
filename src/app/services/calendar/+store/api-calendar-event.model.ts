@@ -1,3 +1,4 @@
+import { ApiProject } from "@models/api-project.model";
 import { ApiUser } from "@models/api-user.model";
 
 export interface ApiCalendarEvent {
@@ -8,7 +9,10 @@ export interface ApiCalendarEvent {
   created_user?: ApiUser;
   modified?: number;
   modified_user?: ApiUser;
+  project?: ApiProject;
   timespans: ApiCalendarTimespan[];
+  saveable?: boolean;
+  deletable?: boolean;
 };
 
 export interface ApiCalendarTimespan {

@@ -49,6 +49,10 @@ export class CalendarApiService extends ApiService {
       apiEvent.modified = Math.floor(apiEvent.modified / 1000);
     }
 
+    if(apiEvent.project){
+      apiEvent.project = null;
+    }
+
     if (isValidArray(apiEvent.timespans)) {
       apiEvent.timespans = apiEvent.timespans.map(
         ts => {
@@ -88,5 +92,9 @@ export class CalendarApiService extends ApiService {
         event: CalendarConverters.convertEvent(response.event)
       }))
     );
+  }
+
+  deleteEvent(event: ApiCalendarEvent): Observable<{ success: boolean }> {
+    return this.delete(this.baseUrl + 'calendar/events/' + event.id);
   }
 }

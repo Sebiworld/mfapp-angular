@@ -5,12 +5,21 @@ ion-card-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   padding: 16px 10px;
 
   .title-wrapper {
     flex: 1 1 200px;
     padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    ion-card-subtitle {
+      margin: 0;
+      font-size: var(--font-size-small);
+    }
   }
 
   .actions {
@@ -36,7 +45,7 @@ ion-card-content {
   padding-bottom: 16px;
 
   &>.description {
-    padding: 0 20px;
+    padding: 0 20px 8px 20px;
   }
 
   .timespans-wrapper {

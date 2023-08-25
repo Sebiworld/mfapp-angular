@@ -18,7 +18,9 @@ const convertEvent = (data: any): ApiCalendarEvent => {
     created_user: UserConverters.convertUserData(data?.created_user),
     modified: Converters.parseDateData(data?.modified, 'server'),
     modified_user: UserConverters.convertUserData(data?.modified_user),
-    timespans: []
+    timespans: [],
+    saveable: Converters.parseBooleanData(data?.saveable),
+    deletable: Converters.parseBooleanData(data?.deletable)
   };
 
   if (isValidArray(data?.timespans)) {
@@ -32,7 +34,7 @@ const convertEvent = (data: any): ApiCalendarEvent => {
   return event;
 };
 
-const isEventValid = (data: any): boolean => !!data?.title;
+const isEventValid = (data: any): boolean => !!data?.id && !!data?.timespans?.length;
 
 const convertTimespan = (data: any): ApiCalendarTimespan => {
   const timespan: ApiCalendarTimespan = {

@@ -28,10 +28,20 @@
     "event": {
       "title": "Titel",
       "description": "Beschreibung",
-      "timespans": "Zeitblock",
-      "timeFrom": "Von",
-      "timeUntil": "Bis",
-      "add": "Zeitblock hinzufügen",
+      "project": "Projekt",
+      "add": "Neuen Termin erstellen",
+      "edit": "Termin bearbeiten",
+      "save": "Termin speichern",
+      "save-success": "Der Termin wurde gespeichert.",
+      "delete": "Termin löschen",
+      "delete-confirmation": "Möchtest du diesen Termin wirklich löschen?",
+      "delete-success": "Der Termin wurde gelöscht.",
+      "timespan": {
+        "label": "Zeitblock",
+        "time-from": "Von",
+        "time-until": "Bis",
+        "add": "Zeitblock hinzufügen"
+      },
       "loading": "Termin wird geladen"
     }
   },
@@ -60,7 +70,11 @@
     "done": "Ok",
     "cancel": "Abbrechen",
     "clear": "Zurücksetzen",
-    "loading": "Daten werden geladen"
+    "loading": "Daten werden geladen",
+    "no-selection": "Keine Auswahl",
+    "yes": "Ja",
+    "no": "Nein",
+    "close": "Schließen"
   },
   "errors": {
     "title": "Fehler:",

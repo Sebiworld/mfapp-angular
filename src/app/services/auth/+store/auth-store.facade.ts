@@ -16,6 +16,10 @@ export class AuthStoreFacade {
   public readonly username$ = this.store.select(AuthSelectors.selectUsername);
   public readonly userRoles$ = this.store.select(AuthSelectors.selectUserRoles);
   public readonly userRolesCount$ = this.store.select(AuthSelectors.selectUserRolesCount);
+  public readonly userPermissions$ = this.store.select(AuthSelectors.selectUserPermissions);
+  public readonly userPermissionsCount$ = this.store.select(AuthSelectors.selectUserPermissionsCount);
+  public readonly projects$ = this.store.select(AuthSelectors.selectProjects);
+  public readonly projectsCount$ = this.store.select(AuthSelectors.selectProjectsCount);
   public readonly isAuthenticated$ = this.store.select(AuthSelectors.selectIsAuthenticated);
   public readonly isNotAuthenticated$ = this.store.select(AuthSelectors.selectIsNotAuthenticated);
   public readonly refreshToken$ = this.store.select(AuthSelectors.selectRefreshToken);

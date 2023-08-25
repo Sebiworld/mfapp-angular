@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar [color]="color">
+    <ion-title *ngIf="title">
+      {{ title | translateMulti | async }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [attr.aria-label]="'general.close' | translate: {fallback: 'Schließen'}" (click)="dismiss()">
+        <ion-icon slot="icon-only" aria-hidden="true" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="text" class="modal-inner-content ion-padding">
+  <div class="text-wrapper" [innerHTML]="text | translateMulti | async"></div>
+</div>
+
+<ion-footer class="action-buttonbar">
+  <ion-button *ngIf="yesLabel" (click)="yes()" [color]="yesColor" class="autofocus" tabindex="0">
+    {{ yesLabel | translateMulti | async }}
+  </ion-button>
+  <ion-button *ngIf="noLabel" (click)="no()" [color]="noColor" tabindex="1">
+    {{ noLabel | translateMulti | async }}
+  </ion-button>
+  <ion-button *ngIf="cancelLabel" (click)="dismiss()" [color]="cancelColor" tabindex="2">
+    {{ cancelLabel | translateMulti | async }}
+  </ion-button>
+</ion-footer>

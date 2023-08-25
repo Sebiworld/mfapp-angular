@@ -3,6 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { ApiDefaultPage } from './api-default-page.model';
 import { PageActions } from './page.actions';
+import { AuthActions } from '@services/auth/+store/auth.actions';
 
 const featureKey = 'pages';
 
@@ -60,6 +61,11 @@ const reducer = createReducer(
   on(PageActions.clearPages,
     state => adapter.removeAll(state)
   ),
+
+  on(AuthActions.loginSessionSuccess, AuthActions.logoutSessionSuccess, (state) => ({
+    ...state,
+    ...initialState
+  }))
 );
 
 export const PageReducer = {

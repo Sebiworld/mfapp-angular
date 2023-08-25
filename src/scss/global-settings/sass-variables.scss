@@ -12,7 +12,7 @@ $tertiary: #f1f1f5;
 $dark: #1e1e1e;
 $medium: #92949c; // Used as disabled-color
 $light: #ccd2e2;
-$lighter: #f4f5f8;
+$lightest: #f4f5f8;
 
 $theme-colors: (
   success: $success,
@@ -24,7 +24,7 @@ $theme-colors: (
   dark: $dark,
   medium: $medium,
   light: $light,
-  lighter: $lighter,
+  lightest: $lightest,
 );
 
 // Color-Steps:
@@ -51,7 +51,6 @@ $color-steps: (
 );
 
 $special-colors: (
-  twitter: #1da1f2,
   facebook: #1877f2,
   instagram: #e1306c,
   whatsapp: #25d366,
@@ -60,7 +59,6 @@ $special-colors: (
   github: #6e5494,
   linkedin: #0077b5,
   xing: #cfdc00,
-  musical-fabrik: #fd8e01,
   discord: #5865F2
 );
 
@@ -88,7 +86,7 @@ $dark-tertiary: #2F4858;
 $dark-dark: #d9e8f1;
 $dark-medium: #223039; // Used as disabled-color
 $dark-light: #141e25;
-$dark-lighter: #543e3e;
+$dark-lightest: #000000;
 
 $dark-theme-colors: (
   success: $dark-success,
@@ -100,7 +98,7 @@ $dark-theme-colors: (
   dark: $dark-dark,
   medium: $dark-medium,
   light: $dark-light,
-  lighter: $dark-lighter,
+  lightest: $dark-lightest,
 );
 
 // Color-Steps:

@@ -31,10 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'calendar',
-    loadChildren: () => import('@pages/calendar/calendar.module').then(m => m.CalendarPageModule),
-    data: {
-      loadType: 'calendar'
-    }
+    loadChildren: () => import('@pages/calendar/calendar.module').then(m => m.CalendarPageModule)
   },
   {
     path: '**',

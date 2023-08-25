@@ -8,7 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Drivers } from '@ionic/storage';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -57,7 +57,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new TranslateHttpLoader(h
         deps: [HttpClient]
       },
       missingTranslationHandler: {
-        provide: MissingTranslationFallbackHandler,
+        provide: MissingTranslationHandler,
         useClass: MissingTranslationFallbackHandler
       }
     }),

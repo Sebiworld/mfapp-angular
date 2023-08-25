@@ -1,6 +1,8 @@
-import { ApiPermission, ApiRole } from '@models/api-user.model';
 import { createReducer, on } from '@ngrx/store';
 import { cloneDeep as _cloneDeep } from 'lodash';
+
+import { ApiPermission, ApiRole } from '@models/api-user.model';
+import { ApiProject } from '@models/api-project.model';
 
 import { AuthActions } from './auth.actions';
 
@@ -14,6 +16,7 @@ export interface AuthState {
   userid: string | null;
   roles: ApiRole[];
   permissions: ApiPermission[];
+  projects: ApiProject[];
   loggedIn: boolean;
 
   loginResponse: { response?: any; type: 'success' | 'error'; timestamp: number } | null;
@@ -30,6 +33,7 @@ const initialState: AuthState = {
   userid: null,
   roles: [],
   permissions: [],
+  projects: [],
   loggedIn: false,
 
   loginResponse: null,
@@ -55,6 +59,7 @@ const reducer = createReducer(
     username: action.name,
     roles: action.roles || [],
     permissions: action.permissions || [],
+    projects: action.projects || [],
     loggedIn: !!action.loggedIn
   })),
 
@@ -69,12 +74,12 @@ const reducer = createReducer(
     accessToken: action.access_token,
     username: action.username,
     loading: false,
-    loginResponse: { type: 'success', timestamp: action.timestamp }
+    loginResponse: { type: 'success' as 'success' | 'error', timestamp: action.timestamp }
   })),
   on(AuthActions.loginSessionFailure, (state, action) => ({
     ...state,
     loading: false,
-    loginResponse: { response: action.error, type: 'error', timestamp: action.timestamp }
+    loginResponse: { response: action.error, type: 'error' as 'success' | 'error', timestamp: action.timestamp }
   })),
 
   on(AuthActions.registration, (state) => ({
@@ -85,12 +90,12 @@ const reducer = createReducer(
   on(AuthActions.registrationSuccess, (state, action) => ({
     ...state,
     loading: false,
-    registrationResponse: { type: 'success', timestamp: action.timestamp }
+    registrationResponse: { type: 'success' as 'success' | 'error', timestamp: action.timestamp }
   })),
   on(AuthActions.registrationFailure, (state, action) => ({
     ...state,
     loading: false,
-    registrationResponse: { response: action.error, type: 'error', timestamp: action.timestamp }
+    registrationResponse: { response: action.error, type: 'error' as 'success' | 'error', timestamp: action.timestamp }
   })),
 
   on(AuthActions.loadUser, (state) => ({
@@ -103,6 +108,7 @@ const reducer = createReducer(
     username: action.name,
     roles: action.roles || [],
     permissions: action.permissions || [],
+    projects: action.projects || [],
     loggedIn: !!action.loggedIn
   })),
   on(AuthActions.loadUserSuccess, AuthActions.loadUserFailure, (state) => ({
@@ -122,6 +128,7 @@ const reducer = createReducer(
     userid: null,
     roles: [],
     permissions: [],
+    projects: [],
     loggedIn: false
   })),
   on(AuthActions.logoutSessionFailure, (state) => ({

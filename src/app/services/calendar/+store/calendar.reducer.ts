@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 
 import { CalendarActions } from './calendar.actions';
 import { CalendarEventState, CalendarEventEntity } from './calendar-event.entity';
+import { AuthActions } from '@services/auth/+store/auth.actions';
 
 const featureKey = 'calendar';
 
@@ -78,6 +79,30 @@ const reducer = createReducer(
     })
   ),
 
+  on(CalendarActions.deleteEvent,
+    state => ({
+      ...state,
+      loading: [...state.loading, 'delete-event']
+    })
+  ),
+  on(CalendarActions.deleteEventSuccess,
+    (state, action) => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'delete-event'),
+      events: CalendarEventEntity.adapter.removeOne(action.id, state.events)
+    })
+  ),
+  on(CalendarActions.deleteEventFailure,
+    state => ({
+      ...state,
+      loading: state.loading.filter(v => v !== 'delete-event')
+    })
+  ),
+
+  on(AuthActions.loginSessionSuccess, AuthActions.logoutSessionSuccess, (state) => ({
+    ...state,
+    ...initialState
+  }))
 );
 
 export const CalendarReducer = {

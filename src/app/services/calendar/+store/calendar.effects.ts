@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 import { startsWith as _startsWith } from 'lodash-es';
 
 import { CalendarActions } from './calendar.actions';
 import { CalendarApiService } from '../calendar-api.service';
-import { Router } from '@angular/router';
+import { AlertService } from '@services/alert.service';
 
 @Injectable()
 export class CalendarEffects {
@@ -59,7 +60,35 @@ export class CalendarEffects {
   saveEventSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(CalendarActions.saveEventSuccess),
     switchMap(async (action) => {
+      this.alertService.success('calendar.event.save-success', undefined, {
+        fallback: 'Der Termin wurde gespeichert.'
+      });
       await this.router.navigate(['/calendar']);
+    })
+  ), { dispatch: false });
+
+  deleteEvent$ = createEffect(() => this.actions$.pipe(
+    ofType(CalendarActions.deleteEvent),
+    switchMap((action) =>
+      this.calendarApiService.deleteEvent(action.event).pipe(
+        map((response) => {
+          if (!response?.success) {
+            throw new Error('Event could not be deleted');
+          }
+          // TODO Alerts
+          return CalendarActions.deleteEventSuccess({ id: action.event?.id });
+        }),
+        catchError(error => of(CalendarActions.deleteEventFailure({ error })))
+      )
+    )
+  ));
+
+  deleteEventSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(CalendarActions.deleteEventSuccess),
+    switchMap(async (action) => {
+      this.alertService.success('calendar.event.delete-success', undefined, {
+        fallback: 'Der Termin wurde gelöscht.'
+      });
     })
   ), { dispatch: false });
 
@@ -74,9 +103,10 @@ export class CalendarEffects {
   // ), { dispatch: false });
 
   constructor(
-    private actions$: Actions,
-    private calendarApiService: CalendarApiService,
-    private router: Router
+    private readonly actions$: Actions,
+    private readonly calendarApiService: CalendarApiService,
+    private readonly alertService: AlertService,
+    private readonly router: Router
   ) { }
 
 }

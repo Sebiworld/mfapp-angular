@@ -34,6 +34,7 @@
     --#{$color}-warning: var(--#{$color}-contrast);
     --#{$color}-danger: var(--#{$color}-contrast);
     --#{$color}-border: var(--#{$color}-shade);
+    --#{$color}-disabled: var(--#{$color}-disabled);
 
     --ion-color-#{$color}: var(--#{$color});
     --ion-color-#{$color}-rgb: var(--#{$color}-rgb);
@@ -153,8 +154,8 @@ body,
     --ion-color-step-900: #e6e6e6;
     --ion-color-step-950: #f2f2f2;
 
-    --ion-item-background: var(--lighter);
-    --ion-item-color: var(--lighter-contrast);
+    --ion-item-background: var(--light);
+    --ion-item-color: var(--light-contrast);
 
     ion-modal {
       --ion-background-color: var(--ion-color-step-100);

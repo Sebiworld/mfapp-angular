@@ -4,7 +4,9 @@
 
 <ion-content>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="success" [routerLink]="['new']">
+    <ion-fab-button color="success" [routerLink]="['new']"
+      [title]="'calendar.event.add' | translate: {fallback: 'Neuen Termin erstellen'}"
+      [attr.aria-label]="'calendar.event.add' | translate: {fallback: 'Neuen Termin erstellen'}">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

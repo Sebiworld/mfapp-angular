@@ -1,0 +1,66 @@
+ @import '~quill/dist/quill.snow.css';
+
+ quill-editor {
+   .ql-snow {
+     &.ql-toolbar {
+       border-color: var(--ion-color-tint);
+
+       .ql-stroke {
+         stroke: var(--color);
+       }
+
+       .ql-fill {
+         fill: var(--color);
+       }
+
+       .ql-picker {
+         color: var(--color);
+       }
+
+       button,
+       .ql-picker-label {
+
+         &.ql-active,
+         &:focus,
+         &:hover {
+           color: var(--primary);
+
+           .ql-stroke {
+             stroke: var(--primary);
+           }
+
+           .ql-fill {
+             fill: var(--primary);
+           }
+
+           .ql-picker {
+             color: var(--primary);
+           }
+         }
+       }
+
+       .ql-picker-options {
+         background: var(--background);
+
+         .ql-picker-item {
+
+           &.ql-selected,
+           &:hover,
+           &:focus {
+             color: var(--primary);
+           }
+         }
+       }
+     }
+
+     &.ql-container {
+       border-color: var(--ion-color-tint);
+
+       .ql-blank {
+         &::before {
+           color: rgba(var(--color-rgb), 0.6);
+         }
+       }
+     }
+   }
+ }

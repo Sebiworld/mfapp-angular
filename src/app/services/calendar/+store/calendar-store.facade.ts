@@ -34,6 +34,9 @@ export class CalendarStoreFacade {
   saveEvent(event: ApiCalendarEvent) {
     this.store.dispatch(CalendarActions.saveEvent({ event }));
   }
+  deleteEvent(event: ApiCalendarEvent) {
+    this.store.dispatch(CalendarActions.deleteEvent({ event }));
+  }
 
   event$(id: number) {
     return this.store.select(CalendarSelectors.selectEvent(id));

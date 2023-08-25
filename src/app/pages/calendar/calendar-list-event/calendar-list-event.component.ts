@@ -4,6 +4,9 @@ import { TranslationService } from '@services/translation.service';
 
 import { ApiCalendarEvent, ApiCalendarTimespan } from '@services/calendar/+store/api-calendar-event.model';
 import { CalendarTimespanGroup, groupTimespans } from '@services/calendar/calendar.helpers';
+import { CalendarService } from '@services/calendar/calendar.service';
+import { ModalController } from '@ionic/angular';
+import { ConfirmationModalComponent } from '@modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-calendar-list-event',
@@ -26,8 +29,29 @@ export class CalendarListEventComponent {
   public readonly locale = this.translationService.locale;
 
   constructor(
-    private readonly translationService: TranslationService
+    private readonly translationService: TranslationService,
+    private readonly calendarService: CalendarService,
+    private readonly modalController: ModalController
   ) { }
+
+  async delete() {
+    const modal = await this.modalController.create({
+      component: ConfirmationModalComponent,
+      cssClass: ['auto-height', 'large-width'],
+      backdropDismiss: false,
+      componentProps: {
+        title: { key: 'calendar.event.delete', params: { fallback: 'Termin löschen' } },
+        text: { key: 'calendar.event.delete-confirmation', params: { fallback: 'Möchtest du diesen Termin wirklich löschen?' } },
+        noLabel: undefined
+      }
+    });
+    await modal.present()
+    const modalResult = await modal.onDidDismiss();
+
+    if (modalResult?.data?.confirmed) {
+      this.calendarService.deleteEvent(this._event());
+    }
+  }
 
   trackTimespanGroup(index, item: CalendarTimespanGroup) {
     return item.date;

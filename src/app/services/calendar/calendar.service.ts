@@ -58,4 +58,8 @@ export class CalendarService {
   saveEvent(event: ApiCalendarEvent) {
     return this.calendarStoreFacade.saveEvent(event);
   }
+
+  deleteEvent(event: ApiCalendarEvent) {
+    return this.calendarStoreFacade.deleteEvent(event);
+  }
 }

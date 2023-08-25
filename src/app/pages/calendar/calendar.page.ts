@@ -1,12 +1,12 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, catchError, distinctUntilChanged, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
 
 import { AlertService } from '@services/alert.service';
 import { ApiCalendarEvent } from '@services/calendar/+store/api-calendar-event.model';
 import { CalendarStoreFacade } from '@services/calendar/+store/calendar-store.facade';
 import { CalendarService } from '@services/calendar/calendar.service';
-import { TranslationService } from '@services/translation.service';
+import { AuthStoreFacade } from '@services/auth/+store/auth-store.facade';
 
 @Component({
   selector: 'app-calendar',
@@ -25,11 +25,17 @@ export class CalendarPage implements OnInit {
   constructor(
     private readonly calendarService: CalendarService,
     private readonly calendarStoreFacade: CalendarStoreFacade,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
+    private readonly authStoreFacade: AuthStoreFacade
   ) { }
 
   ngOnInit() {
-    this.loadCalendar();
+    this.authStoreFacade.userid$.pipe(
+      distinctUntilChanged(),
+      debounceTime(100),
+      tap(() => this.loadCalendar()),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe();
   }
 
   loadCalendar() {

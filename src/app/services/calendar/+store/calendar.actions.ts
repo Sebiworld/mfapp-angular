@@ -18,5 +18,9 @@ export const CalendarActions = createActionGroup({
     'Save Event': props<{ event: ApiCalendarEvent }>(),
     'Save Event Success': props<{ event: ApiCalendarEvent; shouldNavigate: boolean; }>(),
     'Save Event Failure': props<{ error: any }>(),
+
+    'Delete Event': props<{ event: ApiCalendarEvent }>(),
+    'Delete Event Success': props<{ id: string }>(),
+    'Delete Event Failure': props<{ error: any }>(),
   }
 });

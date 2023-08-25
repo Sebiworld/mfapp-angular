@@ -4,7 +4,7 @@
 
 <ion-content>
   <form [formGroup]="eventForm">
-    <ion-card>
+    <ion-card class="general-inputs">
       <ion-card-content>
         <ion-list class="form-list" lines="none">
           <ion-item *ngIf="eventForm.controls.title">
@@ -21,8 +21,26 @@
               {{ 'calendar.event.description' | translate }} <ion-text *ngIf="eventForm.controls.description.validator"
                 color="danger" [title]="'general.required' | translate">&ast;</ion-text>
             </ion-label>
-            <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"></ckeditor>
+            <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"></quill-editor>
           </div>
+
+          <ion-item *ngIf="eventForm.controls.project">
+            <ion-select formControlName="project" label-placement="floating" fill="solid"
+              [placeholder]="'general.no-selection' | translate">
+              <div slot="label">
+                {{ 'calendar.event.project' | translate }} <ion-text *ngIf="eventForm.controls.project.validator"
+                  color="danger" [title]="'general.required' | translate">&ast;</ion-text>
+              </div>
+
+              <ion-select-option [value]="undefined">
+                {{ 'general.no-selection' | translate }}
+              </ion-select-option>
+
+              <ion-select-option *ngFor="let project of (projects$ | async) | arrayReverse" [value]="project.id">
+                {{ project.title }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>
@@ -32,12 +50,26 @@
         *ngFor="let timespan of timespans.controls; let index = index">
         <ion-card [formGroupName]="index">
           <ion-card-header>
-            <ion-card-subtitle>{{ 'calendar.event.timespans' | translate }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ 'calendar.event.timespan.label' | translate }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <ion-list class="form-list" lines="none">
-              <ion-item button
+              <ion-item *ngIf="saveable$ | async" button
                 (click)="openTimespanPicker($event, index, timespan.value.timeFrom, timespan.value.timeUntil)">
+                <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day'">
+                  {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
+                  <span class="date-spacer">-</span>
+                  {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'mediumTime' : locale }}
+                </div>
+
+                <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day': true">
+                  {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
+                  <span class="date-spacer">-</span>
+                  {{ [timespan.value.timeUntil, currentDate] | dateWithFallback: 'medium' : locale }}
+                </div>
+              </ion-item>
+
+              <ion-item *ngIf="notSaveable$ | async">
                 <div *ngIf="[timespan.value.timeFrom, timespan.value.timeUntil] | areDatesEqual: 'day'">
                   {{ [timespan.value.timeFrom, currentDate] | dateWithFallback: 'medium' : locale }}
                   <span class="date-spacer">-</span>
@@ -66,28 +98,30 @@
                     *ngIf="timespan.get('description')?.validator" color="danger"
                     [title]="'general.required' | translate">&ast;</ion-text>
                 </ion-label>
-                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"></ckeditor>
+                <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"></quill-editor>
               </div>
             </ion-list>
           </ion-card-content>
 
-          <ion-button class="delete-btn" color="secondary" fill="clear" shape="round" size="small"
-            [disabled]="timespans.controls.length <= 1" (click)="deleteTimespan(index)">
+          <ion-button *ngIf="saveable$ | async" class="delete-btn" color="secondary" fill="clear" shape="round"
+            size="small" [disabled]="timespans.controls.length <= 1" (click)="deleteTimespan(index)">
             <ion-icon slot="icon-only" name="close"></ion-icon>
           </ion-button>
         </ion-card>
       </div>
 
-      <ion-button color="secondary" (click)="addTimespan()">
+      <ion-button *ngIf="saveable$ | async" color="secondary" (click)="addTimespan()">
         <ion-icon name="add" slot="start"></ion-icon>
-        {{ 'calendar.event.add' | translate }}
+        {{ 'calendar.event.timespan.add' | translate }}
       </ion-button>
     </div>
   </form>
 
-  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+  <ion-fab *ngIf="saveable$ | async" slot="fixed" horizontal="end" vertical="bottom">
     <ng-container *ngrxLet="saveEventLoading$ as saveEventLoading">
-      <ion-fab-button color="success" (click)="save()" [disabled]="!eventForm.valid || saveEventLoading">
+      <ion-fab-button color="success" [disabled]="!eventForm.valid || saveEventLoading"
+        [title]="'calendar.event.save' | translate: {fallback: 'Termin speichern'}"
+        [attr.aria-label]="'calendar.event.save' | translate: {fallback: 'Termin speichern'}" (click)="save()">
         <ion-icon *ngIf="!saveEventLoading" name="save-outline"></ion-icon>
         <ion-spinner *ngIf="saveEventLoading" name="circular"></ion-spinner>
       </ion-fab-button>

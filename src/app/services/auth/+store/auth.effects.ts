@@ -88,6 +88,7 @@ export class AuthEffects {
             id: null,
             roles: [],
             permissions: [],
+            projects: [],
             loggedIn: false
           })))
         );
@@ -109,6 +110,7 @@ export class AuthEffects {
             id: null,
             roles: [],
             permissions: [],
+            projects: [],
             loggedIn: false
           })))
         ))

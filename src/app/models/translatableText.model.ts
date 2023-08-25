@@ -1,0 +1,1 @@
+export type TranslatableText = string | { key: string, params?: any } | { key: string, params?: any }[];

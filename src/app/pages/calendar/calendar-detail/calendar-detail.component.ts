@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inje
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, filter, map, of, switchMap, tap } from 'rxjs';
 import { PopoverController } from '@ionic/angular';
 import { addHours, fromUnixTime, isEqual } from 'date-fns';
 
@@ -13,11 +13,9 @@ import { ApiCalendarTimespan } from '@services/calendar/+store/api-calendar-even
 import { CalendarStoreFacade } from '@services/calendar/+store/calendar-store.facade';
 import { AlertService } from '@services/alert.service';
 import { NavigationService } from '@services/navigation.service';
+import { AuthStoreFacade } from '@services/auth/+store/auth-store.facade';
 
 import { TimespanPickerComponent } from './timespan-picker/timespan-picker.component';
-import Editor from '@shared/misc/ckeditor/ckeditor';
-import { EditorConfig } from '@ckeditor/ckeditor5-core';
-import { descriptionEditorConfig } from '@shared/misc/description-editor-config';
 
 @Component({
   selector: 'app-calendar-detail',
@@ -37,6 +35,12 @@ export class CalendarDetailComponent {
   public readonly currentEvent$ = this.id$.pipe(
     switchMap(id => this.calendarStoreFacade.event$(id)),
   );
+  public readonly saveable$ = this.currentEvent$.pipe(
+    map(event => !!event?.saveable || !event?.id)
+  );
+  public readonly notSaveable$ = this.saveable$.pipe(
+    map(val => !val)
+  );
   public readonly currentDate = new Date();
 
   private readonly _loading$ = new BehaviorSubject<boolean>(false);
@@ -44,8 +48,24 @@ export class CalendarDetailComponent {
 
   public readonly saveEventLoading$ = this.calendarStoreFacade.saveEventLoading$;
 
-  public readonly Editor = Editor;
-  public readonly editorConfig: EditorConfig = descriptionEditorConfig;
+  public readonly projects$ = this.authStoreFacade.projects$;
+
+  public readonly editorModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+      ['link', 'blockquote', 'code-block'],
+
+      [{ 'header': 1 }, { 'header': 2 }, { 'header': [1, 2, 3, 4, 5, 6, false] }],               // custom button values
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+      [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+
+      ['clean'],                                         // remove formatting button
+    ]
+  };
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -55,12 +75,14 @@ export class CalendarDetailComponent {
     private readonly calendarService: CalendarService,
     private readonly calendarStoreFacade: CalendarStoreFacade,
     private readonly alertService: AlertService,
-    private readonly navigationService: NavigationService
+    private readonly navigationService: NavigationService,
+    private readonly authStoreFacade: AuthStoreFacade
   ) {
     this.eventForm = new FormGroup({
       id: new FormControl(''),
       title: new FormControl(''),
       description: new FormControl(''),
+      project: new FormControl(''),
       timespans: new FormArray([this.createTimespan()], Validators.required)
     });
 
@@ -71,12 +93,13 @@ export class CalendarDetailComponent {
     ).subscribe();
 
     // Load current event:
-    this.id$.pipe(
-      filter(id => !!id && id !== 'new'),
+    combineLatest([
+      this.id$.pipe(distinctUntilChanged()), this.authStoreFacade.userid$
+    ]).pipe(
+      filter(([id]) => !!id && id !== 'new'),
       tap(() => this._loading$.next(true)),
       debounceTime(100),
-      distinctUntilChanged(),
-      switchMap(id => this.calendarService.loadEvent$(id).pipe(
+      switchMap(([id]) => this.calendarService.loadEvent$(id).pipe(
         catchError(error => {
           this.alertService.error(
             ['errors.title', 'errors.' + error.errorcode],
@@ -110,6 +133,11 @@ export class CalendarDetailComponent {
             description: event.description
           });
         }
+        if (this.eventForm.controls.project && this.eventForm.value.project !== event.project?.id) {
+          this.eventForm.patchValue({
+            project: event.project?.id
+          });
+        }
         if (this.eventForm.controls.timespans && isValidArray(event.timespans)) {
           const newTimespans = new FormArray([], Validators.required);
           for (const timespan of event.timespans) {
@@ -121,6 +149,12 @@ export class CalendarDetailComponent {
           }
 
           this.eventForm.setControl('timespans', newTimespans);
+        }
+
+        if (!event.saveable) {
+          this.eventForm.disable();
+        } else {
+          this.eventForm.enable();
         }
       }),
       takeUntilDestroyed(this.destroyRef)
@@ -203,9 +237,6 @@ export class CalendarDetailComponent {
 
   save() {
     console.log('SAVE', this.eventForm.value);
-    if (!this.eventForm.value.title) {
-      return;
-    }
     if (!isValidArray(this.eventForm.value.timespans) || !this.eventForm.value.timespans.length) {
       return;
     }
@@ -228,6 +259,7 @@ export class CalendarDetailComponent {
       id: this.eventForm.value.id,
       title: this.eventForm.value.title,
       description: this.eventForm.value.description,
+      project: this.eventForm.value.project,
       timespans
     });
   }

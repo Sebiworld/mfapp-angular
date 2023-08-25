@@ -2,17 +2,25 @@
   <ion-card-header>
     <div class="title-wrapper">
       <ion-card-subtitle *ngIf="eventDates()?.length >= 1">
-        {{ eventDates()[0] | date: 'longDate' : undefined : locale }}
+        {{ eventDates()[0] | date: 'fullDate' : undefined : locale }}
         <ng-container *ngIf="eventDates()?.length >= 2">
-          - {{ eventDates()[eventDates()?.length - 1] | date: 'longDate' : undefined : locale }}
+          - {{ eventDates()[eventDates()?.length - 1] | date: 'fullDate' : undefined : locale }}
         </ng-container>
       </ion-card-subtitle>
-      <ion-card-title>{{ _event().title }}</ion-card-title>
+      <ion-card-title *ngIf="_event().title">{{ _event().title }}</ion-card-title>
     </div>
 
     <div class="actions">
-      <ion-button size="small" color="light" [routerLink]="['/calendar', _event().id]">
+      <ion-button *ngIf="_event().saveable" size="small" color="light" [routerLink]="['/calendar', _event().id]"
+        [title]="'calendar.event.edit' | translate: {fallback: 'Termin bearbeiten'}"
+        [attr.aria-label]="'calendar.event.edit' | translate: {fallback: 'Termin bearbeiten'}">
         <ion-icon slot="icon-only" name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="_event().deletable" size="small" color="light"
+        [title]="'calendar.event.delete' | translate: {fallback: 'Termin löschen'}"
+        [attr.aria-label]="'calendar.event.delete' | translate: {fallback: 'Termin löschen'}" (click)="delete()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
       </ion-button>
     </div>
   </ion-card-header>
@@ -27,8 +35,7 @@
           {{ group.date | date: 'longDate' : undefined : locale }}
         </div>
         <div class="timespans-wrapper">
-          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;"
-            class="timespan bg-medium">
+          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;" class="timespan">
             <div class="time">
               {{ timespan.timeFrom | date: 'shortTime' : undefined : locale }}&shy; - {{ timespan.timeUntil | date:
               'shortTime' : undefined : locale
