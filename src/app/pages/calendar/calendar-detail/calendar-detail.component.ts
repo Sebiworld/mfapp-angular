@@ -55,13 +55,13 @@ export class CalendarDetailComponent {
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['link', 'blockquote', 'code-block'],
 
-      [{ 'header': 1 }, { 'header': 2 }, { 'header': [1, 2, 3, 4, 5, 6, false] }],               // custom button values
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
       [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+      [{ 'align': [] }],
 
       [{ 'font': [] }],
-      [{ 'align': [] }],
+      [{ size: ['small', false, 'large', 'huge'] }],
 
       ['clean'],                                         // remove formatting button
     ]
@@ -165,10 +165,11 @@ export class CalendarDetailComponent {
     const timeFrom = timespan?.timeFrom || new Date();
     return new FormGroup({
       id: new FormControl(timespan?.id || ''),
+      timeFrom: new FormControl(timeFrom),
+      timeUntil: new FormControl(timespan?.timeUntil || addHours(timeFrom, 1)),
       title: new FormControl(timespan?.title || ''),
       description: new FormControl(timespan?.description || ''),
-      timeFrom: new FormControl(timeFrom),
-      timeUntil: new FormControl(timespan?.timeUntil || addHours(timeFrom, 1))
+      participants: new FormControl(timespan?.participants || '')
     });
   }
 
@@ -250,6 +251,7 @@ export class CalendarDetailComponent {
         id: item.id,
         title: item.title,
         description: item.description,
+        participants: item.participants,
         timeFrom,
         timeUntil
       });

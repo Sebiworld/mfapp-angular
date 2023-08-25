@@ -28,6 +28,7 @@
     "event": {
       "title": "Titel",
       "description": "Beschreibung",
+      "description-placeholder": "Eine allgemeine Beschreibung hier einfügen (optional)",
       "project": "Projekt",
       "add": "Neuen Termin erstellen",
       "edit": "Termin bearbeiten",
@@ -38,8 +39,14 @@
       "delete-success": "Der Termin wurde gelöscht.",
       "timespan": {
         "label": "Zeitblock",
+        "title": "Titel",
+        "time": "Zeit",
         "time-from": "Von",
         "time-until": "Bis",
+        "description": "Beschreibung",
+        "description-placeholder": "Inhalt hier einfügen",
+        "participants": "Teilnehmer",
+        "participants-placeholder": "Wer soll teilnehmen?",
         "add": "Zeitblock hinzufügen"
       },
       "loading": "Termin wird geladen"

@@ -7,7 +7,7 @@ ion-card-header {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  padding: 16px 10px;
+  padding: 4px 8px 4px 10px;
 
   .title-wrapper {
     flex: 1 1 200px;
@@ -19,6 +19,7 @@ ion-card-header {
     ion-card-subtitle {
       margin: 0;
       font-size: var(--font-size-small);
+      color: var(--card-bg-contrast);
     }
   }
 
@@ -41,8 +42,7 @@ ion-card-content {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0;
-  padding-bottom: 16px;
+  padding: 12px 0;
 
   &>.description {
     padding: 0 20px 8px 20px;
@@ -58,7 +58,7 @@ ion-card-content {
     .group-container {
       .group-header {
         padding: 5px 10px;
-        font-size: var(--font-size);
+        font-size: var(--font-size-small);
         align-items: center;
         font-weight: bold;
       }
@@ -76,25 +76,43 @@ ion-card-content {
         display: grid;
         padding: 4px 10px;
         gap: 4px;
-        grid-template-areas: "time info";
-        grid-template-columns: 140px 1fr;
+        grid-template-areas: "time info participants";
+        grid-template-columns: 140px 1.5fr 1fr;
 
         .time {
           grid-area: time;
+          font-size: var(--font-size-small);
         }
 
         .info {
           grid-area: info;
+          overflow: hidden;
 
           .title {
             font-weight: bold;
           }
+        }
 
-          .title,
-          .description {
-            font-size: var(--font-size);
+        .participants {
+          grid-area: participants;
+          overflow: hidden;
+        }
+
+        &.header {
+
+          .time,
+          .info,
+          .participants {
+            font-weight: bold;
+            font-size: var(--font-size-mini);
+            color: var(--ion-color-step-600, #666666);
+            text-transform: uppercase;
           }
         }
+      }
+
+      .rich-content {
+        font-size: var(--font-size-small);
       }
     }
   }

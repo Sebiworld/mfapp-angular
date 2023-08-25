@@ -39,10 +39,11 @@ const isEventValid = (data: any): boolean => !!data?.id && !!data?.timespans?.le
 const convertTimespan = (data: any): ApiCalendarTimespan => {
   const timespan: ApiCalendarTimespan = {
     ...data,
-    title: Converters.parseStringData(data?.title || ''),
-    description: Converters.parseStringData(data?.description || ''),
     timeFrom: Converters.parseDateData(data?.timeFrom, 'server'),
     timeUntil: Converters.parseDateData(data?.timeUntil, 'server'),
+    title: Converters.parseStringData(data?.title || ''),
+    description: Converters.parseStringData(data?.description || ''),
+    participants: Converters.parseStringData(data?.participants || ''),
     created: Converters.parseDateData(data?.created, 'server'),
     created_user: UserConverters.convertUserData(data?.created_user),
     modified: Converters.parseDateData(data?.modified, 'server'),

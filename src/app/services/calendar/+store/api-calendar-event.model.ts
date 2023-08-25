@@ -19,6 +19,7 @@ export interface ApiCalendarTimespan {
   id?: string;
   title?: string;
   description?: string;
+  participants?: string;
   timeFrom: number;
   timeUntil: number;
   created?: number;

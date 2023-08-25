@@ -106,3 +106,18 @@ hr {
     margin-bottom: 0;
   }
 }
+
+.rich-content {
+  font-size: var(--font-size-small);
+
+  ul,
+  ol,
+  li,
+  p {
+    font-size: var(--font-size-small);
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+}

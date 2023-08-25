@@ -18,10 +18,10 @@
 
           <div *ngIf="eventForm.controls.description" class="form-item rich-input">
             <ion-label>
-              {{ 'calendar.event.description' | translate }} <ion-text *ngIf="eventForm.controls.description.validator"
-                color="danger" [title]="'general.required' | translate">&ast;</ion-text>
+              {{ 'calendar.event.description' | translate }}
             </ion-label>
-            <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"></quill-editor>
+            <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"
+              [placeholder]="'calendar.event.description-placeholder' | translate"></quill-editor>
           </div>
 
           <ion-item *ngIf="eventForm.controls.project">
@@ -86,7 +86,7 @@
               <ion-item *ngIf="timespan.get('title')">
                 <ion-input formControlName="title" label-placement="floating" fill="solid">
                   <div slot="label">
-                    {{ 'calendar.event.title' | translate }} <ion-text *ngIf="timespan.get('title').validator"
+                    {{ 'calendar.event.timespan.title' | translate }} <ion-text *ngIf="timespan.get('title').validator"
                       color="danger" [title]="'general.required' | translate">&ast;</ion-text>
                   </div>
                 </ion-input>
@@ -94,11 +94,18 @@
 
               <div *ngIf="timespan.get('description')" class="form-item rich-input">
                 <ion-label>
-                  {{ 'calendar.event.description' | translate }} <ion-text
-                    *ngIf="timespan.get('description')?.validator" color="danger"
-                    [title]="'general.required' | translate">&ast;</ion-text>
+                  {{ 'calendar.event.timespan.description' | translate }}
                 </ion-label>
-                <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"></quill-editor>
+                <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"
+                  [placeholder]="'calendar.event.timespan.description-placeholder' | translate"></quill-editor>
+              </div>
+
+              <div *ngIf="timespan.get('participants')" class="form-item rich-input">
+                <ion-label>
+                  {{ 'calendar.event.timespan.participants' | translate }}
+                </ion-label>
+                <quill-editor class="bg-medium" formControlName="participants" [modules]="editorModules"
+                  [placeholder]="'calendar.event.timespan.participants-placeholder' | translate"></quill-editor>
               </div>
             </ion-list>
           </ion-card-content>
