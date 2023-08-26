@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as AuthSelectors from './auth.selectors';
+import * as AuthVMSelectors from './auth-vm.selectors';
 import { AuthActions } from './auth.actions';
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +19,7 @@ export class AuthStoreFacade {
   public readonly userRolesCount$ = this.store.select(AuthSelectors.selectUserRolesCount);
   public readonly userPermissions$ = this.store.select(AuthSelectors.selectUserPermissions);
   public readonly userPermissionsCount$ = this.store.select(AuthSelectors.selectUserPermissionsCount);
-  public readonly projects$ = this.store.select(AuthSelectors.selectProjects);
+  public readonly projects$ = this.store.select(AuthVMSelectors.selectProjects);
   public readonly projectsCount$ = this.store.select(AuthSelectors.selectProjectsCount);
   public readonly isAuthenticated$ = this.store.select(AuthSelectors.selectIsAuthenticated);
   public readonly isNotAuthenticated$ = this.store.select(AuthSelectors.selectIsNotAuthenticated);

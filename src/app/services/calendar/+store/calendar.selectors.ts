@@ -1,9 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { trim as _trim } from 'lodash-es';
 
+import { isValidArray } from '@shared/helpers/general.helpers';
+
 import { CalendarState, CalendarReducer } from './calendar.reducer';
 import { CalendarEventEntity } from './calendar-event.entity';
-import { isValidArray } from '@shared/helpers/general.helpers';
 
 export const selectCalendarState = createFeatureSelector<CalendarState>(
   CalendarReducer.featureKey
@@ -27,5 +28,3 @@ export const selectEventIds = createSelector(selectEventsState, CalendarEventEnt
 export const selectEventEntities = createSelector(selectEventsState, CalendarEventEntity.selectEntities);
 export const selectAllEvents = createSelector(selectEventsState, CalendarEventEntity.selectAll);
 export const selectEventsTotal = createSelector(selectEventsState, CalendarEventEntity.selectTotal);
-
-export const selectEvent = (id: number) => createSelector(selectEventEntities, values => values[id]);

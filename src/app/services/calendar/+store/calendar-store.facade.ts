@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 
 import { CalendarActions } from "./calendar.actions";
 import * as CalendarSelectors from './calendar.selectors';
+import * as CalendarVMSelectors from './calendar-vm.selectors';
 import { ApiCalendarEvent } from "./api-calendar-event.model";
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +12,7 @@ export class CalendarStoreFacade {
   public readonly loading$ = this.store.select(CalendarSelectors.selectLoading);
   public readonly loadEventLoading$ = this.store.select(CalendarSelectors.selectLoadEventLoading);
   public readonly saveEventLoading$ = this.store.select(CalendarSelectors.selectSaveEventLoading);
-  public readonly events$ = this.store.select(CalendarSelectors.selectAllEvents);
+  public readonly events$ = this.store.select(CalendarVMSelectors.selectEvents);
 
   constructor(
     private store: Store
@@ -39,6 +40,6 @@ export class CalendarStoreFacade {
   }
 
   event$(id: number) {
-    return this.store.select(CalendarSelectors.selectEvent(id));
+    return this.store.select(CalendarVMSelectors.selectEvent(id));
   }
 }

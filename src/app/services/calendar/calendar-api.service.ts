@@ -49,8 +49,8 @@ export class CalendarApiService extends ApiService {
       apiEvent.modified = Math.floor(apiEvent.modified / 1000);
     }
 
-    if(apiEvent.project){
-      apiEvent.project = null;
+    if(!apiEvent.project_id){
+      apiEvent.project_id = null;
     }
 
     if (isValidArray(apiEvent.timespans)) {

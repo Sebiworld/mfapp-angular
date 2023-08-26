@@ -6,4 +6,9 @@ export interface ApiProject {
   modified: number;
   url: string;
   httpUrl: string;
+  theme?: { [key: string]: any };
 };
+
+export interface Project extends ApiProject {
+  projectStyles?: { [key: string]: any };
+}

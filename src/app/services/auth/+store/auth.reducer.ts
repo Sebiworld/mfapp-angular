@@ -16,7 +16,7 @@ export interface AuthState {
   userid: string | null;
   roles: ApiRole[];
   permissions: ApiPermission[];
-  projects: ApiProject[];
+  projects: { [key: number]: ApiProject };
   loggedIn: boolean;
 
   loginResponse: { response?: any; type: 'success' | 'error'; timestamp: number } | null;
@@ -33,7 +33,7 @@ const initialState: AuthState = {
   userid: null,
   roles: [],
   permissions: [],
-  projects: [],
+  projects: {},
   loggedIn: false,
 
   loginResponse: null,

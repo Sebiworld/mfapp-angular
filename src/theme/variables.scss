@@ -17,7 +17,7 @@
     --#{$color}: #{$value};
     --#{$color}-rgb: #{hexToRGB($value)};
 
-    @if (is-dark($value)=='1') {
+    @if (is-dark($value)=='1' or $color =='primary' or $color =='project') {
       --#{$color}-contrast: var(--color-bright);
       --#{$color}-contrast-rgb: var(--color-bright-rgb);
     }
@@ -74,7 +74,7 @@ body,
       --#{$color}: #{$value};
       --#{$color}-rgb: #{hexToRGB($value)};
 
-      @if (is-dark($value)=='1' or $color =='primary') {
+      @if (is-dark($value)=='1' or $color =='primary' or $color =='project') {
         --#{$color}-contrast: var(--color-bright);
         --#{$color}-contrast-rgb: var(--color-bright-rgb);
       }

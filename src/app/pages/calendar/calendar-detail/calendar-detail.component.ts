@@ -48,7 +48,9 @@ export class CalendarDetailComponent {
 
   public readonly saveEventLoading$ = this.calendarStoreFacade.saveEventLoading$;
 
-  public readonly projects$ = this.authStoreFacade.projects$;
+  public readonly projects$ = this.authStoreFacade.projects$.pipe(
+    map(projects => Object.values(projects))
+  );
 
   public readonly editorModules = {
     toolbar: [
@@ -261,7 +263,7 @@ export class CalendarDetailComponent {
       id: this.eventForm.value.id,
       title: this.eventForm.value.title,
       description: this.eventForm.value.description,
-      project: this.eventForm.value.project,
+      project_id: this.eventForm.value.project?.id || this.eventForm.value.project,
       timespans
     });
   }

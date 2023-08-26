@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, Signal, computed, signal } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 import { TranslationService } from '@services/translation.service';
 
-import { ApiCalendarEvent, ApiCalendarTimespan } from '@services/calendar/+store/api-calendar-event.model';
+import { ApiCalendarTimespan, CalendarEvent } from '@services/calendar/+store/api-calendar-event.model';
 import { CalendarTimespanGroup, groupTimespans } from '@services/calendar/calendar.helpers';
 import { CalendarService } from '@services/calendar/calendar.service';
-import { ModalController } from '@ionic/angular';
 import { ConfirmationModalComponent } from '@modals/confirmation-modal/confirmation-modal.component';
 
 @Component({
@@ -16,14 +16,15 @@ import { ConfirmationModalComponent } from '@modals/confirmation-modal/confirmat
 })
 export class CalendarListEventComponent {
 
-  public readonly _event = signal<ApiCalendarEvent | undefined>(undefined)
-  @Input() set event(value: ApiCalendarEvent | undefined) {
+  public readonly _event = signal<CalendarEvent | undefined>(undefined)
+  @Input() set event(value: CalendarEvent | undefined) {
     this._event.set(value);
   }
 
   public readonly timespans: Signal<ApiCalendarTimespan[]> = computed(() => this._event()?.timespans || []);
   public readonly timespanGroups: Signal<CalendarTimespanGroup[]> = computed(() => groupTimespans(this.timespans()) || []);
   public readonly eventDates: Signal<number[]> = computed(() => this.timespanGroups().map(group => group.date));
+  public readonly styles: Signal<{ [key: string]: any }> = computed(() => this._event()?.project?.projectStyles || {});
 
   public readonly currentDate = new Date();
   public readonly locale = this.translationService.locale;

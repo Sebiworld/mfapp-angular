@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card [ngStyle]="styles()">
   <ion-card-header class="bg-medium">
     <div class="title-wrapper">
       <ion-card-subtitle *ngIf="eventDates()?.length >= 1">
@@ -46,7 +46,8 @@
               {{ 'calendar.event.timespan.participants' | translate }}
             </div>
           </div>
-          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;" class="timespan">
+
+          <div *ngFor="let timespan of group.timespans; let index = index; trackBy: trackTimespan;" class="timespan" [class.even]="index % 2 === 1" [class.odd]="index % 2 !== 1">
             <div class="time">
               {{ timespan.timeFrom | date: 'shortTime' : undefined : locale }}&shy; - {{ timespan.timeUntil | date:
               'shortTime' : undefined : locale

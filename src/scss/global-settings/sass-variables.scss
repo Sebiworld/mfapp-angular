@@ -13,6 +13,7 @@ $dark: #1e1e1e;
 $medium: #92949c; // Used as disabled-color
 $light: #ccd2e2;
 $lightest: #f4f5f8;
+$project: #fd8e01;
 
 $theme-colors: (
   success: $success,
@@ -25,6 +26,7 @@ $theme-colors: (
   medium: $medium,
   light: $light,
   lightest: $lightest,
+  project: $project
 );
 
 // Color-Steps:
@@ -87,6 +89,7 @@ $dark-dark: #d9e8f1;
 $dark-medium: #223039; // Used as disabled-color
 $dark-light: #141e25;
 $dark-lightest: #000000;
+$dark-project: #fd8e01;
 
 $dark-theme-colors: (
   success: $dark-success,
@@ -99,6 +102,7 @@ $dark-theme-colors: (
   medium: $dark-medium,
   light: $dark-light,
   lightest: $dark-lightest,
+  project: $dark-project
 );
 
 // Color-Steps:

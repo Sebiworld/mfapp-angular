@@ -2,7 +2,7 @@ import { ApiRole } from '@models/api-user.model';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { isValidArray } from '@shared/helpers/general.helpers';
 import { SortHelpers } from '@shared/helpers/sort.helpers';
-import { some as _some } from 'lodash';
+import { some as _some, size as _size } from 'lodash';
 
 import { AuthReducer, AuthState } from './auth.reducer';
 
@@ -94,12 +94,12 @@ export const selectUserPermissionsCount = createSelector(
 
 export const selectProjects = createSelector(
   selectCurrentSession, (session) => {
-    if (!session?.projects || !isValidArray(session.projects)) { return []; }
+    if (!session?.projects || typeof session.projects !== 'object') { return {}; }
     return session.projects;
   }
 );
 export const selectProjectsCount = createSelector(
-  selectProjects, projects => projects?.length || 0
+  selectProjects, projects => _size(projects) || 0
 );
 
 export const selectIsAuthenticated = createSelector(

@@ -18,7 +18,7 @@
 
           <div *ngIf="eventForm.controls.description" class="form-item rich-input">
             <ion-label>
-              {{ 'calendar.event.description' | translate }}
+              {{ 'calendar.event.description' | translate: {fallback: 'Beschreibung'} }}
             </ion-label>
             <quill-editor class="bg-medium" formControlName="description" [modules]="editorModules"
               [placeholder]="'calendar.event.description-placeholder' | translate"></quill-editor>
@@ -26,10 +26,13 @@
 
           <ion-item *ngIf="eventForm.controls.project">
             <ion-select formControlName="project" label-placement="floating" fill="solid"
-              [placeholder]="'general.no-selection' | translate">
+              [placeholder]="'general.no-selection' | translate: {fallback: 'Keine Auswahl'}"
+              [okText]="'general.done' | translate: {fallback: 'Ok'}"
+              [cancelText]="'general.cancel' | translate: {fallback: 'Abbrechen'}">
               <div slot="label">
-                {{ 'calendar.event.project' | translate }} <ion-text *ngIf="eventForm.controls.project.validator"
-                  color="danger" [title]="'general.required' | translate">&ast;</ion-text>
+                {{ 'calendar.event.project' | translate: {fallback: 'Projekt'} }} <ion-text
+                  *ngIf="eventForm.controls.project.validator" color="danger"
+                  [title]="'general.required' | translate">&ast;</ion-text>
               </div>
 
               <ion-select-option [value]="undefined">
